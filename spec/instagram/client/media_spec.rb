@@ -7,7 +7,7 @@ describe Instagram::Client do
         @client = Instagram::Client.new(:format => format, :client_id => 'CID', :access_token => 'AT')
       end
       
-      describe ".media" do
+      describe ".media_item" do
         
         before do
           stub_get("media/18600493.#{format}").
@@ -25,6 +25,27 @@ describe Instagram::Client do
         it "should return extended information of a given media item" do
           media = @client.media_item(18600493)
           media.user.username.should == "mikeyk"
+        end
+      end
+      
+      describe ".media_item_likers" do
+        
+        before do
+          stub_get("media/18600493/likers.#{format}").
+            with(:query => {:access_token => @client.access_token}).
+            to_return(:body => fixture("media_likers.#{format}"), :headers => {:content_type => "application/#{format}; charset=utf-8"})
+        end
+        
+        it "should get the correct resource" do
+          @client.media_item_likers(18600493)
+          a_get("media/18600493/likers.#{format}").
+            with(:query => {:access_token => @client.access_token}).
+            should have_been_made
+        end
+        
+        it "should return extended information of a given media item" do
+          likers = @client.media_item_likers(18600493)
+          likers.first.username.should == "chris"
         end
       end
       

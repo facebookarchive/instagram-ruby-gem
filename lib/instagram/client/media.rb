@@ -4,7 +4,7 @@ module Instagram
     module Media
       # Returns extended information of a given media item
       #
-      # @overload media_item(id=nil, options={})
+      # @overload media_item(id)
       #   @param user [Integer] An Instagram media item ID
       #   @return [Hashie::Mash] The requested media item.
       #   @example Return extended information for media item 1234
@@ -18,6 +18,25 @@ module Instagram
       def media_item(*args)
         id = args.first || 'self'
         response = get("media/#{id}")
+        response['data']
+      end
+      
+      # Returns a list of users who liked the given media object
+      #
+      # @overload media_item_likers(id)
+      #   @param user [Integer] An Instagram media item ID
+      #   @return [Hashie::Mash] The requested media item.
+      #   @example Return a list of all the likers for media item ID 1234
+      #     Instagram.media_item_likers(1324)
+      # @format :json
+      # @authenticated false unless requesting media from a protected user
+      #
+      #   If getting this data of a protected user, you must authenticate (and be allowed to see that user).
+      # @rate_limited true
+      # @see TODO:docs url
+      def media_item_likers(*args)
+        id = args.first || 'self'
+        response = get("media/#{id}/likers")
         response['data']
       end
       
