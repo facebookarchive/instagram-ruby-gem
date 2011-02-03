@@ -8,9 +8,11 @@ module Instagram
     
     include Instagram::Client::Utils
     
-    include Instagram::Client::User
+    include Instagram::Client::Users
     include Instagram::Client::Media
-    include Instagram::Client::Location
-    include Instagram::Client::Tag
+    include Instagram::Client::Locations
+    include Instagram::Client::Tags
+    include Instagram::Client::Comments
+    include Instagram::Client::Likes
   end
 end

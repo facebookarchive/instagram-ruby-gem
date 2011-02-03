@@ -1,7 +1,7 @@
 module Instagram
   class Client
     # Defines methods related to users
-    module User
+    module Users
       # Returns extended information of a given user
       #
       # @overload user(id=nil, options={})
@@ -18,7 +18,7 @@ module Instagram
       def user(*args)
         id = args.first || 'self'
         response = get("users/#{id}")
-        response['data']
+        response["data"]
       end
       
       # Returns users that match the given query
@@ -35,7 +35,7 @@ module Instagram
       #   Instagram.user_search("Shayne Sweeney")
       def user_search(query, options={})
         response = get('users/search', options.merge(:q => query))
-        response['data']
+        response["data"]
       end
       
       # Returns a list of users whom a given user follows
@@ -62,7 +62,7 @@ module Instagram
       def user_follows(*args)
         options = args.last.is_a?(Hash) ? args.pop : {}
         id = args.first || "self"
-        response = get("users/#{id}/follows/users", options)
+        response = get("users/#{id}/follows", options)
         response["data"]
       end
     end
@@ -91,7 +91,7 @@ module Instagram
     def user_followed_by(*args)
       options = args.last.is_a?(Hash) ? args.pop : {}
       id = args.first || "self"
-      response = get("users/#{id}/followed-by/users", options)
+      response = get("users/#{id}/followed-by", options)
       response["data"]
     end
     

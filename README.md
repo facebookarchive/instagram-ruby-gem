@@ -69,7 +69,7 @@ API Usage Examples
     require "instagram"
 
     # Get a list of a user's most recent media
-    puts Instagram.user_recent_media(1234)
+    puts Instagram.user_recent_media(777)
 
     # Get the currently authenticated user's media feed
     puts Instagram.user_media_feed

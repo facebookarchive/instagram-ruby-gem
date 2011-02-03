@@ -27,28 +27,7 @@ describe Instagram::Client do
           media.user.username.should == "mikeyk"
         end
       end
-      
-      describe ".media_item_likers" do
-        
-        before do
-          stub_get("media/18600493/likers.#{format}").
-            with(:query => {:access_token => @client.access_token}).
-            to_return(:body => fixture("media_likers.#{format}"), :headers => {:content_type => "application/#{format}; charset=utf-8"})
-        end
-        
-        it "should get the correct resource" do
-          @client.media_item_likers(18600493)
-          a_get("media/18600493/likers.#{format}").
-            with(:query => {:access_token => @client.access_token}).
-            should have_been_made
-        end
-        
-        it "should return extended information of a given media item" do
-          likers = @client.media_item_likers(18600493)
-          likers.first.username.should == "chris"
-        end
-      end
-      
+            
       describe ".media_popular" do
         
         before do

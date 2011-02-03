@@ -1,7 +1,7 @@
 module Instagram
   class Client
     # Defines methods related to tags
-    module Tag
+    module Tags
       # Returns extended information of a given Instagram tag
       #
       # @overload tag(tag)
@@ -15,7 +15,7 @@ module Instagram
       # @see TODO:docs url
       def tag(tag, *args)
         response = get("tags/#{tag}")
-        response['data']
+        response["data"]
       end
       
       # Returns a list of recent media items for a given Instagram tag
@@ -52,7 +52,7 @@ module Instagram
       #   Instagram.tag_search("cat")
       def tag_search(query, options={})
         response = get('tags/search', options.merge(:q => query))
-        response['data']
+        response["data"]
       end
     end
   end

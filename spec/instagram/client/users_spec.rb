@@ -69,8 +69,7 @@ describe Instagram::Client do
         it "should return an array of user search results" do
           users = @client.user_search("Shayne Sweeney")
           users.should be_a Array
-          users.first.first_name.should == "Shayne"
-          users.first.last_name.should == "Sweeney"
+          users.first.username.should == "shayne"
         end
       end
       
@@ -79,14 +78,14 @@ describe Instagram::Client do
         context "with user ID passed" do
           
           before do
-            stub_get("users/4/follows/users.#{format}").
+            stub_get("users/4/follows.#{format}").
               with(:query => {:access_token => @client.access_token}).
               to_return(:body => fixture("follows.#{format}"), :headers => {:content_type => "application/#{format}; charset=utf-8"})
           end
           
           it "should get the correct resource" do
             @client.user_follows(4)
-            a_get("users/4/follows/users.#{format}").
+            a_get("users/4/follows.#{format}").
               with(:query => {:access_token => @client.access_token}).
               should have_been_made
           end
@@ -101,14 +100,14 @@ describe Instagram::Client do
         context "without user ID passed" do
           
           before do
-            stub_get("users/self/follows/users.#{format}").
+            stub_get("users/self/follows.#{format}").
               with(:query => {:access_token => @client.access_token}).
               to_return(:body => fixture("follows.#{format}"), :headers => {:content_type => "application/#{format}; charset=utf-8"})
           end
           
           it "should get the correct resource" do
             @client.user_follows
-            a_get("users/self/follows/users.#{format}").
+            a_get("users/self/follows.#{format}").
               with(:query => {:access_token => @client.access_token}).
               should have_been_made
           end
@@ -120,14 +119,14 @@ describe Instagram::Client do
         context "with user ID passed" do
           
           before do
-            stub_get("users/4/followed-by/users.#{format}").
+            stub_get("users/4/followed-by.#{format}").
               with(:query => {:access_token => @client.access_token}).
               to_return(:body => fixture("followed_by.#{format}"), :headers => {:content_type => "application/#{format}; charset=utf-8"})
           end
           
           it "should get the correct resource" do
             @client.user_followed_by(4)
-            a_get("users/4/followed-by/users.#{format}").
+            a_get("users/4/followed-by.#{format}").
               with(:query => {:access_token => @client.access_token}).
               should have_been_made
           end
@@ -142,14 +141,14 @@ describe Instagram::Client do
         context "without user ID passed" do
           
           before do
-            stub_get("users/self/followed-by/users.#{format}").
+            stub_get("users/self/followed-by.#{format}").
               with(:query => {:access_token => @client.access_token}).
               to_return(:body => fixture("followed_by.#{format}"), :headers => {:content_type => "application/#{format}; charset=utf-8"})
           end
           
           it "should get the correct resource" do
             @client.user_followed_by
-            a_get("users/self/followed-by/users.#{format}").
+            a_get("users/self/followed-by.#{format}").
               with(:query => {:access_token => @client.access_token}).
               should have_been_made
           end

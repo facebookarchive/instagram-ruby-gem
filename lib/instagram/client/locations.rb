@@ -1,7 +1,7 @@
 module Instagram
   class Client
     # Defines methods related to media items
-    module Location
+    module Locations
       # Returns extended information of a given Instagram location
       #
       # @overload location(id)
@@ -15,7 +15,7 @@ module Instagram
       # @see TODO:docs url
       def location(id, *args)
         response = get("locations/#{id}")
-        response['data']
+        response["data"]
       end
       
       # Returns a list of recent media items for a given Instagram location
@@ -52,7 +52,7 @@ module Instagram
       # @rate_limited true
       def location_search(lat, lng, options={})
         response = get('locations/search', options.merge(:lat => lat, :lng => lng))
-        response['data']
+        response["data"]
       end
     end
   end

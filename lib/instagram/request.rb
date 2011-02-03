@@ -10,6 +10,16 @@ module Instagram
     def post(path, options={}, raw=false, unformatted=false)
       request(:post, path, options, raw, unformatted)
     end
+    
+    # Perform an HTTP PUT request
+    def put(path, options={}, raw=false, unformatted=false)
+      request(:put, path, options, raw, unformatted)
+    end
+    
+    # Perform an HTTP DELETE request
+    def delete(path, options={}, raw=false, unformatted=false)
+      request(:delete, path, options, raw, unformatted)
+    end
 
     private
 
@@ -18,9 +28,9 @@ module Instagram
       response = connection(raw).send(method) do |request|
         path = formatted_path(path) unless unformatted
         case method
-        when :get
+        when :get, :delete
           request.url(path, options)
-        when :post
+        when :post, :put
           request.path = path
           request.body = options unless options.empty?
         end
