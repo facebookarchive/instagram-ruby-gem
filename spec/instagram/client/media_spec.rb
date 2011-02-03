@@ -55,20 +55,20 @@ describe Instagram::Client do
         before do
           stub_get("media/search.#{format}").
             with(:query => {:access_token => @client.access_token}).
-            with(:query => {:ll => "37.7808851,-122.3948632"}).
+            with(:query => {:lat => "37.7808851", :lng => "-122.3948632"}).
             to_return(:body => fixture("media_search.#{format}"), :headers => {:content_type => "application/#{format}; charset=utf-8"})
         end
         
         it "should get the correct resource" do
-          @client.media_search('37.7808851,-122.3948632')
+          @client.media_search("37.7808851", "-122.3948632")
           a_get("media/search.#{format}").
             with(:query => {:access_token => @client.access_token}).
-            with(:query => {:ll => "37.7808851,-122.3948632"}).
+            with(:query => {:lat => "37.7808851", :lng => "-122.3948632"}).
             should have_been_made
         end
         
         it "should return an array of user search results" do
-          user_search = @client.media_search('37.7808851,-122.3948632')
+          user_search = @client.media_search("37.7808851", "-122.3948632")
           user_search.should be_a Array
           user_search.first.user.username.should == "mikeyk"
         end

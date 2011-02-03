@@ -43,18 +43,19 @@ module Instagram
       
       # Returns media items within proximity of given lat,lng
       #
-      # @format :json
-      # @authenticated false
-      # @rate_limited true
-      # @param latlng [String] A comma separated string containing a latitude and longitude of which to center the search.
+      # @param lat [String] A given latitude in decimal format
+      # @param lng [String] A given longitude in decimal format
       # @param options [Hash] A customizable set of options.
       # @option options [Integer] :count The number of media items to retrieve. Maxiumum of 100 allowed per page.
       # @return [Array]
+      # @example Return media around 37.7808851, -122.3948632 (164 S Park, SF, CA USA)
+      #   Instagram.media_search("37.7808851", "-122.3948632")
       # @see TODO:doc url
-      # @example Return media around "37.7808851,-122.3948632" (164 S Park, SF, CA USA)
-      #   Instagram.media_search('37.7808851,-122.3948632')
-      def media_search(latlng, options={})
-        response = get('media/search', options.merge(:ll => latlng))
+      # @format :json
+      # @authenticated false
+      # @rate_limited true
+      def media_search(lat, lng, options={})
+        response = get('media/search', options.merge(:lat => lat, :lng => lng))
         response['data']
       end
     end
