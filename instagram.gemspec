@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
 ********************************************************************************
 
   Follow @instagram on Twitter for announcements, updates, and news.
-  https://twitter.com/instagram
+  https://twitter.com/instagramapi
 
   Join the mailing list!
   https://groups.google.com/group/instagram-ruby-gem
