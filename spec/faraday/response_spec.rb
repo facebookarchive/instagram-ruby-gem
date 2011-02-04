@@ -9,6 +9,7 @@ describe Faraday::Response do
     400 => Instagram::BadRequest,
     404 => Instagram::NotFound,
     500 => Instagram::InternalServerError,
+    503 => Instagram::ServiceUnavailable
   }.each do |status, exception|
     context "when HTTP status is #{status}" do
 

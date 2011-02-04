@@ -52,6 +52,22 @@ describe Instagram::Client do
           comment.text.should == "hi there"
         end
       end
+      
+      describe ".delete_media_comment" do
+        
+        before do
+          stub_delete("media/777/comments/1234.#{format}").
+            with(:query => {:access_token => @client.access_token}).
+            to_return(:body => fixture("media_comment_deleted.#{format}"), :headers => {:content_type => "application/#{format}; charset=utf-8"})
+        end
+        
+        it "should get the correct resource" do
+          @client.delete_media_comment(777, 1234)
+          a_delete("media/777/comments/1234.#{format}").
+            with(:query => {:access_token => @client.access_token}).
+            should have_been_made
+        end
+      end
     end
   end
 end

@@ -44,10 +44,21 @@ describe Instagram::Client do
             with(:query => {:access_token => @client.access_token}).
             should have_been_made
         end
+      end
+      
+      describe ".unlike_media" do
         
-        it "should return nil data when successful" do
-          data = @client.like_media(777)
-          data.should == nil
+        before do
+          stub_delete("media/777/likes.#{format}").
+            with(:query => {:access_token => @client.access_token}).
+            to_return(:body => fixture("media_unliked.#{format}"), :headers => {:content_type => "application/#{format}; charset=utf-8"})
+        end
+        
+        it "should get the correct resource" do
+          @client.unlike_media(777)
+          a_delete("media/777/likes.#{format}").
+            with(:query => {:access_token => @client.access_token}).
+            should have_been_made
         end
       end
     end

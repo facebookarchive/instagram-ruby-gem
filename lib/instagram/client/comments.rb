@@ -39,6 +39,24 @@ module Instagram
         response["data"]
       end
       
+      # Delete's a comment for a given media item ID
+      #
+      # @overload delete_media_comment(media_id, comment_id)
+      #   @param media_id [Integer] An Instagram media item ID.
+      #   @param comment_id [Integer] Your comment ID of the comment you wish to delete.
+      #   @return [nil]
+      #   @example Delete the comment with ID of 1234, on the media item with ID of 777
+      #     Instagram.delete_media_comment(777, 1234)
+      # @format :json
+      # @authenticated true
+      #
+      #   In order to remove a comment, you must be either the owner comment or the media item (or both). 
+      # @rate_limited true
+      # @see TODO:docs url
+      def delete_media_comment(media_id, comment_id, options={})
+        response = delete("media/#{media_id}/comments/#{comment_id}", options)
+        response["data"]
+      end
     end
   end
 end
