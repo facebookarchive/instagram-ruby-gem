@@ -20,7 +20,7 @@ module Instagram
         response = get("users/#{id}")
         response["data"]
       end
-      
+
       # Returns users that match the given query
       #
       # @format :json
@@ -37,7 +37,7 @@ module Instagram
         response = get('users/search', options.merge(:q => query))
         response["data"]
       end
-      
+
       # Returns a list of users whom a given user follows
       #
       # @overload follows(id=nil, options={})
@@ -66,15 +66,15 @@ module Instagram
         response["data"]
       end
     end
-    
+
     # Returns a list of users whom a given user is followed by
     #
-    # @overload followed_by(id=nil, options={})
+    # @overload user_followed_by(id=nil, options={})
     #   @param options [Hash] A customizable set of options.
     #   @return [Hashie::Mash]
     #   @example Returns a list of users the authenticated user is followed by
     #     Instagram.user_followed_by
-    # @overload followed_by(id=nil, options={})
+    # @overload user_followed_by(id=nil, options={})
     #   @param user [Integer] An Instagram user ID.
     #   @param options [Hash] A customizable set of options.
     #   @option options [Integer] :cursor (nil) Breaks the results into pages. Provide values as returned in the response objects's next_cursor attribute to page forward in the list.
@@ -94,7 +94,27 @@ module Instagram
       response = get("users/#{id}/followed-by", options)
       response["data"]
     end
-    
+
+    # Returns a list of users whom a given user is followed by
+    #
+    # @overload user_requested_by()
+    #   @param options [Hash] A customizable set of options.
+    #   @return [Hashie::Mash]
+    #   @example Returns a list of users awaiting approval of a ollow request, for the authenticated user
+    #     Instagram.user_requested_by
+    # @overload user_requested_by()
+    #   @return [Hashie::Mash]
+    #   @example Return a list of users who have requested to follow the authenticated user
+    #     Instagram.user_requested_by()
+    # @see TODO:docs url
+    # @format :json
+    # @authenticated truei
+    # @rate_limited true
+    def user_requested_by()
+      response = get("users/self/requested-by")
+      response["data"]
+    end
+
     # Returns the 20 most recent media items from the currently authorized user's feed.
     #
     # @overload user_media_feed(options={})
@@ -113,7 +133,7 @@ module Instagram
       response = get('users/self/feed', options)
       response["data"]
     end
-    
+
     # Returns a list of recent media items for a given user
     #
     # @overload user_recent_media(id=nil, options={})

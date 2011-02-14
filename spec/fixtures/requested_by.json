@@ -1,0 +1,12 @@
+{
+    "meta": {
+        "code": 200
+    },
+    "data": [
+        {
+            "username": "shayne",
+            "profile_picture": "http://distillery.s3.amazonaws.com/profiles/profile_20_75sq_1295492590_debug.jpg",
+            "id": "20"
+        }]
+}
+
