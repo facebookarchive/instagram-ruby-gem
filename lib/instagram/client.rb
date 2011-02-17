@@ -14,6 +14,6 @@ module Instagram
     include Instagram::Client::Tags
     include Instagram::Client::Comments
     include Instagram::Client::Likes
-    include Instagram::Client::RealTime
+    include Instagram::Client::Subscriptions
   end
 end

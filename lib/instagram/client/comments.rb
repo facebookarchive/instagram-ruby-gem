@@ -20,7 +20,7 @@ module Instagram
         response["data"]
       end
 
-      # Create's a comment for a given media item ID
+      # Creates a comment for a given media item ID
       #
       # @overload create_media_comment(id, text)
       #   @param id [Integer] An Instagram media item ID
@@ -39,7 +39,7 @@ module Instagram
         response["data"]
       end
 
-      # Delete's a comment for a given media item ID
+      # Deletes a comment for a given media item ID
       #
       # @overload delete_media_comment(media_id, comment_id)
       #   @param media_id [Integer] An Instagram media item ID.

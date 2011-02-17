@@ -1,0 +1,12 @@
+{
+    "meta": {
+        "code": 200
+    },
+    "data": {
+        "object": "user",
+        "type": "subscription",
+        "id": "1",
+        "aspect": "media",
+        "callback_url": "http://your-callback.com/url/"
+    }
+}
