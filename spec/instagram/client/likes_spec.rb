@@ -5,7 +5,7 @@ describe Instagram::Client do
     context ".new(:format => '#{format}')" do
       
       before do
-        @client = Instagram::Client.new(:format => format, :client_id => 'CID', :access_token => 'AT')
+        @client = Instagram::Client.new(:format => format, :client_id => 'CID', :client_secret => 'CS', :access_token => 'AT')
       end
       
       describe ".media_likes" do
@@ -34,14 +34,14 @@ describe Instagram::Client do
         
         before do
           stub_post("media/777/likes.#{format}").
-            with(:query => {:access_token => @client.access_token}).
+            with(:body => {:access_token => @client.access_token}).
             to_return(:body => fixture("media_liked.#{format}"), :headers => {:content_type => "application/#{format}; charset=utf-8"})
         end
         
         it "should get the correct resource" do
           @client.like_media(777)
           a_post("media/777/likes.#{format}").
-            with(:query => {:access_token => @client.access_token}).
+            with(:body => {:access_token => @client.access_token}).
             should have_been_made
         end
       end

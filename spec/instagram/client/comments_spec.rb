@@ -5,7 +5,7 @@ describe Instagram::Client do
     context ".new(:format => '#{format}')" do
 
       before do
-        @client = Instagram::Client.new(:format => format, :client_id => 'CID', :access_token => 'AT')
+        @client = Instagram::Client.new(:format => format, :client_id => 'CID', :client_secret => 'CS', :access_token => 'AT')
       end
 
       describe ".media_comments" do
