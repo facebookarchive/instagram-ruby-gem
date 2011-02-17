@@ -5,16 +5,23 @@ module Faraday
   # @private
   class Request::OAuth2 < Faraday::Middleware
     def call(env)
-      params = env[:url].query_values || {}
+
+      params = {}
 
       if @access_token
-        params.merge!('access_token' => @access_token)
+        params[:access_token] = @access_token
         env[:request_headers].merge!('Authorization' => "Token token=\"#{@access_token}\"")
       elsif @client_id
-        params.merge!('client_id' => @client_id)
+        params[:client_id] = @client_id
       end
 
-      env[:url].query_values = params unless params == {}
+      if env[:body]
+        env[:body] = env[:body].merge(params)
+      elsif env[:url].query_values
+        env[:url].query_values = env[:url].query_values.merge(params)
+      else
+        env[:url].query_values = params
+      end
 
       @app.call env
     end
