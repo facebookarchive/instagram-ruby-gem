@@ -19,7 +19,7 @@ module Instagram
         response = get("media/#{id}/comments")
         response["data"]
       end
-      
+
       # Create's a comment for a given media item ID
       #
       # @overload create_media_comment(id, text)
@@ -38,7 +38,7 @@ module Instagram
         response = post("media/#{id}/comments", options.merge(:text => text))
         response["data"]
       end
-      
+
       # Delete's a comment for a given media item ID
       #
       # @overload delete_media_comment(media_id, comment_id)
@@ -50,7 +50,7 @@ module Instagram
       # @format :json
       # @authenticated true
       #
-      #   In order to remove a comment, you must be either the owner comment or the media item (or both). 
+      #   In order to remove a comment, you must be either the owner comment or the media item (or both).
       # @rate_limited true
       # @see TODO:docs url
       def delete_media_comment(media_id, comment_id, options={})

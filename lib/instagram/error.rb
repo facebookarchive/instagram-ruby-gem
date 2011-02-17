@@ -10,7 +10,7 @@ module Instagram
 
   # Raised when Instagram returns the HTTP status code 500
   class InternalServerError < Error; end
-  
+
   # Raised when Instagram returns the HTTP status code 503
   class ServiceUnavailable < Error; end
 end

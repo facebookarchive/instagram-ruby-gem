@@ -19,7 +19,7 @@ module Instagram
         response = get("media/#{id}/likes")
         response["data"]
       end
-      
+
       # Issues a like by the currently authenticated user, for a given media item ID
       #
       # @overload like_media(id, text)
@@ -37,7 +37,7 @@ module Instagram
         response = post("media/#{id}/likes", options)
         response["data"]
       end
-      
+
       # Removes the like on a givem media item ID for the currently authenticated user
       #
       # @overload unlike_media(id)

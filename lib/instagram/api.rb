@@ -15,7 +15,7 @@ module Instagram
         send("#{key}=", options[key])
       end
     end
-    
+
     include Connection
     include Request
     include OAuth

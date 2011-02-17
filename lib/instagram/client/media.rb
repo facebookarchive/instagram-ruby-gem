@@ -20,7 +20,7 @@ module Instagram
         response = get("media/#{id}")
         response["data"]
       end
-      
+
       # Returns a list of the overall most popular media
       #
       # @overload media_popular(options={})
@@ -40,7 +40,7 @@ module Instagram
         response = get("media/popular", options)
         response["data"]
       end
-      
+
       # Returns media items within proximity of given lat,lng
       #
       # @param lat [String] A given latitude in decimal format

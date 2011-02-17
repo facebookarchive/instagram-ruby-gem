@@ -5,17 +5,17 @@ module Instagram
     def get(path, options={}, raw=false, unformatted=false)
       request(:get, path, options, raw, unformatted)
     end
-    
+
     # Perform an HTTP POST request
     def post(path, options={}, raw=false, unformatted=false)
       request(:post, path, options, raw, unformatted)
     end
-    
+
     # Perform an HTTP PUT request
     def put(path, options={}, raw=false, unformatted=false)
       request(:put, path, options, raw, unformatted)
     end
-    
+
     # Perform an HTTP DELETE request
     def delete(path, options={}, raw=false, unformatted=false)
       request(:delete, path, options, raw, unformatted)

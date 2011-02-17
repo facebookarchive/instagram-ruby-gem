@@ -7,7 +7,7 @@ describe Instagram::Client do
     connection = client.send(:connection).build_url(nil).to_s
     connection.should == endpoint.to_s
   end
-  
+
   it "should not cache the user account across clients" do
     stub_get("users/self.json").
       with(:query => {:access_token => "at1"}).

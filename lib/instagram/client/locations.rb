@@ -17,7 +17,7 @@ module Instagram
         response = get("locations/#{id}")
         response["data"]
       end
-      
+
       # Returns a list of recent media items for a given Instagram location
       #
       # @overload location_recent_media(id, options={})
@@ -37,7 +37,7 @@ module Instagram
         response = get("locations/#{id}/media/recent", options)
         response["data"]
       end
-      
+
       # Returns Instagram locations within proximity of given lat,lng
       #
       # @param lat [String] A given latitude in decimal format

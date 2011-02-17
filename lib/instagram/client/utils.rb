@@ -3,7 +3,7 @@ module Instagram
     # @private
     module Utils
       private
-      
+
       # Returns the configured user name or the user name of the authenticated user
       #
       # @return [String]

@@ -17,7 +17,7 @@ module Instagram
         response = get("tags/#{tag}")
         response["data"]
       end
-      
+
       # Returns a list of recent media items for a given Instagram tag
       #
       # @overload tag_recent_media(tag, options={})
@@ -37,7 +37,7 @@ module Instagram
         response = get("tags/#{id}/media/recent", options)
         response["data"]
       end
-      
+
       # Returns a list of tags starting with the given search query
       #
       # @format :json
