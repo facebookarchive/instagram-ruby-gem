@@ -1,1 +1,0 @@
-module Instagram  class Client    # Defines methods related to realtime    module Realtime      # TODO    end  endend
