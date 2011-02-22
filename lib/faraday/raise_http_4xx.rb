@@ -29,8 +29,8 @@ module Faraday
     def self.error_body(body)
       if body.nil?
         nil
-      elsif body['meta']
-        ": #{body['error_message']}"
+      elsif body['meta'] and not body['meta']['error_message'].blank?
+        ": #{body['meta']['error_message']}"
       end
     end
   end
