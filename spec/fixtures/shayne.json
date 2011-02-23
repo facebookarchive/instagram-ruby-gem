@@ -1,1 +1,1 @@
-{"meta": {"code": 200}, "data": {"username": "shayne", "first_name": "Shayne", "profile_picture": "http://distillery.s3.amazonaws.com/profiles/profile_20_75sq_1290558237.jpg", "id": 20, "last_name": "Sweeney"}}
+{"meta": {"code": 200}, "data": {"username": "shayne", "full_name": "Shayne Sweeney", "profile_picture": "http://distillery.s3.amazonaws.com/profiles/profile_20_75sq_1290558237.jpg", "id": 20}}

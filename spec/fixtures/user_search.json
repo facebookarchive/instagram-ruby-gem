@@ -1,1 +1,1 @@
-{"meta": {"code": 200}, "data": [{"username": "shayne", "first_name": "Shayne", "last_name": "Sweeney", "type": "user", "id": 20}]}
+{"meta": {"code": 200}, "data": [{"username": "shayne", "full_name": "Shayne Sweeney", "type": "user", "id": 20}]}

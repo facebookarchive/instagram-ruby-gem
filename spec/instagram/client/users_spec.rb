@@ -26,8 +26,7 @@ describe Instagram::Client do
 
           it "should return extended information of a given user" do
             user = @client.user(4)
-            user.first_name.should == "Mike"
-            user.last_name.should == "Krieger"
+            user.full_name.should == "Mike Krieger"
           end
 
         end

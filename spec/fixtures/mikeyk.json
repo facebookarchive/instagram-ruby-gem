@@ -1,1 +1,1 @@
-{"meta": {"code": 200}, "data": {"username": "mikeyk", "first_name": "Mike", "profile_picture": "http://distillery.s3.amazonaws.com/profiles/profile_4_75sq_1292743625.jpg", "id": 4, "last_name": "Krieger"}}
+{"meta": {"code": 200}, "data": {"username": "mikeyk", "full_name": "Mike Krieger", "profile_picture": "http://distillery.s3.amazonaws.com/profiles/profile_4_75sq_1292743625.jpg", "id": 4}}
