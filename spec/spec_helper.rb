@@ -1,11 +1,11 @@
 require 'simplecov'
 SimpleCov.start do
-  add_group 'Instagram', 'lib/Instagram'
+  add_group 'Instagram', 'lib/instagram'
   add_group 'Faraday Middleware', 'lib/faraday'
   add_group 'Specs', 'spec'
 end
 
-require File.expand_path('../../lib/Instagram', __FILE__)
+require File.expand_path('../../lib/instagram', __FILE__)
 
 require 'rspec'
 require 'webmock/rspec'
