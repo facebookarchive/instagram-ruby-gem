@@ -7,7 +7,7 @@ Installation
 ------------
 	gem install instagram
 
-	
+
 Follow @instagramapi on Twitter
 ----------------------------
 You should [follow @instagramapi on Twitter](http://twitter.com/#!/instagramapi) for announcements,
@@ -55,11 +55,11 @@ Sample Application
 	get "/feed" do
 	  client = Instagram.client(:access_token => session[:access_token])
 	  user = client.user
- 
+
 	  html = "<h1>#{user.username}'s recent photos</h1>"
 	  for media_item in client.user_recent_media
 	    html << "<img src='#{media_item.images.thumbnail.url}'>"
-	  end  
+	  end
 	  html
 	end
 
@@ -77,7 +77,7 @@ API Usage Examples
 
     # Get a list of recent media at a given location, in this case, the Instagram office
     puts Instagram.location_recent_media(514276)
-	
+
     # All methods require authentication (either by client ID or access token).
 	# To get your Instagram OAuth credentials, register an app at http://instagr.am/oauth/client/register/
     Instagram.configure do |config|
@@ -93,7 +93,7 @@ API Usage Examples
 
 	# Get a list of the overall most popular media items
 	puts Instagram.media_popular
-	
+
 	# Search for users on instagram, by name or username
 	puts Instagram.user_search("shayne sweeney")
 
