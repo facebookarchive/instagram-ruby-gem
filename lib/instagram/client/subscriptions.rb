@@ -1,3 +1,5 @@
+require 'hmac-sha1'
+
 module Instagram
   class Client
     # Defines methods related to real-time
@@ -98,6 +100,7 @@ module Instagram
       # @overload process_subscription(json, &block)
       #   @param json [String] The JSON response received by the Instagram real-time server
       #   @param block [Proc] A callable in which callbacks are defined
+      #   @option options [String] :signature Pass in an X-Hub-Signature to use for payload validation
       #   @return [nil]
       #   @example Process and handle a notification for a user media change
       #     Instagram.process_subscription(params[:body]) do |handler|
@@ -117,8 +120,20 @@ module Instagram
       #   Requires client_secret to be set on the client or passed in options
       # @rate_limited true
       # @see https://api.instagram.com/developer/realtime/
-      def process_subscription(json, &block)
+      def process_subscription(json, options={}, &block)
         raise ArgumentError, "callbacks block expected" unless block_given?
+
+        if options[:signature]
+          if !client_secret
+            raise ArgumentError, "client_secret must be set during configure"
+          end
+          verify_signature = HMAC::SHA1.hexdigest(client_secret, json)
+
+          if options[:signature] != verify_signature
+            raise Instagram::InvalidSignature, "invalid X-Hub-Signature does not match verify signature against client_secret"
+          end
+        end
+
         payload = MultiJson.decode(json)
         @changes = Hash.new { |h,k| h[k] = [] }
         for change in payload

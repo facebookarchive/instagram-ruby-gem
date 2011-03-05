@@ -113,6 +113,36 @@ describe Instagram::Client do
           end
         end
       end
+
+      context "with a valid signature" do
+
+        before do
+          @json = fixture("subscription_payload.json").read
+        end
+
+        it "should not raise an Instagram::InvalidSignature error" do
+          lambda do
+            @client.process_subscription(@json, :signature => "f1dbe2b6184ac2131209c87bba8e0382d089a8a2") do |handler|
+              # hi
+            end
+          end.should_not raise_error(Instagram::InvalidSignature)
+        end
+      end
+
+      context "with an invalid signature" do
+
+        before do
+          @json = fixture("subscription_payload.json").read
+        end
+
+        it "should raise an Instagram::InvalidSignature error" do
+          lambda do
+            @client.process_subscription(@json, :signature => "31337H4X0R") do |handler|
+              # hi
+            end
+          end.should raise_error(Instagram::InvalidSignature)
+        end
+      end
     end
   end
 end
