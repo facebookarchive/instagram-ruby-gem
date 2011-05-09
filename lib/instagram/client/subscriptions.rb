@@ -1,4 +1,4 @@
-require 'hmac-sha1'
+require 'openssl'
 
 module Instagram
   class Client
@@ -127,7 +127,8 @@ module Instagram
           if !client_secret
             raise ArgumentError, "client_secret must be set during configure"
           end
-          verify_signature = HMAC::SHA1.hexdigest(client_secret, json)
+          digest = OpenSSL::Digest::Digest.new('sha1')
+          verify_signature = OpenSSL::HMAC.hexdigest(digest, client_secret, json)
 
           if options[:signature] != verify_signature
             raise Instagram::InvalidSignature, "invalid X-Hub-Signature does not match verify signature against client_secret"
