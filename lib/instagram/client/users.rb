@@ -120,7 +120,7 @@ module Instagram
     # @overload user_media_feed(options={})
     #   @param options [Hash] A customizable set of options.
     #   @option options [Integer] :max_id Returns results with an ID less than (that is, older than) or equal to the specified ID.
-    #   @option options [Integer] :count Specifies the number of records to retrieve, per page.
+    #   @option optionsc [Integer] :count Specifies the number of records to retrieve, per page.
     #   @return [Array]
     #   @example Return most recent media images that would appear on @shayne's feed
     #     Instagram.user_media_feed() # assuming @shayne is the authorized user
@@ -159,6 +159,131 @@ module Instagram
       options = args.last.is_a?(Hash) ? args.pop : {}
       id = args.first || "self"
       response = get("users/#{id}/media/recent", options)
+      response["data"]
+    end
+    
+    # Returns information about the current user's relationship (follow/following/etc) to another user
+    #
+    # @overload user_relationship(id, options={})
+    #   @param user [Integer] An Instagram user ID.
+    #   @param options [Hash] An optional options hash
+    #   @return [Hashie::Mash]
+    #   @example Return the relationship status between the currently authenticated user and @mikeyk
+    #     Instagram.user_relationship(4) # @mikeyk user ID being 4
+    # @see http://instagram.com/developer/endpoints/relationships/
+    # @format :json
+    # @authenticated true
+    # @rate_limited true
+    def user_relationship(id, options={})
+      response = get("users/#{id}/relationship", options)
+      response["data"]
+    end
+    
+    # Create a follows relationship between the current user and the target user
+    #
+    # @overload follow_user(id, options={})
+    #   @param user [Integer] An Instagram user ID.
+    #   @param options [Hash] An optional options hash
+    #   @return [Hashie::Mash]
+    #   @example Request the current user to follow the target user
+    #     Instagram.follow_user(4)
+    # @see http://instagram.com/developer/endpoints/relationships/
+    # @format :json
+    # @authenticated true
+    # @rate_limited true
+    def follow_user(id, options={})
+      options["action"] = "follow"
+      response = post("users/#{id}/relationship", options)
+      response["data"]
+    end
+    
+    # Destroy a follows relationship between the current user and the target user
+    #
+    # @overload unfollow_user(id, options={})
+    #   @param user [Integer] An Instagram user ID.
+    #   @param options [Hash] An optional options hash
+    #   @return [Hashie::Mash]
+    #   @example Remove a follows relationship between the current user and the target user
+    #     Instagram.unfollow_user(4)
+    # @see http://instagram.com/developer/endpoints/relationships/
+    # @format :json
+    # @authenticated true
+    # @rate_limited true
+    def unfollow_user(id, options={})
+      options["action"] = "unfollow"
+      response = post("users/#{id}/relationship", options)
+      response["data"]
+    end
+    
+    # Block a relationship between the current user and the target user
+    #
+    # @overload unfollow_user(id, options={})
+    #   @param user [Integer] An Instagram user ID.
+    #   @param options [Hash] An optional options hash
+    #   @return [Hashie::Mash]
+    #   @example Block a relationship between the current user and the target user
+    #     Instagram.block_user(4)
+    # @see http://instagram.com/developer/endpoints/relationships/
+    # @format :json
+    # @authenticated true
+    # @rate_limited true
+    def block_user(id, options={})
+      options["action"] = "block"
+      response = post("users/#{id}/relationship", options)
+      response["data"]
+    end
+    
+    # Remove a relationship block between the current user and the target user
+    #
+    # @overload unblock_user(id, options={})
+    #   @param user [Integer] An Instagram user ID.
+    #   @param options [Hash] An optional options hash
+    #   @return [Hashie::Mash]
+    #   @example Remove a relationship block between the current user and the target user
+    #     Instagram.unblock_user(4)
+    # @see http://instagram.com/developer/endpoints/relationships/
+    # @format :json
+    # @authenticated true
+    # @rate_limited true
+    def unblock_user(id, options={})
+      options["action"] = "unblock"
+      response = post("users/#{id}/relationship", options)
+      response["data"]
+    end
+    
+    # Approve a relationship request between the current user and the target user
+    #
+    # @overload approve_user(id, options={})
+    #   @param user [Integer] An Instagram user ID.
+    #   @param options [Hash] An optional options hash
+    #   @return [Hashie::Mash]
+    #   @example Approve a relationship request between the current user and the target user
+    #     Instagram.approve_user(4)
+    # @see http://instagram.com/developer/endpoints/relationships/
+    # @format :json
+    # @authenticated true
+    # @rate_limited true
+    def approve_user(id, options={})
+      options["action"] = "approve"
+      response = post("users/#{id}/relationship", options)
+      response["data"]
+    end
+    
+    # Deny a relationship request between the current user and the target user
+    #
+    # @overload deny_user(id, options={})
+    #   @param user [Integer] An Instagram user ID.
+    #   @param options [Hash] An optional options hash
+    #   @return [Hashie::Mash]
+    #   @example Deny a relationship request between the current user and the target user
+    #     Instagram.deny_user(4)
+    # @see http://instagram.com/developer/endpoints/relationships/
+    # @format :json
+    # @authenticated true
+    # @rate_limited true
+    def deny_user(id, options={})
+      options["action"] = "deny"
+      response = post("users/#{id}/relationship", options)
       response["data"]
     end
   end
