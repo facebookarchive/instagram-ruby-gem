@@ -140,5 +140,5 @@ Submitting a Pull Request
 
 Copyright
 ---------
-Copyright (c) 2010 Instagram (Burbn, Inc).
+Copyright (c) 2011 Instagram (Burbn, Inc).
 See [LICENSE](https://github.com/Instagram/instagram-ruby-gem/blob/master/LICENSE.md) for details.

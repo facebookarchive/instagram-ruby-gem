@@ -1,4 +1,4 @@
-Copyright (c) 2010 Instagram (Burbn, Inc.)
+Copyright (c) 2011 Instagram (Burbn, Inc.)
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
