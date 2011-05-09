@@ -31,7 +31,7 @@ module Instagram
       #   @option options [String, Integer] :object_id When specifying a location or tag use the location's ID or tag name respectively
       #   @option options [String, Float] :lat The center latitude of an area, used when subscribing to a geography object
       #   @option options [String, Float] :lng The center longitude of an area, used when subscribing to a geography object
-      #   @option options [String, Integer] :radius The distance in meters you'd like to capture around a given point (max 5000 meters)
+      #   @option options [String, Integer] :radius The distance in meters you'd like to capture around a given point
       # @overload create_subscription(object, callback_url, aspect="media", options={})
       #   @param object [String] The object you'd like to subscribe to (user, tag, location or geography)
       #   @param callback_url [String] The subscription callback URL
@@ -40,7 +40,7 @@ module Instagram
       #   @option options [String, Integer] :object_id When specifying a location or tag use the location's ID or tag name respectively
       #   @option options [String, Float] :lat The center latitude of an area, used when subscribing to a geography object
       #   @option options [String, Float] :lng The center longitude of an area, used when subscribing to a geography object
-      #   @option options [String, Integer] :radius The distance in meters you'd like to capture around a given point (max 5000 meters)
+      #   @option options [String, Integer] :radius The distance in meters you'd like to capture around a given point 
       #
       #     Note that we only support "media" at this time, but we might support other types of subscriptions in the future.
       #   @return [Hashie::Mash] The subscription created.

@@ -46,7 +46,7 @@ module Instagram
       # @param lat [String] A given latitude in decimal format
       # @param lng [String] A given longitude in decimal format
       # @param options [Hash] A customizable set of options.
-      # @option options [Integer] :count The number of media items to retrieve. Maxiumum of 100 allowed per page.
+      # @option options [Integer] :count The number of media items to retrieve.
       # @return [Array]
       # @example Return media around 37.7808851, -122.3948632 (164 S Park, SF, CA USA)
       #   Instagram.media_search("37.7808851", "-122.3948632")

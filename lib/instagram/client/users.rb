@@ -28,7 +28,7 @@ module Instagram
       # @rate_limited true
       # @param query [String] The search query to run against user search.
       # @param options [Hash] A customizable set of options.
-      # @option options [Integer] :count The number of users to retrieve. Maxiumum of 100 allowed per page.
+      # @option options [Integer] :count The number of users to retrieve.
       # @return [Array]
       # @see TODO:doc url
       # @example Return users that match "Shayne Sweeney"
@@ -49,7 +49,7 @@ module Instagram
       #   @param user [Integer] An Instagram user ID.
       #   @param options [Hash] A customizable set of options.
       #   @option options [Integer] :cursor (nil) Breaks the results into pages. Provide values as returned in the response objects's next_cursor attribute to page forward in the list.
-      #   @option options [Integer] :count (nil) Limits the number of results returned per page, maximum 150.
+      #   @option options [Integer] :count (nil) Limits the number of results returned per page.
       #   @return [Hashie::Mash]
       #   @example Return a list of users @mikeyk follows
       #     Instagram.user_follows(4) # @mikeyk user ID being 4
@@ -78,7 +78,7 @@ module Instagram
     #   @param user [Integer] An Instagram user ID.
     #   @param options [Hash] A customizable set of options.
     #   @option options [Integer] :cursor (nil) Breaks the results into pages. Provide values as returned in the response objects's next_cursor attribute to page forward in the list.
-    #   @option options [Integer] :count (nil) Limits the number of results returned per page, maximum 150.
+    #   @option options [Integer] :count (nil) Limits the number of results returned per page.
     #   @return [Hashie::Mash]
     #   @example Return a list of users @mikeyk is followed by
     #     Instagram.user_followed_by(4) # @mikeyk user ID being 4
@@ -115,14 +115,14 @@ module Instagram
       response["data"]
     end
 
-    # Returns the 20 most recent media items from the currently authorized user's feed.
+    # Returns most recent media items from the currently authorized user's feed.
     #
     # @overload user_media_feed(options={})
     #   @param options [Hash] A customizable set of options.
     #   @option options [Integer] :max_id Returns results with an ID less than (that is, older than) or equal to the specified ID.
-    #   @option options [Integer] :count Specifies the number of records to retrieve, per page. Must be less than or equal to 100.
+    #   @option options [Integer] :count Specifies the number of records to retrieve, per page.
     #   @return [Array]
-    #   @example Return the 20 most recent media images that would appear on @shayne's feed
+    #   @example Return most recent media images that would appear on @shayne's feed
     #     Instagram.user_media_feed() # assuming @shayne is the authorized user
     # @format :json
     # @authenticated true
@@ -145,7 +145,7 @@ module Instagram
     #   @param user [Integer] An Instagram user ID.
     #   @param options [Hash] A customizable set of options.
     #   @option options [Integer] :max_id (nil) Returns results with an ID less than (that is, older than) or equal to the specified ID.
-    #   @option options [Integer] :count (nil) Limits the number of results returned per page, maximum 150.
+    #   @option options [Integer] :count (nil) Limits the number of results returned per page.
     #   @return [Hashie::Mash]
     #   @example Return a list of media items taken by @mikeyk
     #     Instagram.user_recent_media(4) # @mikeyk user ID being 4
