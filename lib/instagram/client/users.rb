@@ -133,6 +133,21 @@ module Instagram
       response = get('users/self/feed', options)
       response["data"]
     end
+    
+    # Returns liked media items from the currently authorized user.
+    #
+    # @overload user_media_feed(options={})
+    #   @return [Array]
+    #   @example Return liked media images from user @shayne
+    #     Instagram.user_media_liked() # assuming @shayne is the authorized user
+    # @format :json
+    # @authenticated true
+    # @rate_limited true
+    # @see TODO:docs URL
+    def user_media_liked()
+      response = get('users/self/media/liked')
+      response["data"]
+    end
 
     # Returns a list of recent media items for a given user
     #
