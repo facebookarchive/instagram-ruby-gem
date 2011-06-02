@@ -2,18 +2,13 @@
 require File.expand_path('../lib/instagram/version', __FILE__)
 
 Gem::Specification.new do |s|
-  s.add_development_dependency('bundler', '~> 1.0')
-  s.add_development_dependency('rake', '~> 0.8')
   s.add_development_dependency('rspec', '~> 2.4')
-  s.add_development_dependency('yard', '~> 0.6')
-  s.add_development_dependency('simplecov', '~> 0.3')
   s.add_development_dependency('webmock', '~> 1.6')
-  s.add_development_dependency('ZenTest', '~> 4.4')
   s.add_development_dependency('bluecloth', '~> 2.0.11')
   s.add_runtime_dependency('faraday', '~> 0.5.4')
   s.add_runtime_dependency('faraday_middleware', '~> 0.3.1')
   s.add_runtime_dependency('multi_json', '~> 0.0.5')
-  s.add_runtime_dependency('hashie', '~> 1.0.0')
+  s.add_runtime_dependency('hashie',  '>= 0.4.0')
   s.authors = ["Shayne Sweeney"]
   s.description = %q{A Ruby wrapper for the Instagram REST and Search APIs}
   s.post_install_message =<<eos
