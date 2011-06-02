@@ -170,6 +170,22 @@ describe Instagram::Client do
         end
       end
 
+      describe ".user_liked_media" do
+        
+        before do
+          stub_get("users/self/media/liked.#{format}").
+            with(:query => {:access_token => @client.access_token}).
+            to_return(:body => fixture("liked_media.#{format}"), :headers => {:content_type => "application/#{format}; charset=utf-8"})
+        end
+
+        it "should get the correct resource" do
+          @client.user_liked_media
+          a_get("users/self/media/liked.#{format}").
+            with(:query => {:access_token => @client.access_token}).
+            should have_been_made
+        end
+      end
+      
       describe ".user_recent_media" do
 
         context "with user ID passed" do

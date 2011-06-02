@@ -136,7 +136,7 @@ module Instagram
 
     # Returns a list of recent media items for a given user
     #
-    # @overload user_recent_media(id=nil, options={})
+    # @overload user_recent_media(options={})
     #   @param options [Hash] A customizable set of options.
     #   @return [Hashie::Mash]
     #   @example Returns a list of recent media items for the currently authenticated user
@@ -149,7 +149,7 @@ module Instagram
     #   @return [Hashie::Mash]
     #   @example Return a list of media items taken by @mikeyk
     #     Instagram.user_recent_media(4) # @mikeyk user ID being 4
-    # @see TODO:docs url
+    # @see http://instagram.com/developer/endpoints/users/#get_users_media_recent
     # @format :json
     # @authenticated false unless requesting it from a protected user
     #
@@ -159,6 +159,24 @@ module Instagram
       options = args.last.is_a?(Hash) ? args.pop : {}
       id = args.first || "self"
       response = get("users/#{id}/media/recent", options)
+      response["data"]
+    end
+    
+    # Returns a list of media items liked by the current user
+    #
+    # @overload user_liked_media(options={})
+    #   @param options [Hash] A customizable set of options.
+    #   @option options [Integer] :max_like_id (nil) Returns results with an ID less than (that is, older than) or equal to the specified ID.
+    #   @option options [Integer] :count (nil) Limits the number of results returned per page.
+    #   @return [Hashie::Mash]
+    #   @example Returns a list of media items liked by the currently authenticated user
+    #     Instagram.user_liked_media
+    # @see http://instagram.com/developer/endpoints/users/#get_users_liked_feed
+    # @format :json
+    # @authenticated true
+    # @rate_limited true
+    def user_liked_media(options={})
+      response = get("users/self/media/liked", options)
       response["data"]
     end
     
