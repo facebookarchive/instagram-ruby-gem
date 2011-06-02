@@ -1,4 +1,5 @@
 require 'faraday'
+require 'active_support'
 
 # @private
 module Faraday
