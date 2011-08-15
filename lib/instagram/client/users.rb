@@ -120,18 +120,19 @@ module Instagram
     # @overload user_media_feed(options={})
     #   @param options [Hash] A customizable set of options.
     #   @option options [Integer] :max_id Returns results with an ID less than (that is, older than) or equal to the specified ID.
-    #   @option optionsc [Integer] :count Specifies the number of records to retrieve, per page.
+    #   @option options [Integer] :min_id Return media later than this min_id
+    #   @option options [Integer] :count Specifies the number of records to retrieve, per page.
     #   @return [Array]
     #   @example Return most recent media images that would appear on @shayne's feed
     #     Instagram.user_media_feed() # assuming @shayne is the authorized user
     # @format :json
     # @authenticated true
     # @rate_limited true
-    # @see TODO:docs URL
+    # @see http://instagram.com/developer/endpoints/users/#get_users_feed
     def user_media_feed(*args)
       options = args.first.is_a?(Hash) ? args.pop : {}
       response = get('users/self/feed', options)
-      response["data"]
+      response
     end
 
     # Returns a list of recent media items for a given user
@@ -161,7 +162,7 @@ module Instagram
       response = get("users/#{id}/media/recent", options)
       response["data"]
     end
-    
+
     # Returns a list of media items liked by the current user
     #
     # @overload user_liked_media(options={})
@@ -177,9 +178,9 @@ module Instagram
     # @rate_limited true
     def user_liked_media(options={})
       response = get("users/self/media/liked", options)
-      response["data"]
+      response
     end
-    
+
     # Returns information about the current user's relationship (follow/following/etc) to another user
     #
     # @overload user_relationship(id, options={})
@@ -196,7 +197,7 @@ module Instagram
       response = get("users/#{id}/relationship", options)
       response["data"]
     end
-    
+
     # Create a follows relationship between the current user and the target user
     #
     # @overload follow_user(id, options={})
@@ -214,7 +215,7 @@ module Instagram
       response = post("users/#{id}/relationship", options)
       response["data"]
     end
-    
+
     # Destroy a follows relationship between the current user and the target user
     #
     # @overload unfollow_user(id, options={})
@@ -232,7 +233,7 @@ module Instagram
       response = post("users/#{id}/relationship", options)
       response["data"]
     end
-    
+
     # Block a relationship between the current user and the target user
     #
     # @overload unfollow_user(id, options={})
@@ -250,7 +251,7 @@ module Instagram
       response = post("users/#{id}/relationship", options)
       response["data"]
     end
-    
+
     # Remove a relationship block between the current user and the target user
     #
     # @overload unblock_user(id, options={})
@@ -268,7 +269,7 @@ module Instagram
       response = post("users/#{id}/relationship", options)
       response["data"]
     end
-    
+
     # Approve a relationship request between the current user and the target user
     #
     # @overload approve_user(id, options={})
@@ -286,7 +287,7 @@ module Instagram
       response = post("users/#{id}/relationship", options)
       response["data"]
     end
-    
+
     # Deny a relationship request between the current user and the target user
     #
     # @overload deny_user(id, options={})

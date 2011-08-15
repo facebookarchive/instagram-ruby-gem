@@ -56,7 +56,7 @@ module Instagram
       # @rate_limited true
       def media_search(lat, lng, options={})
         response = get('media/search', options.merge(:lat => lat, :lng => lng))
-        response["data"]
+        response
       end
     end
   end

@@ -35,7 +35,7 @@ module Instagram
       def tag_recent_media(id, *args)
         options = args.last.is_a?(Hash) ? args.pop : {}
         response = get("tags/#{id}/media/recent", options)
-        response["data"]
+        response
       end
 
       # Returns a list of tags starting with the given search query

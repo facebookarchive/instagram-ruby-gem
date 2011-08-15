@@ -35,7 +35,7 @@ module Instagram
       def location_recent_media(id, *args)
         options = args.last.is_a?(Hash) ? args.pop : {}
         response = get("locations/#{id}/media/recent", options)
-        response["data"]
+        response
       end
 
       # Returns Instagram locations within proximity of given lat,lng
