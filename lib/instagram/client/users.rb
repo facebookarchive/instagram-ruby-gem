@@ -178,7 +178,7 @@ module Instagram
     # @rate_limited true
     def user_liked_media(options={})
       response = get("users/self/media/liked", options)
-      response
+      response["data"]
     end
 
     # Returns information about the current user's relationship (follow/following/etc) to another user
