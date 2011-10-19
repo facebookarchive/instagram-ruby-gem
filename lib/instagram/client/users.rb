@@ -40,12 +40,12 @@ module Instagram
 
       # Returns a list of users whom a given user follows
       #
-      # @overload follows(id=nil, options={})
+      # @overload user_follows(id=nil, options={})
       #   @param options [Hash] A customizable set of options.
       #   @return [Hashie::Mash]
       #   @example Returns a list of users the authenticated user follows
       #     Instagram.user_follows
-      # @overload follows(id=nil, options={})
+      # @overload user_follows(id=nil, options={})
       #   @param user [Integer] An Instagram user ID.
       #   @param options [Hash] A customizable set of options.
       #   @option options [Integer] :cursor (nil) Breaks the results into pages. Provide values as returned in the response objects's next_cursor attribute to page forward in the list.
