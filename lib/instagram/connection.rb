@@ -15,16 +15,16 @@ module Instagram
       }
 
       Faraday::Connection.new(options) do |connection|
-        connection.use Faraday::Request::OAuth2, client_id, access_token
+        connection.use FaradayMiddleware::OAuth2, client_id, access_token
+        connection.use Faraday::Request::UrlEncoded
         connection.adapter(adapter)
-        connection.use Faraday::Response::RaiseHttp5xx
+        connection.use FaradayMiddleware::Mashify unless raw
         unless raw
           case format.to_s.downcase
           when 'json' then connection.use Faraday::Response::ParseJson
           end
         end
-        connection.use Faraday::Response::RaiseHttp4xx
-        connection.use Faraday::Response::Mashify unless raw
+        connection.use FaradayMiddleware::RaiseHttpException
       end
     end
   end
