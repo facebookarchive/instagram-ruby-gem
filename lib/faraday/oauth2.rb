@@ -1,13 +1,14 @@
 require 'faraday'
 
 # @private
-module Faraday
+module FaradayMiddleware
   # @private
-  class Request::OAuth2 < Faraday::Middleware
+  class OAuth2 < Faraday::Middleware
     def call(env)
 
       if env[:method] == :get or env[:method] == :delete
         env[:url].query_values = {} if env[:url].query_values.nil?
+
         if @access_token and not env[:url].query_values["client_secret"]
           env[:url].query_values = env[:url].query_values.merge(:access_token => @access_token)
           env[:request_headers] = env[:request_headers].merge('Authorization' => "Token token=\"#{@access_token}\"")
@@ -23,6 +24,8 @@ module Faraday
           env[:body] = env[:body].merge(:client_id => @client_id)
         end
       end
+
+      env[:url].query_values = nil if env[:url].query_values == {}
 
       @app.call env
     end

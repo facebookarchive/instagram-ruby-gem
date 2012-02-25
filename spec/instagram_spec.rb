@@ -14,8 +14,7 @@ describe Instagram do
 
      it "should get the correct resource" do
        Instagram.user_media_feed()
-       a_get("users/self/feed.json").
-         should have_been_made
+       a_get("users/self/feed.json").should have_been_made
      end
 
      it "should return the same results as a client" do
