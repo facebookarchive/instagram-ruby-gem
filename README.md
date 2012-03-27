@@ -89,7 +89,7 @@ API Usage Examples
     puts Instagram.follows
 
     # Get a list of media close to a given latitude and longitude
-    puts Instagram.media_search("37.7808851,-122.3948632")
+    puts Instagram.media_search("37.7808851","-122.3948632")
 
 	# Get a list of the overall most popular media items
 	puts Instagram.media_popular
