@@ -35,7 +35,7 @@ module Instagram
       #   Instagram.user_search("Shayne Sweeney")
       def user_search(query, options={})
         response = get('users/search', options.merge(:q => query))
-        response["data"]
+        response
       end
 
       # Returns a list of users whom a given user follows
@@ -63,7 +63,7 @@ module Instagram
         options = args.last.is_a?(Hash) ? args.pop : {}
         id = args.first || "self"
         response = get("users/#{id}/follows", options)
-        response["data"]
+        response
       end
     end
 
@@ -92,7 +92,7 @@ module Instagram
       options = args.last.is_a?(Hash) ? args.pop : {}
       id = args.first || "self"
       response = get("users/#{id}/followed-by", options)
-      response["data"]
+      response
     end
 
     # Returns a list of users whom a given user is followed by
@@ -112,7 +112,7 @@ module Instagram
     # @rate_limited true
     def user_requested_by()
       response = get("users/self/requested-by")
-      response["data"]
+      response
     end
 
     # Returns most recent media items from the currently authorized user's feed.
