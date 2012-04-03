@@ -29,7 +29,7 @@ module Instagram
       # @param query [String] The search query to run against user search.
       # @param options [Hash] A customizable set of options.
       # @option options [Integer] :count The number of users to retrieve.
-      # @return [Array]
+      # @return [Hashie::Mash]
       # @see TODO:doc url
       # @example Return users that match "Shayne Sweeney"
       #   Instagram.user_search("Shayne Sweeney")
@@ -122,7 +122,7 @@ module Instagram
     #   @option options [Integer] :max_id Returns results with an ID less than (that is, older than) or equal to the specified ID.
     #   @option options [Integer] :min_id Return media later than this min_id
     #   @option options [Integer] :count Specifies the number of records to retrieve, per page.
-    #   @return [Array]
+    #   @return [Hashie::Mash]
     #   @example Return most recent media images that would appear on @shayne's feed
     #     Instagram.user_media_feed() # assuming @shayne is the authorized user
     # @format :json
