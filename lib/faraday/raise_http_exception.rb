@@ -27,8 +27,8 @@ module FaradayMiddleware
     private
 
     def error_message_400(response)
-      #{}"#{response[:method].to_s.upcase} #{response[:url].to_s}: #{response[:status]}#{error_body(response[:body])}"
       puts '>> ' + response.inspect
+      ">> #{response[:method].to_s.upcase} #{response[:url].to_s}: #{response[:status]}#{error_body(response[:body])}"
     end
 
     def error_body(body)
