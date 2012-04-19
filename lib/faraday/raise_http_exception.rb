@@ -1,4 +1,5 @@
 require 'faraday'
+require 'multi_json'
 
 # @private
 module FaradayMiddleware
