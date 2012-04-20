@@ -1,5 +1,4 @@
 require 'faraday'
-require 'multi_json'
 
 # @private
 module FaradayMiddleware
@@ -32,9 +31,10 @@ module FaradayMiddleware
     end
 
     def error_body(body)
-      # body gets passed as a string, not sure if it is passed as something else from other spots. Checking specs.
+      # body gets passed as a string, not sure if it is passed as something else from other spots?
       if not body.nil? and not body.empty? and body.kind_of?(String)
-        body = MultiJson.decode(body)
+        # removed multi_json thanks to wesnolte's commit
+        body = ::JSON.parse(body)
       end
 
       if body.nil?
