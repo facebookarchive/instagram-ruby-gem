@@ -1,3 +1,4 @@
+require 'addressable/uri'
 require 'faraday'
 
 # @private
@@ -5,7 +6,7 @@ module FaradayMiddleware
   # @private
   class OAuth2 < Faraday::Middleware
     def call(env)
-
+      env[:url] = Addressable::URI.parse(env[:url])
       if env[:method] == :get or env[:method] == :delete
         env[:url].query_values = {} if env[:url].query_values.nil?
 
