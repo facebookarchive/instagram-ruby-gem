@@ -7,6 +7,7 @@ module FaradayMiddleware
   class OAuth2 < Faraday::Middleware
     def call(env)
       env[:url] = Addressable::URI.parse(env[:url])
+      env[:url].port = env[:url].inferred_port
       if env[:method] == :get or env[:method] == :delete
         env[:url].query_values = {} if env[:url].query_values.nil?
 
