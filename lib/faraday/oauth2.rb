@@ -1,4 +1,3 @@
-require 'addressable/uri'
 require 'faraday'
 
 # @private
@@ -6,17 +5,16 @@ module FaradayMiddleware
   # @private
   class OAuth2 < Faraday::Middleware
     def call(env)
-      env[:url] = Addressable::URI.parse(env[:url])
-      env[:url].port = env[:url].inferred_port
       if env[:method] == :get or env[:method] == :delete
-        env[:url].query_values = {} if env[:url].query_values.nil?
+        query = Faraday::Utils.parse_query(env[:url].query)
 
-        if @access_token and not env[:url].query_values["client_secret"]
-          env[:url].query_values = env[:url].query_values.merge(:access_token => @access_token)
+        if @access_token and not query["client_secret"]
+          query.update(:access_token => @access_token)
           env[:request_headers] = env[:request_headers].merge('Authorization' => "Token token=\"#{@access_token}\"")
         elsif @client_id
-          env[:url].query_values = env[:url].query_values.merge(:client_id => @client_id)
+          query.update(:client_id => @client_id)
         end
+        env[:url].query = Faraday::Utils.build_query(query)
       else
         if @access_token and not env[:body] && env[:body][:client_secret]
           env[:body] = {} if env[:body].nil?
@@ -27,7 +25,7 @@ module FaradayMiddleware
         end
       end
 
-      env[:url].query_values = nil if env[:url].query_values == {}
+      env[:url].query = nil if env[:url].query == ""
 
       @app.call env
     end
