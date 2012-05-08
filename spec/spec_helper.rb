@@ -39,8 +39,6 @@ def stub_delete(path)
 end
 
 def stub_get(path)
-  pp '#' * 50
-  pp stub_request(:get, Instagram.endpoint + path)
   stub_request(:get, Instagram.endpoint + path)
 end
 
