@@ -27,7 +27,10 @@ module FaradayMiddleware
     private
 
     def error_message_400(response)
-      "#{response[:method].to_s.upcase} #{response[:url].to_s}: #{response[:status]}#{error_body(response[:body])}"
+      # response body is escaped JSON so it needs to be parsed
+      body = ::JSON.parse(response[:body])
+      
+      "#{response[:method].to_s.upcase} #{response[:url].to_s}: #{response[:status]}#{error_body(body)}"
     end
 
     def error_body(body)
@@ -40,7 +43,7 @@ module FaradayMiddleware
       if body.nil?
         nil
       elsif body['meta'] and body['meta']['error_message'] and not body['meta']['error_message'].empty?
-        ": #{body['meta']['error_message']}"
+        ": #{body['meta']['error_type']} - #{body['meta']['error_message']}"
       end
     end
 
