@@ -7,13 +7,17 @@ module FaradayMiddleware
     def call(env)
 
       if env[:method] == :get or env[:method] == :delete
-        env[:url].query_values = {} if env[:url].query_values.nil?
+        if env[:url].query.nil?
+          query = {}
+        else
+          query = Faraday::Utils.parse_query(env[:url].query)
+        end
 
-        if @access_token and not env[:url].query_values["client_secret"]
-          env[:url].query_values = env[:url].query_values.merge(:access_token => @access_token)
+        if @access_token and not query["client_secret"]
+          env[:url].query = Faraday::Utils.build_query(query.merge(:access_token => @access_token))
           env[:request_headers] = env[:request_headers].merge('Authorization' => "Token token=\"#{@access_token}\"")
         elsif @client_id
-          env[:url].query_values = env[:url].query_values.merge(:client_id => @client_id)
+          env[:url].query = Faraday::Utils.build_query(query.merge(:client_id => @client_id))
         end
       else
         if @access_token and not env[:body] && env[:body][:client_secret]
@@ -25,7 +29,6 @@ module FaradayMiddleware
         end
       end
 
-      env[:url].query_values = nil if env[:url].query_values == {}
 
       @app.call env
     end
