@@ -18,7 +18,7 @@ module Instagram
       def media_item(*args)
         id = args.first || 'self'
         response = get("media/#{id}")
-        response["data"]
+        response
       end
 
       # Returns a list of the overall most popular media
@@ -38,7 +38,7 @@ module Instagram
         options = args.last.is_a?(Hash) ? args.pop : {}
         id = args.first || "self"
         response = get("media/popular", options)
-        response["data"]
+        response
       end
 
       # Returns media items within proximity of given lat,lng
@@ -47,7 +47,7 @@ module Instagram
       # @param lng [String] A given longitude in decimal format
       # @param options [Hash] A customizable set of options.
       # @option options [Integer] :count The number of media items to retrieve.
-      # @return [Array]
+      # @return [Hashie::Mash] A list of matching media
       # @example Return media around 37.7808851, -122.3948632 (164 S Park, SF, CA USA)
       #   Instagram.media_search("37.7808851", "-122.3948632")
       # @see TODO:doc url

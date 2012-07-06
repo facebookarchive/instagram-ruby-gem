@@ -69,8 +69,8 @@ describe Instagram::Client do
 
         it "should return an array of user search results" do
           media_search = @client.media_search("37.7808851", "-122.3948632")
-          media_search.data.should be_a Array
-          media_search.data.first.user.username.should == "mikeyk"
+          media_search.should be_a Array
+          media_search.first.user.username.should == "mikeyk"
         end
       end
     end
