@@ -17,7 +17,6 @@ module Instagram
       Faraday::Connection.new(options) do |connection|
         connection.use FaradayMiddleware::OAuth2, client_id, access_token
         connection.use Faraday::Request::UrlEncoded
-        #connection.adapter(adapter)
         connection.use FaradayMiddleware::Mashify unless raw
         unless raw
           case format.to_s.downcase
