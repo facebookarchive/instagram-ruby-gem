@@ -86,7 +86,7 @@ API Usage Examples
     end
 
     # Get a list of all the users you're following
-    puts Instagram.follows
+    puts Instagram.user_follows
 
     # Get a list of media close to a given latitude and longitude
     puts Instagram.media_search("37.7808851","-122.3948632")
