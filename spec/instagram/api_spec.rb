@@ -32,6 +32,7 @@ describe Instagram::API do
         @configuration = {
           :client_id => 'CID',
           :client_secret => 'CS',
+          :redirect_uri => 'http://http://localhost:4567/oauth/callback',
           :access_token => 'AT',
           :adapter => :typhoeus,
           :endpoint => 'http://tumblr.com/',
@@ -82,29 +83,73 @@ describe Instagram::API do
 
       url2.should == url
     end
+
+    context "when redirect uri not passed" do
+
+      it "should generate an authorize URL using the redirect uri from the configuration" do
+        redirect_uri = "http://localhost:4567/oauth/callback"
+        params = { :client_id => "CID", :client_secret => "CS", :redirect_uri => redirect_uri }
+        client = Instagram::Client.new(params)
+        url = client.authorize_url
+
+        params2 = client.send(:access_token_params).merge({:client_id => "CID", :client_secret => "CS"})
+        params2[:response_type] = "code"
+        params2[:redirect_uri] = redirect_uri
+        url2 = client.send(:connection).build_url("/oauth/authorize/", params2).to_s
+
+        url2.should == url
+      end
+    end
   end
 
   describe ".get_access_token" do
 
-    before do
-      @client = Instagram::Client.new(:client_id => "CID", :client_secret => "CS")
-      @url = @client.send(:connection).build_url("/oauth/access_token/").to_s
-      stub_request(:post, @url).
-        with(:body => {:client_id => "CID", :client_secret => "CS", :redirect_uri => "http://localhost:4567/oauth/callback", :grant_type => "authorization_code", :code => "C"}).
-        to_return(:status => 200, :body => fixture("access_token.json"), :headers => {})
+    context "when redirect uri passed" do
+
+      before do
+        @client = Instagram::Client.new(:client_id => "CID", :client_secret => "CS")
+        @url = @client.send(:connection).build_url("/oauth/access_token/").to_s
+        stub_request(:post, @url).
+          with(:body => {:client_id => "CID", :client_secret => "CS", :redirect_uri => "http://localhost:4567/oauth/callback", :grant_type => "authorization_code", :code => "C"}).
+          to_return(:status => 200, :body => fixture("access_token.json"), :headers => {})
+      end
+
+      it "should get the correct resource" do
+        @client.get_access_token(code="C", :redirect_uri => "http://localhost:4567/oauth/callback")
+        a_request(:post, @url).
+          with(:body => {:client_id => "CID", :client_secret => "CS", :redirect_uri => "http://localhost:4567/oauth/callback", :grant_type => "authorization_code", :code => "C"}).
+          should have_been_made
+      end
+
+      it "should return a hash with an access_token and user data" do
+        response = @client.get_access_token(code="C", :redirect_uri => "http://localhost:4567/oauth/callback")
+        response.access_token.should == "at"
+        response.user.username.should == "mikeyk"
+      end
     end
 
-    it "should get the correct resource" do
-      @client.get_access_token(code="C", :redirect_uri => "http://localhost:4567/oauth/callback")
-      a_request(:post, @url).
-        with(:body => {:client_id => "CID", :client_secret => "CS", :redirect_uri => "http://localhost:4567/oauth/callback", :grant_type => "authorization_code", :code => "C"}).
-        should have_been_made
-    end
+    context 'when redirect uri not passed' do
 
-    it "should return a hash with an access_token and user data" do
-      response = @client.get_access_token(code="C", :redirect_uri => "http://localhost:4567/oauth/callback")
-      response.access_token.should == "at"
-      response.user.username.should == "mikeyk"
+      before do
+        @client = Instagram::Client.new(:client_id => "CID", :client_secret => "CS", :redirect_uri => "http://localhost:4567/oauth/callback")
+        @url = @client.send(:connection).build_url("/oauth/access_token/").to_s
+        stub_request(:post, @url).
+          with(:body => {:client_id => "CID", :client_secret => "CS", :redirect_uri => "http://localhost:4567/oauth/callback", :grant_type => "authorization_code", :code => "C"}).
+          to_return(:status => 200, :body => fixture("access_token.json"), :headers => {})
+      end
+
+      it "should get the correct resource" do
+        @client.get_access_token(code="C")
+        a_request(:post, @url).
+          with(:body => {:client_id => "CID", :client_secret => "CS", :redirect_uri => "http://localhost:4567/oauth/callback", :grant_type => "authorization_code", :code => "C"}).
+          should have_been_made
+      end
+
+      it "should return a hash with an access_token and user data" do
+        response = @client.get_access_token(code="C")
+        response.access_token.should == "at"
+        response.user.username.should == "mikeyk"
+      end
     end
   end
 end

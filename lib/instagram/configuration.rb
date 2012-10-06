@@ -9,6 +9,7 @@ module Instagram
       :adapter,
       :client_id,
       :client_secret,
+      :redirect_uri,
       :access_token,
       :endpoint,
       :format,
@@ -80,6 +81,7 @@ module Instagram
       self.adapter        = DEFAULT_ADAPTER
       self.client_id      = DEFAULT_CLIENT_ID
       self.client_secret  = DEFAULT_CLIENT_SECRET
+      self.redirect_uri   = DEFAULT_REDIRECT_URI
       self.access_token   = DEFAULT_ACCESS_TOKEN
       self.endpoint       = DEFAULT_ENDPOINT
       self.format         = DEFAULT_FORMAT
