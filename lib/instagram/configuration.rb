@@ -10,6 +10,7 @@ module Instagram
       :client_id,
       :client_secret,
       :scope,
+      :redirect_uri,
       :access_token,
       :endpoint,
       :format,
@@ -85,6 +86,7 @@ module Instagram
       self.client_id      = DEFAULT_CLIENT_ID
       self.client_secret  = DEFAULT_CLIENT_SECRET
       self.scope          = DEFAULT_SCOPE
+      self.redirect_uri   = DEFAULT_REDIRECT_URI
       self.access_token   = DEFAULT_ACCESS_TOKEN
       self.endpoint       = DEFAULT_ENDPOINT
       self.format         = DEFAULT_FORMAT
