@@ -3,7 +3,7 @@ require 'faraday'
 # @private
 module FaradayMiddleware
   # @private
-  class OAuth2 < Faraday::Middleware
+  class InstagramOAuth2 < Faraday::Middleware
     def call(env)
 
       if env[:method] == :get or env[:method] == :delete
