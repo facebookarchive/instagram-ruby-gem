@@ -82,11 +82,8 @@ API Usage Examples
 	# To get your Instagram OAuth credentials, register an app at http://instagr.am/oauth/client/register/
     Instagram.configure do |config|
       config.client_id = YOUR_CLIENT_KEY
-      config.access_token = YOUR_ACCESS_TOKEN
+      config.client_secret = "YOUR_CLIENT_SECRET"
     end
-
-    # Get a list of all the users you're following
-    puts Instagram.follows
 
     # Get a list of media close to a given latitude and longitude
     puts Instagram.media_search("37.7808851","-122.3948632")
