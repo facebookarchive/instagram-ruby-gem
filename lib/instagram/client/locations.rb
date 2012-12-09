@@ -40,16 +40,16 @@ module Instagram
 
       # Returns Instagram locations within proximity of given lat,lng or foursquare venue id
       #
-      # @param lat [String] A given latitude in decimal format
-      # @param lng [String] A given longitude in decimal format
-      # or
-      # @param foursquare_v2_id [String] A valid Foursquare Venue ID (v2)
-      # @option options [Integer] :count The number of media items to retrieve.
-      # @return [Array]
-      # @example 1: Return a location with the Foursquare Venue ID = ()
-      #   Instagram.location_search("")
-      # @example 2: Return locations around 37.7808851, -122.3948632 (164 S Park, SF, CA USA)
-      #   Instagram.location_search("37.7808851", "-122.3948632")
+      # @overload location_search(options={})
+      #   @param foursquare_v2_id [String] A valid Foursquare Venue ID (v2)
+      #   @param lat [String] A given latitude in decimal format
+      #   @param lng [String] A given longitude in decimal format
+      #   @option options [Integer] :count The number of media items to retrieve.
+      #   @return [Array]
+      #   @example 1: Return a location with the Foursquare Venue ID = ()
+      #     Instagram.location_search("3fd66200f964a520c5f11ee3") (Schiller's Liquor Bar, 131 Rivington St., NY, NY 10002)
+      #   @example 2: Return locations around 37.7808851, -122.3948632 (164 S Park, SF, CA USA)
+      #     Instagram.location_search("37.7808851", "-122.3948632")
       # @see TODO:doc url
       # @format :json
       # @authenticated false
