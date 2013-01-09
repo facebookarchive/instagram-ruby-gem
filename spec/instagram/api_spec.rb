@@ -75,12 +75,23 @@ describe Instagram::API do
       redirect_uri = 'http://localhost:4567/oauth/callback'
       url = client.authorize_url(:redirect_uri => redirect_uri)
 
-      params2 = client.send(:access_token_params).merge(params)
-      params2[:redirect_uri] = redirect_uri
-      params2[:response_type] = "code"
+      options = {
+        :redirect_uri => redirect_uri,
+        :response_type => "code"
+      }
+      params2 = client.send(:authorization_params).merge(options)
+
       url2 = client.send(:connection).build_url("/oauth/authorize/", params2).to_s
 
       url2.should == url
+    end
+
+    it "should not include client secret in URL params" do
+      params = { :client_id => "CID", :client_secret => "CS" }
+      client = Instagram::Client.new(params)
+      redirect_uri = 'http://localhost:4567/oauth/callback'
+      url = client.authorize_url(:redirect_uri => redirect_uri)
+      url.should_not include("client_secret")
     end
   end
 

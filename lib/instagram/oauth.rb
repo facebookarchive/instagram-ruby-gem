@@ -4,7 +4,7 @@ module Instagram
     # Return URL for OAuth authorization
     def authorize_url(options={})
       options[:response_type] ||= "code"
-      params = access_token_params.merge(options)
+      params = authorization_params.merge(options)
       connection.build_url("/oauth/authorize/", params).to_s
     end
 
@@ -16,6 +16,12 @@ module Instagram
     end
 
     private
+
+    def authorization_params
+      {
+        :client_id => client_id
+      }
+    end
 
     def access_token_params
       {
