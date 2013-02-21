@@ -36,7 +36,7 @@ describe Faraday::Response do
     it "should return the body error message" do
       expect do
         @client.user_media_feed()
-      end.should raise_error(Instagram::BadRequest, /Bad words are bad./)
+      end.to raise_error(Instagram::BadRequest, /Bad words are bad./)
     end
   end
 end
