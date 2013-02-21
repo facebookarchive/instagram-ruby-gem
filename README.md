@@ -79,6 +79,11 @@ API Usage Examples
     # Get a list of a user's most recent media
     puts Instagram.user_recent_media(777)
 
+    # Use pagination data from a response to get the next page
+    page_1 = Instagram.user_recent_media(777)
+    page_2_max_id = page_1.pagination.next_max_id
+    page_2 = Instagram.user_recent_media(777, :max_id => page_2_max_id ) unless page_2_max_id.nil?
+
     # Get the currently authenticated user's media feed
     puts Instagram.user_media_feed
 

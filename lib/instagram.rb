@@ -2,6 +2,7 @@ require File.expand_path('../instagram/error', __FILE__)
 require File.expand_path('../instagram/configuration', __FILE__)
 require File.expand_path('../instagram/api', __FILE__)
 require File.expand_path('../instagram/client', __FILE__)
+require File.expand_path('../instagram/response', __FILE__)
 
 module Instagram
   extend Configuration

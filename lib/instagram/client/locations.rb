@@ -15,7 +15,7 @@ module Instagram
       # @see TODO:docs url
       def location(id, *args)
         response = get("locations/#{id}")
-        response["data"]
+        response
       end
 
       # Returns a list of recent media items for a given Instagram location
@@ -45,7 +45,7 @@ module Instagram
       #   @param lat [String] A given latitude in decimal format
       #   @param lng [String] A given longitude in decimal format
       #   @option options [Integer] :count The number of media items to retrieve.
-      #   @return [Array]
+      #   @return [Hashie::Mash] location resultm object, #data is an Array.
       #   @example 1: Return a location with the Foursquare Venue ID = ()
       #     Instagram.location_search("3fd66200f964a520c5f11ee3") (Schiller's Liquor Bar, 131 Rivington St., NY, NY 10002)
       #   @example 2: Return locations around 37.7808851, -122.3948632 (164 S Park, SF, CA USA)
@@ -64,7 +64,7 @@ module Instagram
           lat, lng = args
           response = get('locations/search', options.merge(:lat => lat, :lng => lng))
         end
-        response["data"]
+        response
       end
     end
   end

@@ -168,6 +168,31 @@ describe Instagram::Client do
             with(:query => {:access_token => @client.access_token}).
             should have_been_made
         end
+
+        context Instagram::Response do
+          let(:user_media_feed_response){ @client.user_media_feed }
+          subject{ user_media_feed_response }
+
+          it{ should be_an_instance_of(Array) }
+          it{ should be_a_kind_of(Instagram::Response) }
+          it{ should respond_to(:pagination) }
+          it{ should respond_to(:meta) }
+
+          context '.pagination' do
+            subject{ user_media_feed_response.pagination }
+
+            it{ should be_an_instance_of(Hashie::Mash) }
+            its(:next_url){ should == 'http://api.instagram.com/v1/users/self/feed?access_token=f59def8.001cde77128843169627c0308237bafa&max_id=22063131' }
+            its(:next_max_id){ should == '22063131' }
+          end
+
+          context '.meta' do
+            subject{ user_media_feed_response.meta }
+
+            it{ should be_an_instance_of(Hashie::Mash) }
+            its(:code){ should == 200 }
+          end
+        end
       end
 
       describe ".user_liked_media" do

@@ -18,7 +18,7 @@ module Instagram
       def user(*args)
         id = args.first || 'self'
         response = get("users/#{id}")
-        response["data"]
+        response
       end
 
       # Returns users that match the given query
@@ -29,13 +29,13 @@ module Instagram
       # @param query [String] The search query to run against user search.
       # @param options [Hash] A customizable set of options.
       # @option options [Integer] :count The number of users to retrieve.
-      # @return [Array]
+      # @return [Hashie::Mash]
       # @see TODO:doc url
       # @example Return users that match "Shayne Sweeney"
       #   Instagram.user_search("Shayne Sweeney")
       def user_search(query, options={})
         response = get('users/search', options.merge(:q => query))
-        response["data"]
+        response
       end
 
       # Returns a list of users whom a given user follows
@@ -63,7 +63,7 @@ module Instagram
         options = args.last.is_a?(Hash) ? args.pop : {}
         id = args.first || "self"
         response = get("users/#{id}/follows", options)
-        response["data"]
+        response
       end
     end
 
@@ -92,7 +92,7 @@ module Instagram
       options = args.last.is_a?(Hash) ? args.pop : {}
       id = args.first || "self"
       response = get("users/#{id}/followed-by", options)
-      response["data"]
+      response
     end
 
     # Returns a list of users whom a given user is followed by
@@ -112,7 +112,7 @@ module Instagram
     # @rate_limited true
     def user_requested_by()
       response = get("users/self/requested-by")
-      response["data"]
+      response
     end
 
     # Returns most recent media items from the currently authorized user's feed.
@@ -122,7 +122,7 @@ module Instagram
     #   @option options [Integer] :max_id Returns results with an ID less than (that is, older than) or equal to the specified ID.
     #   @option options [Integer] :min_id Return media later than this min_id
     #   @option options [Integer] :count Specifies the number of records to retrieve, per page.
-    #   @return [Array]
+    #   @return [Hashie::Mash]
     #   @example Return most recent media images that would appear on @shayne's feed
     #     Instagram.user_media_feed() # assuming @shayne is the authorized user
     # @format :json
@@ -160,7 +160,7 @@ module Instagram
       options = args.last.is_a?(Hash) ? args.pop : {}
       id = args.first || "self"
       response = get("users/#{id}/media/recent", options)
-      response["data"]
+      response
     end
 
     # Returns a list of media items liked by the current user
@@ -195,7 +195,7 @@ module Instagram
     # @rate_limited true
     def user_relationship(id, options={})
       response = get("users/#{id}/relationship", options)
-      response["data"]
+      response
     end
 
     # Create a follows relationship between the current user and the target user
@@ -213,7 +213,7 @@ module Instagram
     def follow_user(id, options={})
       options["action"] = "follow"
       response = post("users/#{id}/relationship", options)
-      response["data"]
+      response
     end
 
     # Destroy a follows relationship between the current user and the target user
@@ -231,7 +231,7 @@ module Instagram
     def unfollow_user(id, options={})
       options["action"] = "unfollow"
       response = post("users/#{id}/relationship", options)
-      response["data"]
+      response
     end
 
     # Block a relationship between the current user and the target user
@@ -249,7 +249,7 @@ module Instagram
     def block_user(id, options={})
       options["action"] = "block"
       response = post("users/#{id}/relationship", options)
-      response["data"]
+      response
     end
 
     # Remove a relationship block between the current user and the target user
@@ -267,7 +267,7 @@ module Instagram
     def unblock_user(id, options={})
       options["action"] = "unblock"
       response = post("users/#{id}/relationship", options)
-      response["data"]
+      response
     end
 
     # Approve a relationship request between the current user and the target user
@@ -285,7 +285,7 @@ module Instagram
     def approve_user(id, options={})
       options["action"] = "approve"
       response = post("users/#{id}/relationship", options)
-      response["data"]
+      response
     end
 
     # Deny a relationship request between the current user and the target user
@@ -303,7 +303,7 @@ module Instagram
     def deny_user(id, options={})
       options["action"] = "deny"
       response = post("users/#{id}/relationship", options)
-      response["data"]
+      response
     end
   end
 end
