@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.post_install_message =<<eos
 ********************************************************************************
 
-  Follow @instagram on Twitter for announcements, updates, and news.
+  Follow @instagramapi on Twitter for announcements, updates, and news.
   https://twitter.com/instagramapi
 
   Join the mailing list!
