@@ -16,5 +16,6 @@ module Instagram
     include Instagram::Client::Comments
     include Instagram::Client::Likes
     include Instagram::Client::Subscriptions
+    include Instagram::Client::Embedding
   end
 end
