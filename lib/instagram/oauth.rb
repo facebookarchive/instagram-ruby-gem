@@ -12,7 +12,7 @@ module Instagram
     def get_access_token(code, options={})
       options[:grant_type] ||= "authorization_code"
       params = access_token_params.merge(options)
-      post("/oauth/access_token/", params.merge(:code => code), raw=false, unformatted=true)
+      post("/oauth/access_token/", params.merge(:code => code), raw=false, unformatted=true, no_response_wrapper=true)
     end
 
     private

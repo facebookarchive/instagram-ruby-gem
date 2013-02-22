@@ -19,7 +19,7 @@ module Instagram
       # @see https://api.instagram.com/developer/realtime/
       def subscriptions(options={})
         response = get("subscriptions", options.merge(:client_secret => client_secret))
-        response["data"]
+        response
       end
 
       # Creates a real-time subscription
@@ -64,7 +64,7 @@ module Instagram
           o[:aspect] = aspect || o[:aspect] || "media"
         }
         response = post("subscriptions", options.merge(:client_secret => client_secret))
-        response["data"]
+        response
       end
 
       # Deletes a real-time subscription
@@ -79,7 +79,7 @@ module Instagram
       #   @param options [Hash] Addition options and parameters
       #   @option options [String] :object When specified will remove all subscriptions of this object type, unless an :object_id is also specified (user, tag, location or geography)
       #   @option options [String, Integer] :object_id When specifying :object, inlcude an :object_id to only remove subscriptions of that object and object_id
-      #   @return [nil]
+      #   @return [Hashie::Mash]
       #   @example Deletes an application's user change subscription
       #     Instagram.delete_subscription(:object => "user")
       # @format :json
@@ -93,7 +93,7 @@ module Instagram
         subscription_id = args.first
         options.merge!(:id => subscription_id) if subscription_id
         response = delete("subscriptions", options.merge(:client_secret => client_secret))
-        response["data"]
+        response
       end
 
       # Process a subscription notification JSON payload

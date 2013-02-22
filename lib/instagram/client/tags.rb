@@ -15,7 +15,7 @@ module Instagram
       # @see TODO:docs url
       def tag(tag, *args)
         response = get("tags/#{tag}")
-        response["data"]
+        response
       end
 
       # Returns a list of recent media items for a given Instagram tag
@@ -46,13 +46,13 @@ module Instagram
       # @param query [String] The beginning or complete tag name to search for
       # @param options [Hash] A customizable set of options.
       # @option options [Integer] :count The number of media items to retrieve.
-      # @return [Array]
+      # @return [Hashie::Mash]
       # @see TODO:doc url
       # @example Return tags that start with "cat"
       #   Instagram.tag_search("cat")
       def tag_search(query, options={})
         response = get('tags/search', options.merge(:q => query))
-        response["data"]
+        response
       end
     end
   end

@@ -45,8 +45,8 @@ describe Instagram::Client do
 
         it "should return a list of media taken at a given location" do
           media = @client.location_recent_media(514276)
-          media.data.should be_a Array
-          media.data.first.user.username.should == "josh"
+          media.should be_a Array
+          media.first.user.username.should == "josh"
         end
       end
 
