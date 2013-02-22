@@ -1,7 +1,7 @@
 module Instagram
   module Response
     def self.create( response_hash )
-      data = response_hash.data.dup rescue Hashie::Mash.new
+      data = response_hash.data.dup rescue response_hash
       data.extend( self )
       data.instance_exec do
         @pagination = response_hash.pagination
