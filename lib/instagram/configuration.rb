@@ -9,6 +9,7 @@ module Instagram
       :adapter,
       :client_id,
       :client_secret,
+      :scope,
       :access_token,
       :endpoint,
       :format,
@@ -38,6 +39,9 @@ module Instagram
 
     # By default, don't set a user access token
     DEFAULT_ACCESS_TOKEN = nil
+
+    # By default, don't set a user scope
+    DEFAULT_SCOPE = nil
 
     # The endpoint that will be used to connect if none is set
     #
@@ -80,6 +84,7 @@ module Instagram
       self.adapter        = DEFAULT_ADAPTER
       self.client_id      = DEFAULT_CLIENT_ID
       self.client_secret  = DEFAULT_CLIENT_SECRET
+      self.scope          = DEFAULT_SCOPE
       self.access_token   = DEFAULT_ACCESS_TOKEN
       self.endpoint       = DEFAULT_ENDPOINT
       self.format         = DEFAULT_FORMAT

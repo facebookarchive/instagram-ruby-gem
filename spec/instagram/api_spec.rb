@@ -32,6 +32,7 @@ describe Instagram::API do
         @configuration = {
           :client_id => 'CID',
           :client_secret => 'CS',
+          :scope => 'comments relationships',
           :access_token => 'AT',
           :adapter => :typhoeus,
           :endpoint => 'http://tumblr.com/',
@@ -92,6 +93,24 @@ describe Instagram::API do
       redirect_uri = 'http://localhost:4567/oauth/callback'
       url = client.authorize_url(:redirect_uri => redirect_uri)
       url.should_not include("client_secret")
+    end
+
+    describe "scope param" do
+      it "should include the scope if there is one set" do
+        params = { :scope => "comments likes" }
+        client = Instagram::Client.new(params)
+        redirect_uri = 'http://localhost:4567/oauth/callback'
+        url = client.authorize_url(:redirect_uri => redirect_uri)
+        url.should include("scope")
+      end
+
+      it "should not include the scope if the scope is blank" do
+        params = { :scope => "" }
+        client = Instagram::Client.new(params)
+        redirect_uri = 'http://localhost:4567/oauth/callback'
+        url = client.authorize_url(:redirect_uri => redirect_uri)
+        url.should_not include("scope")
+      end
     end
   end
 
