@@ -53,7 +53,7 @@ describe Instagram::Client do
         before do
           stub_get("users/search.#{format}").
             with(:query => {:access_token => @client.access_token}).
-            with(:query => {:q => "Shayne Sweeney"}).
+            with(:query => {:q => "Shayne%2BSweeney"}).
             to_return(:body => fixture("user_search.#{format}"), :headers => {:content_type => "application/#{format}; charset=utf-8"})
         end
 
@@ -61,7 +61,7 @@ describe Instagram::Client do
           @client.user_search("Shayne Sweeney")
           a_get("users/search.#{format}").
             with(:query => {:access_token => @client.access_token}).
-            with(:query => {:q => "Shayne Sweeney"}).
+            with(:query => {:q => "Shayne%2BSweeney"}).
             should have_been_made
         end
 
