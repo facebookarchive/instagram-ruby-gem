@@ -4,6 +4,7 @@ module Instagram
     # Return URL for OAuth authorization
     def authorize_url(options={})
       options[:response_type] ||= "code"
+      options[:scope] ||= scope if !scope.nil? && !scope.empty?
       params = authorization_params.merge(options)
       connection.build_url("/oauth/authorize/", params).to_s
     end
