@@ -68,9 +68,9 @@ API Usage Examples
 ------------------
     require "rubygems"
     require "instagram"
-    
+
     # All methods require authentication (either by client ID or access token).
-	# To get your Instagram OAuth credentials, register an app at http://instagr.am/oauth/client/register/
+    # To get your Instagram OAuth credentials, register an app at http://instagram.com/developer/clients/register/
     Instagram.configure do |config|
       config.client_id = YOUR_CLIENT_KEY
       config.access_token = YOUR_ACCESS_TOKEN
@@ -105,7 +105,7 @@ API Usage Examples
 	# Search for a location by Fousquare ID (v2)
 	puts Instagram.location_search("3fd66200f964a520c5f11ee3")
 
-	
+
 
 
 Contributing
