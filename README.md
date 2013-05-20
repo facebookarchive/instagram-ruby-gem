@@ -26,85 +26,88 @@ Add it to the [apps](http://github.com/Instagram/instagram-ruby-gem/wiki/apps) w
 
 Sample Application
 ------------------
-	require "sinatra"
-	require "instagram"
 
-	enable :sessions
+```ruby
+require "sinatra"
+require "instagram"
 
-	CALLBACK_URL = "http://localhost:4567/oauth/callback"
+enable :sessions
 
-	Instagram.configure do |config|
-	  config.client_id = "YOUR_CLIENT_ID"
-	  config.client_secret = "YOUR_CLIENT_SECRET"
-	end
+CALLBACK_URL = "http://localhost:4567/oauth/callback"
 
-	get "/" do
-	  '<a href="/oauth/connect">Connect with Instagram</a>'
-	end
+Instagram.configure do |config|
+  config.client_id = "YOUR_CLIENT_ID"
+  config.client_secret = "YOUR_CLIENT_SECRET"
+end
 
-	get "/oauth/connect" do
-	  redirect Instagram.authorize_url(:redirect_uri => CALLBACK_URL)
-	end
+get "/" do
+  '<a href="/oauth/connect">Connect with Instagram</a>'
+end
 
-	get "/oauth/callback" do
-	  response = Instagram.get_access_token(params[:code], :redirect_uri => CALLBACK_URL)
-	  session[:access_token] = response.access_token
-	  redirect "/feed"
-	end
+get "/oauth/connect" do
+  redirect Instagram.authorize_url(:redirect_uri => CALLBACK_URL)
+end
 
-	get "/feed" do
-	  client = Instagram.client(:access_token => session[:access_token])
-	  user = client.user
+get "/oauth/callback" do
+  response = Instagram.get_access_token(params[:code], :redirect_uri => CALLBACK_URL)
+  session[:access_token] = response.access_token
+  redirect "/feed"
+end
 
-	  html = "<h1>#{user.username}'s recent photos</h1>"
-	  for media_item in client.user_recent_media
-	    html << "<img src='#{media_item.images.thumbnail.url}'>"
-	  end
-	  html
-	end
+get "/feed" do
+  client = Instagram.client(:access_token => session[:access_token])
+  user = client.user
 
+  html = "<h1>#{user.username}'s recent photos</h1>"
+  for media_item in client.user_recent_media
+    html << "<img src='#{media_item.images.thumbnail.url}'>"
+  end
+  html
+end
+```
 
 API Usage Examples
 ------------------
-    require "rubygems"
-    require "instagram"
-    
-    # All methods require authentication (either by client ID or access token).
-	# To get your Instagram OAuth credentials, register an app at http://instagr.am/oauth/client/register/
-    Instagram.configure do |config|
-      config.client_id = YOUR_CLIENT_KEY
-      config.access_token = YOUR_ACCESS_TOKEN
-    end
+```ruby
+require "rubygems"
+require "instagram"
 
-    # Get a list of a user's most recent media
-    puts Instagram.user_recent_media(777)
+# All methods require authentication (either by client ID or access token).
+# To get your Instagram OAuth credentials, register an app at http://instagr.am/oauth/client/register/
+Instagram.configure do |config|
+  config.client_id = YOUR_CLIENT_KEY
+  config.access_token = YOUR_ACCESS_TOKEN
+end
 
-    # Use pagination data from a response to get the next page
-    page_1 = Instagram.user_recent_media(777)
-    page_2_max_id = page_1.pagination.next_max_id
-    page_2 = Instagram.user_recent_media(777, :max_id => page_2_max_id ) unless page_2_max_id.nil?
+# Get a list of a user's most recent media
+puts Instagram.user_recent_media(777)
 
-    # Get the currently authenticated user's media feed
-    puts Instagram.user_media_feed
+# Use pagination data from a response to get the next page
+page_1 = Instagram.user_recent_media(777)
+page_2_max_id = page_1.pagination.next_max_id
+page_2 = Instagram.user_recent_media(777, :max_id => page_2_max_id ) unless page_2_max_id.nil?
 
-    # Get a list of recent media at a given location, in this case, the Instagram office
-    puts Instagram.location_recent_media(514276)
+# Get the currently authenticated user's media feed
+puts Instagram.user_media_feed
 
-    # Get a list of media close to a given latitude and longitude
-    puts Instagram.media_search("37.7808851","-122.3948632")
+# Get a list of recent media at a given location, in this case, the Instagram office
+puts Instagram.location_recent_media(514276)
 
-	# Get a list of the overall most popular media items
-	puts Instagram.media_popular
+# Get a list of media close to a given latitude and longitude
+puts Instagram.media_search("37.7808851","-122.3948632")
 
-	# Search for users on instagram, by name or username
-	puts Instagram.user_search("shayne sweeney")
+# Get a list of the overall most popular media items
+puts Instagram.media_popular
 
-	# Search for a location by lat/lng
-	puts Instagram.location_search("37.7808851","-122.3948632")
+# Search for users on instagram, by name or username
+puts Instagram.user_search("shayne sweeney")
 
-	# Search for a location by Fousquare ID (v2)
-	puts Instagram.location_search("3fd66200f964a520c5f11ee3")
+# Search for a location by lat/lng
+puts Instagram.location_search("37.7808851","-122.3948632")
 
+# Search for a location by Fousquare ID (v2)
+puts Instagram.location_search("3fd66200f964a520c5f11ee3")
+```
 	
 
 
