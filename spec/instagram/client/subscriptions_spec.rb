@@ -136,11 +136,14 @@ describe Instagram::Client do
         end
 
         it "should raise an Instagram::InvalidSignature error" do
-          lambda do
-            @client.process_subscription(@json, :signature => "31337H4X0R") do |handler|
-              # hi
-            end
-          end.should raise_error(Instagram::InvalidSignature)
+          invalid_signatures = ["31337H4X0R", nil]
+          invalid_signatures.each do |signature|
+            lambda do
+              @client.process_subscription(@json, :signature => signature ) do |handler|
+                # hi
+              end
+            end.should raise_error(Instagram::InvalidSignature)
+          end
         end
       end
     end
