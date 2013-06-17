@@ -16,6 +16,8 @@ module Instagram
         pagination.next_url.sub!('http://', 'https://') #Make the URL secure if it isn't already
         response = client.get(pagination.next_url.sub(Instagram.endpoint, ''), {}, false, true)
         response
+      else
+        []
       end
     end
 
