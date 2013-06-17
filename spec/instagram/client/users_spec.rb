@@ -208,7 +208,7 @@ describe Instagram::Client do
               next_feed.should be_an_instance_of(Array)
               next_feed.should be_a_kind_of(Instagram::Response)
               next_feed.pagination.should be_empty
-              next_feed.next.should be_nil
+              next_feed.next.should be_empty
             end
           end
 
