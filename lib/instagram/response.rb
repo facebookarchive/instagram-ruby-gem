@@ -14,7 +14,7 @@ module Instagram
       if pagination.next_url
         client = Instagram::Client.new(Instagram.options)
         pagination.next_url.sub!('http://', 'https://') #Make the URL secure if it isn't already
-        response = client.get(pagination.next_url.sub(/#{Instagram.endpoint}/, ''), {}, false, true)
+        response = client.get(pagination.next_url.sub(Instagram.endpoint, ''), {}, false, true)
         response
       end
     end
