@@ -12,7 +12,7 @@ module Instagram
         :proxy => proxy,
         :ssl => {:verify => false},
         :url => endpoint,
-      }
+      }.merge(connection_options)
 
       Faraday::Connection.new(options) do |connection|
         connection.use FaradayMiddleware::InstagramOAuth2, client_id, access_token

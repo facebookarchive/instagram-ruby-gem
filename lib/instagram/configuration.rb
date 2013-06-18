@@ -10,6 +10,7 @@ module Instagram
       :adapter,
       :client_id,
       :client_secret,
+      :connection_options,
       :endpoint,
       :format,
       :proxy,
@@ -30,6 +31,9 @@ module Instagram
 
     # By default, don't set an application secret
     DEFAULT_CLIENT_SECRET = nil
+
+    # By default, don't set any connection options
+    DEFAULT_CONNECTION_OPTIONS = {}
 
     # The endpoint that will be used to connect if none is set
     #
@@ -81,15 +85,16 @@ module Instagram
 
     # Reset all configuration options to defaults
     def reset
-      self.access_token   = DEFAULT_ACCESS_TOKEN
-      self.adapter        = DEFAULT_ADAPTER
-      self.client_id      = DEFAULT_CLIENT_ID
-      self.client_secret  = DEFAULT_CLIENT_SECRET
-      self.endpoint       = DEFAULT_ENDPOINT
-      self.format         = DEFAULT_FORMAT
-      self.proxy          = DEFAULT_PROXY
-      self.scope          = DEFAULT_SCOPE
-      self.user_agent     = DEFAULT_USER_AGENT
+      self.access_token       = DEFAULT_ACCESS_TOKEN
+      self.adapter            = DEFAULT_ADAPTER
+      self.client_id          = DEFAULT_CLIENT_ID
+      self.client_secret      = DEFAULT_CLIENT_SECRET
+      self.connection_options = DEFAULT_CONNECTION_OPTIONS
+      self.endpoint           = DEFAULT_ENDPOINT
+      self.format             = DEFAULT_FORMAT
+      self.proxy              = DEFAULT_PROXY
+      self.scope              = DEFAULT_SCOPE
+      self.user_agent         = DEFAULT_USER_AGENT
     end
   end
 end
