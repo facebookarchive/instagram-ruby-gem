@@ -37,7 +37,8 @@ module Instagram
       end
       return response if raw
       return response.body if no_response_wrapper
-      return Response.create( response.body )
+      return Response.create( response.body, {:limit => response.headers['x-ratelimit-limit'].to_i,
+                                              :remaining => response.headers['x-ratelimit-remaining'].to_i} )
     end
 
     def formatted_path(path)

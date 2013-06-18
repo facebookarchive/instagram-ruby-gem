@@ -68,7 +68,7 @@ API Usage Examples
 ------------------
     require "rubygems"
     require "instagram"
-    
+
     # All methods require authentication (either by client ID or access token).
 	# To get your Instagram OAuth credentials, register an app at http://instagr.am/oauth/client/register/
     Instagram.configure do |config|
@@ -83,6 +83,15 @@ API Usage Examples
     page_1 = Instagram.user_recent_media(777)
     page_2_max_id = page_1.pagination.next_max_id
     page_2 = Instagram.user_recent_media(777, :max_id => page_2_max_id ) unless page_2_max_id.nil?
+
+    # Get next page of data from response
+    page_1 = Instagram.user_recent_media(777)
+    page_2 = page_1.next
+
+    # Inspect rate limit data provided by Instagram API (5000 requests/client id/hour, 5000 requests/access token/hour)
+    page_1 = Instagram.user_recent_media(777)
+    limit = page_1.ratelimit.limit
+    remaining = page1.ratelimit.remaining
 
     # Get the currently authenticated user's media feed
     puts Instagram.user_media_feed
@@ -105,7 +114,7 @@ API Usage Examples
 	# Search for a location by Fousquare ID (v2)
 	puts Instagram.location_search("3fd66200f964a520c5f11ee3")
 
-	
+
 
 
 Contributing
