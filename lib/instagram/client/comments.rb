@@ -50,7 +50,7 @@ module Instagram
       # @format :json
       # @authenticated true
       #
-      #   In order to remove a comment, you must be either the owner comment or the media item (or both).
+      #   In order to remove a comment, you must be the owner of the comment, the media item, or both.
       # @rate_limited true
       # @see TODO:docs url
       def delete_media_comment(media_id, comment_id, options={})
