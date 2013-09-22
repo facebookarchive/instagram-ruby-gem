@@ -66,6 +66,21 @@ describe Instagram::API do
     end
   end
 
+  describe '#config' do
+    subject { Instagram::API.new }
+
+    let(:config) do
+      c = {}; @keys.each {|key| c[key] = key }; c
+    end
+
+    it "returns a hash representing the configuration" do
+      @keys.each do |key|
+        subject.send("#{key}=", key)
+      end
+      subject.config.should == config
+    end
+  end
+
   describe ".authorize_url" do
 
     it "should generate an authorize URL with necessary params" do
