@@ -21,7 +21,7 @@ module Instagram
       # Returns a list of recent media items for a given Instagram tag
       #
       # @overload tag_recent_media(tag, options={})
-      #   @param user [String] An Instagram tag name.
+      #   @param id [String] An Instagram tag name.
       #   @param options [Hash] A customizable set of options.
       #   @option options [Integer] :max_id (nil) Returns results with an ID less than (that is, older than) or equal to the specified ID.
       #   @option options [Integer] :count (nil) Limits the number of results returned per page.
