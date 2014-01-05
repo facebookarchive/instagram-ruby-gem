@@ -125,7 +125,7 @@ module Instagram
         end
       end
 
-      # Public: As a security measure, all updates from facebook are signed using
+      # Public: As a security measure, all updates from Instagram are signed using
       # X-Hub-Signature: sha1=XXXX where XXX is the sha1 of the json payload
       # using your application secret as the key.
       #
