@@ -10,7 +10,6 @@ module Instagram
       options = {
         :headers => {'Accept' => "application/#{format}; charset=utf-8", 'User-Agent' => user_agent},
         :proxy => proxy,
-        :ssl => {:verify => false},
         :url => endpoint,
       }
 
