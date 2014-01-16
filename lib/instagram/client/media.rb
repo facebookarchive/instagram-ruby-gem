@@ -14,7 +14,7 @@ module Instagram
       #
       #   If getting this data of a protected user, you must authenticate (and be allowed to see that user).
       # @rate_limited true
-      # @see TODO:docs url
+      # @see http://instagram.com/developer/endpoints/media/#get_media
       def media_item(*args)
         id = args.first || 'self'
         response = get("media/#{id}")
@@ -28,7 +28,7 @@ module Instagram
       #   @return [Hashie::Mash]
       #   @example Returns a list of the overall most popular media
       #     Instagram.media_popular
-      # @see TODO:docs url
+      # @see http://instagram.com/developer/endpoints/media/#get_media_popular
       # @format :json
       # @authenticated false unless requesting it from a protected user
       #
@@ -50,7 +50,7 @@ module Instagram
       # @return [Hashie::Mash] A list of matching media
       # @example Return media around 37.7808851, -122.3948632 (164 S Park, SF, CA USA)
       #   Instagram.media_search("37.7808851", "-122.3948632")
-      # @see TODO:doc url
+      # @see http://instagram.com/developer/endpoints/media/#get_media_search
       # @format :json
       # @authenticated false
       # @rate_limited true
