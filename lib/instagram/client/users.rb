@@ -14,7 +14,7 @@ module Instagram
       #
       #   If getting this data of a protected user, you must authenticate (and be allowed to see that user).
       # @rate_limited true
-      # @see TODO:docs url
+      # @see http://instagram.com/developer/endpoints/users/#get_users
       def user(*args)
         options = args.last.is_a?(Hash) ? args.pop : {}
         id = args.first || 'self'
@@ -31,7 +31,7 @@ module Instagram
       # @param options [Hash] A customizable set of options.
       # @option options [Integer] :count The number of users to retrieve.
       # @return [Hashie::Mash]
-      # @see TODO:doc url
+      # @see http://instagram.com/developer/endpoints/users/#get_users_search
       # @example Return users that match "Shayne Sweeney"
       #   Instagram.user_search("Shayne Sweeney")
       def user_search(query, options={})
@@ -54,7 +54,7 @@ module Instagram
       #   @return [Hashie::Mash]
       #   @example Return a list of users @mikeyk follows
       #     Instagram.user_follows(4) # @mikeyk user ID being 4
-      # @see TODO:docs url
+      # @see http://instagram.com/developer/endpoints/relationships/#get_users_follows
       # @format :json
       # @authenticated false unless requesting it from a protected user
       #
@@ -83,7 +83,7 @@ module Instagram
     #   @return [Hashie::Mash]
     #   @example Return a list of users @mikeyk is followed by
     #     Instagram.user_followed_by(4) # @mikeyk user ID being 4
-    # @see TODO:docs url
+    # @see http://instagram.com/developer/endpoints/relationships/#get_users_followed_by
     # @format :json
     # @authenticated false unless requesting it from a protected user
     #
@@ -96,7 +96,7 @@ module Instagram
       response
     end
 
-    # Returns a list of users whom a given user is followed by
+    # Returns a list of users who have requested the currently authorized user's permission to follow
     #
     # @overload user_requested_by()
     #   @param options [Hash] A customizable set of options.
@@ -107,16 +107,16 @@ module Instagram
     #   @return [Hashie::Mash]
     #   @example Return a list of users who have requested to follow the authenticated user
     #     Instagram.user_requested_by()
-    # @see TODO:docs url
+    # @see http://instagram.com/developer/endpoints/relationships/#get_incoming_requests
     # @format :json
-    # @authenticated truei
+    # @authenticated true
     # @rate_limited true
     def user_requested_by()
       response = get("users/self/requested-by")
       response
     end
 
-    # Returns most recent media items from the currently authorized user's feed.
+    # Returns most recent media items from the currently authorized user's feed
     #
     # @overload user_media_feed(options={})
     #   @param options [Hash] A customizable set of options.
@@ -190,7 +190,7 @@ module Instagram
     #   @return [Hashie::Mash]
     #   @example Return the relationship status between the currently authenticated user and @mikeyk
     #     Instagram.user_relationship(4) # @mikeyk user ID being 4
-    # @see http://instagram.com/developer/endpoints/relationships/
+    # @see http://instagram.com/developer/endpoints/relationships/#get_relationship
     # @format :json
     # @authenticated true
     # @rate_limited true
@@ -207,7 +207,7 @@ module Instagram
     #   @return [Hashie::Mash]
     #   @example Request the current user to follow the target user
     #     Instagram.follow_user(4)
-    # @see http://instagram.com/developer/endpoints/relationships/
+    # @see http://instagram.com/developer/endpoints/relationships/#post_relationship
     # @format :json
     # @authenticated true
     # @rate_limited true
@@ -225,7 +225,7 @@ module Instagram
     #   @return [Hashie::Mash]
     #   @example Remove a follows relationship between the current user and the target user
     #     Instagram.unfollow_user(4)
-    # @see http://instagram.com/developer/endpoints/relationships/
+    # @see http://instagram.com/developer/endpoints/relationships/#post_relationship
     # @format :json
     # @authenticated true
     # @rate_limited true
@@ -243,7 +243,7 @@ module Instagram
     #   @return [Hashie::Mash]
     #   @example Block a relationship between the current user and the target user
     #     Instagram.block_user(4)
-    # @see http://instagram.com/developer/endpoints/relationships/
+    # @see http://instagram.com/developer/endpoints/relationships/#post_relationship
     # @format :json
     # @authenticated true
     # @rate_limited true
@@ -261,7 +261,7 @@ module Instagram
     #   @return [Hashie::Mash]
     #   @example Remove a relationship block between the current user and the target user
     #     Instagram.unblock_user(4)
-    # @see http://instagram.com/developer/endpoints/relationships/
+    # @see http://instagram.com/developer/endpoints/relationships/#post_relationship
     # @format :json
     # @authenticated true
     # @rate_limited true
@@ -279,7 +279,7 @@ module Instagram
     #   @return [Hashie::Mash]
     #   @example Approve a relationship request between the current user and the target user
     #     Instagram.approve_user(4)
-    # @see http://instagram.com/developer/endpoints/relationships/
+    # @see http://instagram.com/developer/endpoints/relationships/#post_relationship
     # @format :json
     # @authenticated true
     # @rate_limited true
@@ -297,7 +297,7 @@ module Instagram
     #   @return [Hashie::Mash]
     #   @example Deny a relationship request between the current user and the target user
     #     Instagram.deny_user(4)
-    # @see http://instagram.com/developer/endpoints/relationships/
+    # @see http://instagram.com/developer/endpoints/relationships/#post_relationship
     # @format :json
     # @authenticated true
     # @rate_limited true

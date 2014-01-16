@@ -14,7 +14,7 @@ module Instagram
       #
       #   If getting this data of a protected user, you must be authenticated (and be allowed to see that user).
       # @rate_limited true
-      # @see TODO:docs url
+      # @see http://instagram.com/developer/endpoints/comments/#get_media_comments
       def media_comments(id, *args)
         response = get("media/#{id}/comments")
         response
@@ -33,7 +33,7 @@ module Instagram
       #
       #   If getting this data of a protected user, you must be authenticated (and be allowed to see that user).
       # @rate_limited true
-      # @see TODO:docs url
+      # @see http://instagram.com/developer/endpoints/comments/#post_media_comments
       def create_media_comment(id, text, options={})
         response = post("media/#{id}/comments", options.merge(:text => text))
         response
@@ -52,7 +52,7 @@ module Instagram
       #
       #   In order to remove a comment, you must be the owner of the comment, the media item, or both.
       # @rate_limited true
-      # @see TODO:docs url
+      # @see http://instagram.com/developer/endpoints/comments/#delete_media_comments
       def delete_media_comment(media_id, comment_id, options={})
         response = delete("media/#{media_id}/comments/#{comment_id}", options)
         response
