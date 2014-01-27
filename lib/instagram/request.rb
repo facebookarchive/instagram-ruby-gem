@@ -2,22 +2,22 @@ module Instagram
   # Defines HTTP request methods
   module Request
     # Perform an HTTP GET request
-    def get(path, options={}, raw=false, unformatted=false, no_response_wrapper=false)
+    def get(path, options={}, raw=false, unformatted=false, no_response_wrapper=no_response_wrapper)
       request(:get, path, options, raw, unformatted, no_response_wrapper)
     end
 
     # Perform an HTTP POST request
-    def post(path, options={}, raw=false, unformatted=false, no_response_wrapper=false)
+    def post(path, options={}, raw=false, unformatted=false, no_response_wrapper=no_response_wrapper)
       request(:post, path, options, raw, unformatted, no_response_wrapper)
     end
 
     # Perform an HTTP PUT request
-    def put(path, options={}, raw=false, unformatted=false, no_response_wrapper=false)
+    def put(path, options={}, raw=false, unformatted=false, no_response_wrapper=no_response_wrapper)
       request(:put, path, options, raw, unformatted, no_response_wrapper)
     end
 
     # Perform an HTTP DELETE request
-    def delete(path, options={}, raw=false, unformatted=false, no_response_wrapper=false)
+    def delete(path, options={}, raw=false, unformatted=false, no_response_wrapper=no_response_wrapper)
       request(:delete, path, options, raw, unformatted, no_response_wrapper)
     end
 
