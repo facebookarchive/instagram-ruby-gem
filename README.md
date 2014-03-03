@@ -102,11 +102,14 @@ puts Instagram.media_popular
 # Search for users on instagram, by name or username
 puts Instagram.user_search("shayne sweeney")
 
+# Search for a location by Fousquare ID (v2)
+puts Instagram.location_search("3fd66200f964a520c5f11ee3")
+
 # Search for a location by lat/lng
 puts Instagram.location_search("37.7808851","-122.3948632")
 
-# Search for a location by Fousquare ID (v2)
-puts Instagram.location_search("3fd66200f964a520c5f11ee3")
+# Search for a location by lat/lng/distance
+puts Instagram.location_search("37.7808851","-122.3948632","5000")
 ```
 	
 
