@@ -74,6 +74,30 @@ describe Instagram::Client do
         end
       end
 
+      describe ".location_search_lat_lng_distance" do
+
+        before do
+          stub_get("locations/search.#{format}").
+            with(:query => {:access_token => @client.access_token}).
+            with(:query => {:lat => "37.7808851", :lng => "-122.3948632", :distance => "5000"}).
+            to_return(:body => fixture("location_search.#{format}"), :headers => {:content_type => "application/#{format}; charset=utf-8"})
+        end
+
+        it "should get the correct resource by lat/lng/distance" do
+          @client.location_search("37.7808851", "-122.3948632", "5000")
+          a_get("locations/search.#{format}").
+            with(:query => {:access_token => @client.access_token}).
+            with(:query => {:lat => "37.7808851", :lng => "-122.3948632", :distance => "5000"}).
+            should have_been_made
+        end
+
+        it "should return an array of user search results" do
+          locations = @client.location_search("37.7808851", "-122.3948632", "5000")
+          locations.should be_a Array
+          locations.first.name.should == "Instagram"
+        end
+      end
+
       describe ".location_search_foursquare_v2_id" do
 
         before do

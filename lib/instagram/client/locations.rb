@@ -63,6 +63,9 @@ module Instagram
         when 2
           lat, lng = args
           response = get('locations/search', options.merge(:lat => lat, :lng => lng))
+        when 3
+          lat, lng, distance = args
+          response = get('locations/search', options.merge(:lat => lat, :lng => lng, :distance => distance))
         end
         response
       end
