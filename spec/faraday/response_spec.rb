@@ -39,4 +39,34 @@ describe Faraday::Response do
       end.to raise_error(Instagram::BadRequest, /Bad words are bad./)
     end
   end
+
+  context 'when a 502 is raised with an HTML response' do
+    before do
+      stub_get('users/self/feed.json').to_return(
+        :body => '<html><body><h1>502 Bad Gateway</h1> The server returned an invalid or incomplete response. </body></html>',
+        :status => 502
+      )
+    end
+
+    it 'should raise an Instagram::BadGateway' do
+      lambda do
+        @client.user_media_feed()
+      end.should raise_error(Instagram::BadGateway)
+    end
+  end
+
+  context 'when a 504 is raised with an HTML response' do
+    before do
+      stub_get('users/self/feed.json').to_return(
+        :body => '<html> <head><title>504 Gateway Time-out</title></head> <body bgcolor="white"> <center><h1>504 Gateway Time-out</h1></center> <hr><center>nginx</center> </body> </html>',
+        :status => 504
+      )
+    end
+
+    it 'should raise an Instagram::GatewayTimeout' do
+      lambda do
+        @client.user_media_feed()
+      end.should raise_error(Instagram::GatewayTimeout)
+    end
+  end
 end
