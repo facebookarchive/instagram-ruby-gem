@@ -2,6 +2,14 @@ module Instagram
   class Client
     # @private
     module Utils
+      # Returns the raw full response including all headers. Can be used to access the values for 'X-Ratelimit-Limit' and 'X-Ratelimit-Remaining' 
+      # ==== Examples
+      #   
+      #   client = Instagram.client(:access_token => session[:access_token])
+      #   response = client.utils_raw_response
+      #   remaining = response.headers[:x_ratelimit_remaining]
+      #   limit = response.headers[:x_ratelimit_limit]
+      #
       def utils_raw_response
         response = get('users/self/feed',nil,true)
         response
