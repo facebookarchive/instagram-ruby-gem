@@ -41,7 +41,7 @@ module Instagram
       #   @option options [String, Integer] :object_id When specifying a location or tag use the location's ID or tag name respectively
       #   @option options [String, Float] :lat The center latitude of an area, used when subscribing to a geography object
       #   @option options [String, Float] :lng The center longitude of an area, used when subscribing to a geography object
-      #   @option options [String, Integer] :radius The distance in meters you'd like to capture around a given point 
+      #   @option options [String, Integer] :radius The distance in meters you'd like to capture around a given point
       #
       #     Note that we only support "media" at this time, but we might support other types of subscriptions in the future.
       #   @return [Hashie::Mash] The subscription created.
@@ -124,7 +124,7 @@ module Instagram
       def process_subscription(json, options={}, &block)
         raise ArgumentError, "callbacks block expected" unless block_given?
 
-        if options[:signature]
+        if options.has_key?(:signature)
           if !client_secret
             raise ArgumentError, "client_secret must be set during configure"
           end
