@@ -107,6 +107,9 @@ puts Instagram.location_search("37.7808851","-122.3948632")
 
 # Search for a location by Fousquare ID (v2)
 puts Instagram.location_search("3fd66200f964a520c5f11ee3")
+
+# Search for media, based on a tag
+puts Instagram.tag_recent_media('cat')
 ```
 	
 
