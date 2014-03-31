@@ -30,14 +30,15 @@ describe Instagram::API do
 
       before do
         @configuration = {
-          :client_id => 'CID',
-          :client_secret => 'CS',
-          :scope => 'comments relationships',
           :access_token => 'AT',
           :adapter => :typhoeus,
+          :client_id => 'CID',
+          :client_secret => 'CS',
+          :connection_options => { :ssl => { :verify => true } },
           :endpoint => 'http://tumblr.com/',
           :format => :xml,
           :proxy => 'http://shayne:sekret@proxy.example.com:8080',
+          :scope => 'comments relationships',
           :user_agent => 'Custom User Agent',
         }
       end
@@ -53,13 +54,24 @@ describe Instagram::API do
 
       context "after initilization" do
 
-        it "should override module configuration after initialization" do
-          api = Instagram::API.new
+        let(:api) { Instagram::API.new }
+
+        before do
           @configuration.each do |key, value|
             api.send("#{key}=", value)
           end
+        end
+
+        it "should override module configuration after initialization" do
           @keys.each do |key|
             api.send(key).should == @configuration[key]
+          end
+        end
+
+        describe "#connection" do
+          it "should use the connection_options" do
+            Faraday::Connection.should_receive(:new).with(include(:ssl => { :verify => true }))
+            api.send(:connection)
           end
         end
       end
