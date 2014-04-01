@@ -218,7 +218,7 @@ _____________________________________
 In order to accept your pull request, we need you to submit a CLA. You only need
 to do this once to work on any of Instagram's or Facebook's open source projects.
 
-Complete your CLA here: [https://developers.facebook.com/opensource/cla](https://developers.facebook.com/opensource/cla])
+Complete your CLA here: [https://code.facebook.com/cla](https://code.facebook.com/cla])
 
 
 Copyright
