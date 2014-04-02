@@ -143,8 +143,8 @@ end
 
 get "/location_search" do
   client = Instagram.client(:access_token => session[:access_token])
-  html = "<h1>Search for a location by lat/lng</h1>"
-  for location in client.location_search("48.858844","2.294351")
+  html = "<h1>Search for a location by lat/lng with a radius of 5000m</h1>"
+  for location in client.location_search("48.858844","2.294351","5000")
     html << "<li> #{location.name} <a href='https://www.google.com/maps/preview/@#{location.latitude},#{location.longitude},19z'>Map</a></li>"
   end
   html
