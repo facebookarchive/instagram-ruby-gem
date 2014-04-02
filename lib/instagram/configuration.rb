@@ -14,7 +14,8 @@ module Instagram
       :endpoint,
       :format,
       :user_agent,
-      :proxy
+      :proxy,
+      :no_response_wrapper
     ].freeze
 
     # An array of valid request/response formats
@@ -56,6 +57,9 @@ module Instagram
     # By default, don't use a proxy server
     DEFAULT_PROXY = nil
 
+    # By default, don't wrap responses with meta data (i.e. pagination)
+    DEFAULT_NO_RESPONSE_WRAPPER = false
+
     # The user agent that will be sent to the API endpoint if none is set
     DEFAULT_USER_AGENT = "Instagram Ruby Gem #{Instagram::VERSION}".freeze
 
@@ -81,15 +85,16 @@ module Instagram
 
     # Reset all configuration options to defaults
     def reset
-      self.adapter        = DEFAULT_ADAPTER
-      self.client_id      = DEFAULT_CLIENT_ID
-      self.client_secret  = DEFAULT_CLIENT_SECRET
-      self.scope          = DEFAULT_SCOPE
-      self.access_token   = DEFAULT_ACCESS_TOKEN
-      self.endpoint       = DEFAULT_ENDPOINT
-      self.format         = DEFAULT_FORMAT
-      self.user_agent     = DEFAULT_USER_AGENT
-      self.proxy          = DEFAULT_PROXY
+      self.adapter              = DEFAULT_ADAPTER
+      self.client_id            = DEFAULT_CLIENT_ID
+      self.client_secret        = DEFAULT_CLIENT_SECRET
+      self.scope                = DEFAULT_SCOPE
+      self.access_token         = DEFAULT_ACCESS_TOKEN
+      self.endpoint             = DEFAULT_ENDPOINT
+      self.format               = DEFAULT_FORMAT
+      self.user_agent           = DEFAULT_USER_AGENT
+      self.proxy                = DEFAULT_PROXY
+      self.no_response_wrapper  = DEFAULT_NO_RESPONSE_WRAPPER
     end
   end
 end
