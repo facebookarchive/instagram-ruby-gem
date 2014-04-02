@@ -96,6 +96,61 @@ module Instagram
         response
       end
 
+      # As a security measure (to prevent DDoS attacks), Instagram sends a verification request to your server
+      # after you request a subscription.
+      # This method parses the challenge params and makes sure the call is legitimate.
+      #
+      # @param params the request parameters sent by Instagram.  (You can pass in a Rails params hash.)
+      # @param verify_token the verify token sent in the {#subscribe subscription request}, if you provided one
+      #
+      # @yield verify_token if you need to compute the verification token
+      #                     (for instance, if your callback URL includes a record ID, which you look up
+      #                     and use to calculate a hash), you can pass meet_challenge a block, which
+      #                     will receive the verify_token received back from Instagram.
+      #
+      # @return the challenge string to be sent back to Instagram, or false if the request is invalid.
+      def meet_challenge(params, verify_token = nil, &verification_block)
+        if params["hub.mode"] == "subscribe" &&
+            # you can make sure this is legitimate through two ways
+            # if your store the token across the calls, you can pass in the token value
+            # and we'll make sure it matches
+            ((verify_token && params["hub.verify_token"] == verify_token) ||
+            # alternately, if you sent a specially-constructed value (such as a hash of various secret values)
+            # you can pass in a block, which we'll call with the verify_token sent by Instagram
+            # if it's legit, return anything that evaluates to true; otherwise, return nil or false
+            (verification_block && yield(params["hub.verify_token"])))
+          params["hub.challenge"]
+        else
+          false
+        end
+      end
+
+      # Public: As a security measure, all updates from Instagram are signed using
+      # X-Hub-Signature: sha1=XXXX where XXX is the sha1 of the json payload
+      # using your application secret as the key.
+      #
+      # Example:
+      #   # in Rails controller
+      #   def receive_update
+      #     if Instagram.validate_update(request.body, headers)
+      #       ...
+      #     else
+      #       render text: "not authorized", status: 401
+      #     end
+      #   end
+      def validate_update(body, headers)
+        unless client_secret
+          raise ArgumentError, "client_secret must be set during configure"
+        end
+
+        if request_signature = headers['X-Hub-Signature'] || headers['HTTP_X_HUB_SIGNATURE'] and
+           signature_parts = request_signature.split('sha1=')
+          request_signature = signature_parts[1]
+          calculated_signature = OpenSSL::HMAC.hexdigest('sha1', client_secret, body)
+          calculated_signature == request_signature
+        end
+      end
+
       # Process a subscription notification JSON payload
       #
       # @overload process_subscription(json, &block)
