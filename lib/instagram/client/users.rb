@@ -96,7 +96,7 @@ module Instagram
       response
     end
 
-    # Returns a list of users whom a given user is followed by
+    # Returns a list of users who have requested to follow the currently authorized user.
     #
     # @overload user_requested_by()
     #   @param options [Hash] A customizable set of options.
