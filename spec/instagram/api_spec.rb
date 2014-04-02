@@ -38,6 +38,7 @@ describe Instagram::API do
           :endpoint => 'http://tumblr.com/',
           :format => :xml,
           :proxy => 'http://shayne:sekret@proxy.example.com:8080',
+          :no_response_wrapper => true,
           :user_agent => 'Custom User Agent',
         }
       end
