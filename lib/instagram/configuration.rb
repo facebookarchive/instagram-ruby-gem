@@ -6,22 +6,20 @@ module Instagram
   module Configuration
     # An array of valid keys in the options hash when configuring a {Instagram::API}
     VALID_OPTIONS_KEYS = [
+      :access_token,
       :adapter,
       :client_id,
       :client_secret,
-      :scope,
-      :access_token,
+      :connection_options,
       :endpoint,
       :format,
-      :user_agent,
-      :proxy
+      :proxy,
+      :scope,
+      :user_agent
     ].freeze
 
-    # An array of valid request/response formats
-    #
-    # @note Not all methods support the XML format.
-    VALID_FORMATS = [
-      :json].freeze
+    # By default, don't set a user access token
+    DEFAULT_ACCESS_TOKEN = nil
 
     # The adapter that will be used to connect if none is set
     #
@@ -34,14 +32,8 @@ module Instagram
     # By default, don't set an application secret
     DEFAULT_CLIENT_SECRET = nil
 
-    # By default, don't set an application redirect uri
-    DEFAULT_REDIRECT_URI = nil
-
-    # By default, don't set a user access token
-    DEFAULT_ACCESS_TOKEN = nil
-
-    # By default, don't set a user scope
-    DEFAULT_SCOPE = nil
+    # By default, don't set any connection options
+    DEFAULT_CONNECTION_OPTIONS = {}
 
     # The endpoint that will be used to connect if none is set
     #
@@ -56,8 +48,20 @@ module Instagram
     # By default, don't use a proxy server
     DEFAULT_PROXY = nil
 
+    # By default, don't set an application redirect uri
+    DEFAULT_REDIRECT_URI = nil
+
+    # By default, don't set a user scope
+    DEFAULT_SCOPE = nil
+
     # The user agent that will be sent to the API endpoint if none is set
     DEFAULT_USER_AGENT = "Instagram Ruby Gem #{Instagram::VERSION}".freeze
+
+    # An array of valid request/response formats
+    #
+    # @note Not all methods support the XML format.
+    VALID_FORMATS = [
+      :json].freeze
 
     # @private
     attr_accessor *VALID_OPTIONS_KEYS
@@ -81,15 +85,16 @@ module Instagram
 
     # Reset all configuration options to defaults
     def reset
-      self.adapter        = DEFAULT_ADAPTER
-      self.client_id      = DEFAULT_CLIENT_ID
-      self.client_secret  = DEFAULT_CLIENT_SECRET
-      self.scope          = DEFAULT_SCOPE
-      self.access_token   = DEFAULT_ACCESS_TOKEN
-      self.endpoint       = DEFAULT_ENDPOINT
-      self.format         = DEFAULT_FORMAT
-      self.user_agent     = DEFAULT_USER_AGENT
-      self.proxy          = DEFAULT_PROXY
+      self.access_token       = DEFAULT_ACCESS_TOKEN
+      self.adapter            = DEFAULT_ADAPTER
+      self.client_id          = DEFAULT_CLIENT_ID
+      self.client_secret      = DEFAULT_CLIENT_SECRET
+      self.connection_options = DEFAULT_CONNECTION_OPTIONS
+      self.endpoint           = DEFAULT_ENDPOINT
+      self.format             = DEFAULT_FORMAT
+      self.proxy              = DEFAULT_PROXY
+      self.scope              = DEFAULT_SCOPE
+      self.user_agent         = DEFAULT_USER_AGENT
     end
   end
 end
