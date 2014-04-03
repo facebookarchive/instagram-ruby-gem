@@ -70,6 +70,7 @@ get "/nav" do
       <li><a href='/user_search'>User Search</a> Calls user_search - Search for users on instagram, by name or username</li>
       <li><a href='/location_search'>Location Search</a> Calls location_search - Search for a location by lat/lng</li>
       <li><a href='/location_search_4square'>Location Search - 4Square</a> Calls location_search - Search for a location by Fousquare ID (v2)</li>
+      <li><a href='/tags'>Tags</a>Search for tags, view tag info and get media by tag</li>
       <li><a href='/limits'>View Rate Limit and Remaining API calls</a>View remaining and ratelimit info.</li>
     </ol>
   """
@@ -155,6 +156,17 @@ get "/location_search_4square" do
   html = "<h1>Search for a location by Fousquare ID (v2)</h1>"
   for location in client.location_search("3fd66200f964a520c5f11ee3")
     html << "<li> #{location.name} <a href='https://www.google.com/maps/preview/@#{location.latitude},#{location.longitude},19z'>Map</a></li>"
+  end
+  html
+end
+
+get "/tags" do
+  client = Instagram.client(:access_token => session[:access_token])
+  html = "<h1>Search for tags, get tag info and get media by tag</h1>"
+  tags = client.tag_search('cat')
+  html << "<h2>Tag Name = #{tags[0].name}. Media Count =  #{tags[0].media_count}. </h2><br/><br/>"
+  for media_item in client.tag_recent_media(tags[0].name)
+    html << "<img src='#{media_item.images.thumbnail.url}'>"
   end
   html
 end
