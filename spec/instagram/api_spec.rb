@@ -41,6 +41,7 @@ describe Instagram::API do
           :proxy => 'http://shayne:sekret@proxy.example.com:8080',
           :scope => 'comments relationships',
           :user_agent => 'Custom User Agent',
+          :no_response_wrapper => true,
         }
       end
 

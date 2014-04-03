@@ -16,7 +16,8 @@ module Instagram
       :endpoint,
       :format,
       :proxy,
-      :user_agent
+      :user_agent,
+      :no_response_wrapper
     ].freeze
 
     # By default, don't set a user access token
@@ -55,6 +56,9 @@ module Instagram
     # By default, don't set a user scope
     DEFAULT_SCOPE = nil
 
+    # By default, don't wrap responses with meta data (i.e. pagination)
+    DEFAULT_NO_RESPONSE_WRAPPER = false
+
     # The user agent that will be sent to the API endpoint if none is set
     DEFAULT_USER_AGENT = "Instagram Ruby Gem #{Instagram::VERSION}".freeze
 
@@ -86,19 +90,18 @@ module Instagram
 
     # Reset all configuration options to defaults
     def reset
-
       self.access_token       = DEFAULT_ACCESS_TOKEN
       self.adapter            = DEFAULT_ADAPTER
       self.client_id          = DEFAULT_CLIENT_ID
       self.client_secret      = DEFAULT_CLIENT_SECRET
       self.connection_options = DEFAULT_CONNECTION_OPTIONS
       self.scope              = DEFAULT_SCOPE
-      self.redirect_uri   = DEFAULT_REDIRECT_URI
+      self.redirect_uri       = DEFAULT_REDIRECT_URI
       self.endpoint           = DEFAULT_ENDPOINT
       self.format             = DEFAULT_FORMAT
       self.proxy              = DEFAULT_PROXY
       self.user_agent         = DEFAULT_USER_AGENT
-      
+      self.no_response_wrapper= DEFAULT_NO_RESPONSE_WRAPPER      
     end
   end
 end
