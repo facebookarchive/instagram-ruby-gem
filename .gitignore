@@ -3,6 +3,7 @@
 .DS_Store
 .bundle
 .rvmrc
+.ruby-version
 .yardoc
 .rake_tasks~
 Gemfile.lock
