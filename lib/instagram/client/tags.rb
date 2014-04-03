@@ -34,9 +34,7 @@ module Instagram
       # @rate_limited true
       def tag_recent_media(id, *args)
         options = args.last.is_a?(Hash) ? args.pop : {}
-        response_wrapper = (args.include? 'add_response_wrapper')? true : false
-        puts "response wrapper = #{response_wrapper}"
-        response = get("tags/#{id}/media/recent", options, false, false, response_wrapper)
+        response = get("tags/#{id}/media/recent", options, false, false)
         response
       end
 

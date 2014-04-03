@@ -49,11 +49,6 @@ describe Instagram::Client do
           media.first.user.username.should == "amandavan"
         end
 
-        it "should return a wrapper around the media to allow for pagination" do
-          media = @client.tag_recent_media('cat','add_response_wrapper')
-          media.data.should be_a Array
-          media.data.first.user.username.should == "amandavan"
-        end
       end
 
       describe ".tag_search" do
