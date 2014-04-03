@@ -14,11 +14,23 @@ Gem::Specification.new do |s|
   s.post_install_message =<<eos
 ********************************************************************************
 
-  Follow @instagramapi on Twitter for announcements, updates, and news.
-  https://twitter.com/instagramapi
+Instagram REST and Search APIs
+------------------------------
+Our developer site  documents all the Instagram REST and Search APIs.
+(http://instagram.com/developer)
 
-  Join the mailing list!
-  https://groups.google.com/group/instagram-ruby-gem
+Blog
+----------------------------
+The Developer Blog features news and important announcements about the Instagram Platform. 
+You will also find tutorials and best practices to help you build great platform integrations.
+Make sure to subscribe to the RSS feed so you don't miss out on new posts: 
+(http://developers.instagram.com).
+
+Community
+----------------------
+The Stack Overflow community is a great place to ask API related questions or if you need help with your code.
+Make sure to tag your questions with the Instagram tag to get fast answers from other fellow developers and members of the Instagram team.
+(http://stackoverflow.com/questions/tagged/instagram/)
 
 ********************************************************************************
 eos
