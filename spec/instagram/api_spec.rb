@@ -35,6 +35,7 @@ describe Instagram::API do
           :client_id => 'CID',
           :client_secret => 'CS',
           :connection_options => { :ssl => { :verify => true } },
+          :redirect_uri => 'http://http://localhost:4567/oauth/callback',
           :endpoint => 'http://tumblr.com/',
           :format => :xml,
           :proxy => 'http://shayne:sekret@proxy.example.com:8080',
@@ -139,29 +140,76 @@ describe Instagram::API do
         url.should_not include("scope")
       end
     end
+
+    describe "redirect_uri" do
+      it "should fall back to configuration redirect_uri if not passed as option" do
+        redirect_uri = 'http://localhost:4567/oauth/callback'
+        params = { :redirect_uri => redirect_uri }
+        client = Instagram::Client.new(params)
+        url = client.authorize_url()
+        url.should =~ /redirect_uri=#{URI.escape(redirect_uri, Regexp.union('/',':'))}/
+      end
+
+      it "should override configuration redirect_uri if passed as option" do
+        redirect_uri_config = 'http://localhost:4567/oauth/callback_config'
+        params = { :redirect_uri => redirect_uri_config }
+        client = Instagram::Client.new(params)
+        redirect_uri_option = 'http://localhost:4567/oauth/callback_option'
+        options = { :redirect_uri => redirect_uri_option }
+        url = client.authorize_url(options)
+        url.should =~ /redirect_uri=#{URI.escape(redirect_uri_option, Regexp.union('/',':'))}/
+      end
+    end
   end
 
   describe ".get_access_token" do
 
-    before do
-      @client = Instagram::Client.new(:client_id => "CID", :client_secret => "CS")
-      @url = @client.send(:connection).build_url("/oauth/access_token/").to_s
-      stub_request(:post, @url).
-        with(:body => {:client_id => "CID", :client_secret => "CS", :redirect_uri => "http://localhost:4567/oauth/callback", :grant_type => "authorization_code", :code => "C"}).
-        to_return(:status => 200, :body => fixture("access_token.json"), :headers => {})
+    describe "common functionality" do
+      before do
+        @client = Instagram::Client.new(:client_id => "CID", :client_secret => "CS")
+        @url = @client.send(:connection).build_url("/oauth/access_token/").to_s
+        stub_request(:post, @url).
+          with(:body => {:client_id => "CID", :client_secret => "CS", :redirect_uri => "http://localhost:4567/oauth/callback", :grant_type => "authorization_code", :code => "C"}).
+          to_return(:status => 200, :body => fixture("access_token.json"), :headers => {})
+      end
+
+      it "should get the correct resource" do
+        @client.get_access_token(code="C", :redirect_uri => "http://localhost:4567/oauth/callback")
+        a_request(:post, @url).
+          with(:body => {:client_id => "CID", :client_secret => "CS", :redirect_uri => "http://localhost:4567/oauth/callback", :grant_type => "authorization_code", :code => "C"}).
+          should have_been_made
+      end
+
+      it "should return a hash with an access_token and user data" do
+        response = @client.get_access_token(code="C", :redirect_uri => "http://localhost:4567/oauth/callback")
+        response.access_token.should == "at"
+        response.user.username.should == "mikeyk"
+      end
     end
 
-    it "should get the correct resource" do
-      @client.get_access_token(code="C", :redirect_uri => "http://localhost:4567/oauth/callback")
-      a_request(:post, @url).
-        with(:body => {:client_id => "CID", :client_secret => "CS", :redirect_uri => "http://localhost:4567/oauth/callback", :grant_type => "authorization_code", :code => "C"}).
-        should have_been_made
-    end
+    describe "redirect_uri param" do
 
-    it "should return a hash with an access_token and user data" do
-      response = @client.get_access_token(code="C", :redirect_uri => "http://localhost:4567/oauth/callback")
-      response.access_token.should == "at"
-      response.user.username.should == "mikeyk"
+      before do
+        @redirect_uri_config = "http://localhost:4567/oauth/callback_config"
+        @client = Instagram::Client.new(:client_id => "CID", :client_secret => "CS", :redirect_uri => @redirect_uri_config)
+        @url = @client.send(:connection).build_url("/oauth/access_token/").to_s
+        stub_request(:post, @url)
+      end
+
+      it "should fall back to configuration redirect_uri if not passed as option" do
+        @client.get_access_token(code="C")
+        a_request(:post, @url).
+          with(:body => hash_including({:redirect_uri => @redirect_uri_config})).
+          should have_been_made
+      end
+
+      it "should override configuration redirect_uri if passed as option" do
+        redirect_uri_option = "http://localhost:4567/oauth/callback_option"
+        @client.get_access_token(code="C", :redirect_uri => redirect_uri_option)
+        a_request(:post, @url).
+          with(:body => hash_including({:redirect_uri => redirect_uri_option})).
+          should have_been_made
+      end
     end
   end
 end

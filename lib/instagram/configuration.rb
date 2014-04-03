@@ -11,10 +11,11 @@ module Instagram
       :client_id,
       :client_secret,
       :connection_options,
+      :scope,
+      :redirect_uri,
       :endpoint,
       :format,
       :proxy,
-      :scope,
       :user_agent
     ].freeze
 
@@ -85,16 +86,19 @@ module Instagram
 
     # Reset all configuration options to defaults
     def reset
+
       self.access_token       = DEFAULT_ACCESS_TOKEN
       self.adapter            = DEFAULT_ADAPTER
       self.client_id          = DEFAULT_CLIENT_ID
       self.client_secret      = DEFAULT_CLIENT_SECRET
       self.connection_options = DEFAULT_CONNECTION_OPTIONS
+      self.scope              = DEFAULT_SCOPE
+      self.redirect_uri   = DEFAULT_REDIRECT_URI
       self.endpoint           = DEFAULT_ENDPOINT
       self.format             = DEFAULT_FORMAT
       self.proxy              = DEFAULT_PROXY
-      self.scope              = DEFAULT_SCOPE
       self.user_agent         = DEFAULT_USER_AGENT
+      
     end
   end
 end
