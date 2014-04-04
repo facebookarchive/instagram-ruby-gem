@@ -12,7 +12,7 @@ module Instagram
       # @format :json
       # @authenticated false
       # @rate_limited true
-      # @see TODO:docs url
+      # @see http://instagram.com/developer/endpoints/tags/#get_tags
       def tag(tag, *args)
         response = get("tags/#{tag}")
         response
@@ -28,7 +28,7 @@ module Instagram
       #   @return [Hashie::Mash]
       #   @example Return a list of the most recent media items tagged "cat"
       #     Instagram.tag_recent_media('cat')
-      # @see TODO:docs url
+      # @see http://instagram.com/developer/endpoints/tags/#get_tags_media_recent
       # @format :json
       # @authenticated false
       # @rate_limited true
@@ -47,7 +47,7 @@ module Instagram
       # @param options [Hash] A customizable set of options.
       # @option options [Integer] :count The number of media items to retrieve.
       # @return [Hashie::Mash]
-      # @see TODO:doc url
+      # @see http://instagram.com/developer/endpoints/tags/#get_tags_search
       # @example Return tags that start with "cat"
       #   Instagram.tag_search("cat")
       def tag_search(query, options={})
