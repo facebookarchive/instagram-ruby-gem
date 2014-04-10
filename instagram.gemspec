@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
 
 Instagram REST and Search APIs
 ------------------------------
-Our developer site  documents all the Instagram REST and Search APIs.
+Our developer site documents all the Instagram REST and Search APIs.
 (http://instagram.com/developer)
 
 Blog
