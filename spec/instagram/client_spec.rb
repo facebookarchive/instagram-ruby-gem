@@ -5,7 +5,7 @@ describe Instagram::Client do
     client = Instagram::Client.new
     endpoint = URI.parse(client.endpoint)
     connection = client.send(:connection).build_url(nil).to_s
-    (connection + '/').should == endpoint.to_s
+    (connection).should == endpoint.to_s
   end
 
   it "should not cache the user account across clients" do
