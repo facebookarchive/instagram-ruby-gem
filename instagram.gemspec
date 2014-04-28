@@ -2,6 +2,7 @@
 require File.expand_path('../lib/instagram/version', __FILE__)
 
 Gem::Specification.new do |s|
+  s.add_development_dependency('rake', '~> 10.3')
   s.add_development_dependency('rspec', '~> 2.4')
   s.add_development_dependency('webmock', '~> 1.6')
   s.add_development_dependency('bluecloth', '~> 2.0.11')
