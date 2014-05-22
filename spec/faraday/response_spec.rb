@@ -36,7 +36,20 @@ describe Faraday::Response do
     it "should return the body error message" do
       expect do
         @client.user_media_feed()
-      end.to raise_error(Instagram::BadRequest, /Bad words are bad./)
+      end.to raise_error(Instagram::BadRequest, /Bad words are bad\./)
+    end
+  end
+
+  context "when a 400 is raised with no meta but an error_message" do
+    before do
+      stub_get('users/self/feed.json').
+        to_return(:body => '{"error_type": "OAuthException", "error_message": "No matching code found."}', :status => 400)
+    end
+
+    it "should return the body error type and message" do
+      expect do
+        @client.user_media_feed()
+      end.to raise_error(Instagram::BadRequest, /OAuthException: No matching code found\./)
     end
   end
 

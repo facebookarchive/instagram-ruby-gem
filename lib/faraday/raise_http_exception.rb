@@ -11,6 +11,8 @@ module FaradayMiddleware
           raise Instagram::BadRequest, error_message_400(response)
         when 404
           raise Instagram::NotFound, error_message_400(response)
+        when 429
+          raise Instagram::RateLimitExceeded, error_message_400(response)
         when 500
           raise Instagram::InternalServerError, error_message_500(response, "Something is technically wrong.")
         when 502
@@ -45,6 +47,8 @@ module FaradayMiddleware
         nil
       elsif body['meta'] and body['meta']['error_message'] and not body['meta']['error_message'].empty?
         ": #{body['meta']['error_message']}"
+      elsif body['error_message'] and not body['error_message'].empty?
+        ": #{body['error_type']}: #{body['error_message']}"
       end
     end
 
