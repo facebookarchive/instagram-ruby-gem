@@ -34,6 +34,7 @@ describe Instagram::API do
           :adapter => :typhoeus,
           :client_id => 'CID',
           :client_secret => 'CS',
+          :client_ips => '1.2.3.4',
           :connection_options => { :ssl => { :verify => true } },
           :redirect_uri => 'http://http://localhost:4567/oauth/callback',
           :endpoint => 'http://tumblr.com/',

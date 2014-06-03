@@ -15,7 +15,7 @@ module Instagram
       options[:grant_type] ||= "authorization_code"
       options[:redirect_uri] ||= self.redirect_uri
       params = access_token_params.merge(options)
-      post("/oauth/access_token/", params.merge(:code => code), raw=false, unformatted=true, no_response_wrapper=true)
+      post("/oauth/access_token/", params.merge(:code => code), signature=false, raw=false, unformatted=true, no_response_wrapper=true)
     end
 
     private
