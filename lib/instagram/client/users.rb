@@ -213,7 +213,7 @@ module Instagram
     # @rate_limited true
     def follow_user(id, options={})
       options["action"] = "follow"
-      response = post("users/#{id}/relationship", options)
+      response = post("users/#{id}/relationship", options, signature=true)
       response
     end
 
@@ -231,7 +231,7 @@ module Instagram
     # @rate_limited true
     def unfollow_user(id, options={})
       options["action"] = "unfollow"
-      response = post("users/#{id}/relationship", options)
+      response = post("users/#{id}/relationship", options, signature=true)
       response
     end
 
@@ -249,7 +249,7 @@ module Instagram
     # @rate_limited true
     def block_user(id, options={})
       options["action"] = "block"
-      response = post("users/#{id}/relationship", options)
+      response = post("users/#{id}/relationship", options, signature=true)
       response
     end
 
@@ -267,7 +267,7 @@ module Instagram
     # @rate_limited true
     def unblock_user(id, options={})
       options["action"] = "unblock"
-      response = post("users/#{id}/relationship", options)
+      response = post("users/#{id}/relationship", options, signature=true)
       response
     end
 
@@ -285,7 +285,7 @@ module Instagram
     # @rate_limited true
     def approve_user(id, options={})
       options["action"] = "approve"
-      response = post("users/#{id}/relationship", options)
+      response = post("users/#{id}/relationship", options, signature=true)
       response
     end
 
@@ -303,7 +303,7 @@ module Instagram
     # @rate_limited true
     def deny_user(id, options={})
       options["action"] = "deny"
-      response = post("users/#{id}/relationship", options)
+      response = post("users/#{id}/relationship", options, signature=true)
       response
     end
   end

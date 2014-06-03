@@ -34,7 +34,7 @@ module Instagram
       # @rate_limited true
       # @see http://instagram.com/developer/endpoints/likes/#post_likes
       def like_media(id, options={})
-        response = post("media/#{id}/likes", options)
+        response = post("media/#{id}/likes", options, signature=true)
         response
       end
 
@@ -50,7 +50,7 @@ module Instagram
       # @rate_limited true
       # @see http://instagram.com/developer/endpoints/likes/#delete_likes
       def unlike_media(id, options={})
-        response = delete("media/#{id}/likes", options)
+        response = delete("media/#{id}/likes", options, signature=true)
         response
       end
     end

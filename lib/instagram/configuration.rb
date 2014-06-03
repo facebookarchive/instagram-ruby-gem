@@ -10,6 +10,7 @@ module Instagram
       :adapter,
       :client_id,
       :client_secret,
+      :client_ips,
       :connection_options,
       :scope,
       :redirect_uri,
@@ -33,6 +34,9 @@ module Instagram
 
     # By default, don't set an application secret
     DEFAULT_CLIENT_SECRET = nil
+
+    # By default, don't set application IPs
+    DEFAULT_CLIENT_IPS = nil
 
     # By default, don't set any connection options
     DEFAULT_CONNECTION_OPTIONS = {}
@@ -94,6 +98,7 @@ module Instagram
       self.adapter            = DEFAULT_ADAPTER
       self.client_id          = DEFAULT_CLIENT_ID
       self.client_secret      = DEFAULT_CLIENT_SECRET
+      self.client_ips         = DEFAULT_CLIENT_IPS
       self.connection_options = DEFAULT_CONNECTION_OPTIONS
       self.scope              = DEFAULT_SCOPE
       self.redirect_uri       = DEFAULT_REDIRECT_URI
@@ -101,7 +106,7 @@ module Instagram
       self.format             = DEFAULT_FORMAT
       self.proxy              = DEFAULT_PROXY
       self.user_agent         = DEFAULT_USER_AGENT
-      self.no_response_wrapper= DEFAULT_NO_RESPONSE_WRAPPER      
+      self.no_response_wrapper= DEFAULT_NO_RESPONSE_WRAPPER
     end
   end
 end
