@@ -8,6 +8,9 @@ module Instagram
   # Raised when Instagram returns the HTTP status code 404
   class NotFound < Error; end
 
+  # Raised when Instagram returns the HTTP status code 429
+  class TooManyRequests < Error; end
+
   # Raised when Instagram returns the HTTP status code 500
   class InternalServerError < Error; end
 
