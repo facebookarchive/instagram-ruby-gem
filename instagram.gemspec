@@ -2,6 +2,7 @@
 require File.expand_path('../lib/instagram/version', __FILE__)
 
 Gem::Specification.new do |s|
+  s.add_development_dependency('rake', '~> 0.9.2.2')
   s.add_development_dependency('rspec', '~> 2.4')
   s.add_development_dependency('webmock', '~> 1.6')
   s.add_development_dependency('bluecloth', '~> 2.0.11')
@@ -21,9 +22,9 @@ Our developer site documents all the Instagram REST and Search APIs.
 
 Blog
 ----------------------------
-The Developer Blog features news and important announcements about the Instagram Platform. 
+The Developer Blog features news and important announcements about the Instagram Platform.
 You will also find tutorials and best practices to help you build great platform integrations.
-Make sure to subscribe to the RSS feed so you don't miss out on new posts: 
+Make sure to subscribe to the RSS feed so you don't miss out on new posts:
 (http://developers.instagram.com).
 
 Community
