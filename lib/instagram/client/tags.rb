@@ -34,7 +34,7 @@ module Instagram
       # @rate_limited true
       def tag_recent_media(id, *args)
         options = args.last.is_a?(Hash) ? args.pop : {}
-        response = get("tags/#{id}/media/recent", options, false, false)
+        response = get("tags/#{id}/media/recent", options, false, false, false)
         response
       end
 
