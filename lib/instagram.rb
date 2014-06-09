@@ -21,7 +21,7 @@ module Instagram
   end
 
   # Delegate to Instagram::Client
-  def self.respond_to?(method)
-    return client.respond_to?(method) || super
+  def self.respond_to?(method, include_all=false)
+    return client.respond_to?(method, include_all) || super
   end
 end
