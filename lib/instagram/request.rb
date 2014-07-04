@@ -51,7 +51,7 @@ module Instagram
     end
 
     def get_insta_fowarded_for(ips, secret)
-        digest = OpenSSL::Digest::Digest.new('sha256')
+        digest = OpenSSL::Digest.new('sha256')
         signature = OpenSSL::HMAC.hexdigest(digest, secret, ips)
         return [ips, signature].join('|')
     end
