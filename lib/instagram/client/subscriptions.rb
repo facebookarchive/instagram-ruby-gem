@@ -183,7 +183,7 @@ module Instagram
           if !client_secret
             raise ArgumentError, "client_secret must be set during configure"
           end
-          digest = OpenSSL::Digest::Digest.new('sha1')
+          digest = OpenSSL::Digest.new('sha1')
           verify_signature = OpenSSL::HMAC.hexdigest(digest, client_secret, json)
 
           if options[:signature] != verify_signature

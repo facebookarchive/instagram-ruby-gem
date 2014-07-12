@@ -5,7 +5,7 @@ describe Instagram::Request do
     before do
       @ips = "1.2.3.4"
       @secret = "CS"
-      digest = OpenSSL::Digest::Digest.new('sha256')
+      digest = OpenSSL::Digest.new('sha256')
       signature = OpenSSL::HMAC.hexdigest(digest, @secret, @ips)
       @signed_header = [@ips, signature].join('|')
     end
