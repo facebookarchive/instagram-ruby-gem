@@ -11,7 +11,7 @@ module Instagram
       #   limit = response.headers[:x_ratelimit_limit]
       #
       def utils_raw_response
-        response = get('users/self/feed',nil,true)
+        response = get('users/self/feed',nil, false, true)
         response
       end
     
