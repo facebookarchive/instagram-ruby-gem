@@ -126,7 +126,7 @@ module Instagram
       end
 
       # Public: As a security measure, all updates from Instagram are signed using
-      # X-Hub-Signature: sha1=XXXX where XXX is the sha1 of the json payload
+      # X-Hub-Signature: XXXX where XXX is the sha1 of the json payload
       # using your application secret as the key.
       #
       # Example:
@@ -143,9 +143,7 @@ module Instagram
           raise ArgumentError, "client_secret must be set during configure"
         end
 
-        if request_signature = headers['X-Hub-Signature'] || headers['HTTP_X_HUB_SIGNATURE'] and
-           signature_parts = request_signature.split('sha1=')
-          request_signature = signature_parts[1]
+        if request_signature = headers['X-Hub-Signature'] || headers['HTTP_X_HUB_SIGNATURE']
           calculated_signature = OpenSSL::HMAC.hexdigest('sha1', client_secret, body)
           calculated_signature == request_signature
         end
