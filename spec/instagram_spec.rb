@@ -81,6 +81,19 @@ describe Instagram do
     end
   end
 
+    describe ".loud_logger" do
+    it "should return the loud_logger status" do
+      Instagram.loud_logger.should == nil
+    end
+  end
+
+  describe ".loud_logger=" do
+    it "should set the loud_logger" do
+      Instagram.loud_logger = true
+      Instagram.loud_logger.should == true
+    end
+  end
+
   describe ".configure" do
 
     Instagram::Configuration::VALID_OPTIONS_KEYS.each do |key|

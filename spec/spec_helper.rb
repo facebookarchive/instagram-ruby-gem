@@ -18,6 +18,18 @@ RSpec.configure do |config|
   config.include WebMock::API
 end
 
+def capture_output(&block)
+  begin
+    old_stdout = $stdout
+    $stdout = StringIO.new
+    block.call
+    result = $stdout.string
+  ensure
+    $stdout = old_stdout
+  end
+  result
+end
+
 def a_delete(path)
   a_request(:delete, Instagram.endpoint + path)
 end

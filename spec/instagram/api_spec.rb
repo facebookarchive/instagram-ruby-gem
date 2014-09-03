@@ -43,6 +43,7 @@ describe Instagram::API do
           :scope => 'comments relationships',
           :user_agent => 'Custom User Agent',
           :no_response_wrapper => true,
+          :loud_logger => true,
         }
       end
 
@@ -211,6 +212,72 @@ describe Instagram::API do
         a_request(:post, @url).
           with(:body => hash_including({:redirect_uri => redirect_uri_option})).
           should have_been_made
+      end
+    end
+
+    describe "loud_logger param" do
+
+      before do
+        @client = Instagram::Client.new(:loud_logger => true)
+      end
+
+      context "outputs to STDOUT with faraday logs when enabled" do
+        before do
+          stub_get('users/self/feed.json').
+          to_return(:body => fixture("user_media_feed.json"), :headers => {:content_type => "application/json; charset=utf-8"})
+        end
+
+        it "should return the body error message" do
+          output = capture_output do
+            @client.user_media_feed()
+          end
+
+          expect(output).to include 'INFO -- : Started GET request to: https://api.instagram.com/v1/users/self/feed.json'
+          expect(output).to include 'DEBUG -- : Response Headers:'
+          expect(output).to include "User-Agent : Instagram Ruby Gem #{Instagram::VERSION}"
+          expect(output).to include 'http://distillery.s3.amazonaws.com/media/2011/01/31/0f8e832c3dc6420bb6ddf0bd09f032f6_6.jpg'
+        end
+      end
+
+      context "shows STDOUT output when errors occur" do
+
+        before do
+          stub_get('users/self/feed.json').
+          to_return(:body => '{"meta":{"error_message": "Bad words are bad."}}', :status => 400)
+        end
+
+        it "should return the body error message" do
+          output = capture_output do
+            @client.user_media_feed() rescue nil
+          end
+
+          expect(output).to include 'INFO -- : Started GET request to: https://api.instagram.com/v1/users/self/feed.json'
+          expect(output).to include 'DEBUG -- : Response Headers:'
+          expect(output).to include "User-Agent : Instagram Ruby Gem #{Instagram::VERSION}"
+          expect(output).to include '{"meta":{"error_message": "Bad words are bad."}}'
+        end
+      end
+
+      context "will redact API keys if INSTAGRAM_GEM_REDACT=true" do
+        before do
+          stub_get('users/self/feed.json').
+          to_return(:body => fixture("user_media_feed.json"), :headers => {:content_type => "application/json; charset=utf-8"})
+        end
+
+        it "should redact API keys" do
+          ENV.stub(:[]).with('http_proxy').and_return(nil)
+          ENV.stub(:[]).with('INSTAGRAM_GEM_REDACT').and_return('true')
+
+          output = capture_output do
+            @client.user_media_feed()
+          end
+
+          expect(output).to include 'INFO -- : Started GET request to: https://api.instagram.com/v1/users/self/feed.json'
+          expect(output).to include 'DEBUG -- : Response Headers:'
+          expect(output).to include "User-Agent : Instagram Ruby Gem #{Instagram::VERSION}"
+          expect(output).to include 'http://distillery.s3.amazonaws.com/media/2011/01/31/0f8e832c3dc6420bb6ddf0bd09f032f6_6.jpg'
+          expect(output).to include 'access_token=[ACCESS-TOKEN]'
+        end
       end
     end
   end
