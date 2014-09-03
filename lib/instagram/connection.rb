@@ -23,6 +23,7 @@ module Instagram
           end
         end
         connection.use FaradayMiddleware::RaiseHttpException
+        connection.use FaradayMiddleware::LoudLogger if loud_logger
         connection.adapter(adapter)
       end
     end
