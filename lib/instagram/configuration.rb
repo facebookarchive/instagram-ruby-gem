@@ -18,7 +18,8 @@ module Instagram
       :format,
       :proxy,
       :user_agent,
-      :no_response_wrapper
+      :no_response_wrapper,
+      :loud_logger,
     ].freeze
 
     # By default, don't set a user access token
@@ -72,6 +73,9 @@ module Instagram
     VALID_FORMATS = [
       :json].freeze
 
+    # By default, don't turn on loud logging
+    DEFAULT_LOUD_LOGGER = nil
+
     # @private
     attr_accessor *VALID_OPTIONS_KEYS
 
@@ -107,6 +111,7 @@ module Instagram
       self.proxy              = DEFAULT_PROXY
       self.user_agent         = DEFAULT_USER_AGENT
       self.no_response_wrapper= DEFAULT_NO_RESPONSE_WRAPPER
+      self.loud_logger        = DEFAULT_LOUD_LOGGER
     end
   end
 end
