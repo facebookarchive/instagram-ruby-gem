@@ -15,7 +15,7 @@ module Instagram
     end
 
     # Perform an HTTP PUT request
-    def put(path, options={},  signature=false, raw=false, unformatted=false, no_response_wrapper=no_response_wrapper)
+    def put(path, options={}, signature=false, raw=false, unformatted=false, no_response_wrapper=no_response_wrapper)
       request(:put, path, options, signature, raw, unformatted, no_response_wrapper)
     end
 
