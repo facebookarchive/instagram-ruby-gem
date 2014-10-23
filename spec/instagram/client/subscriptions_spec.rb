@@ -67,6 +67,29 @@ describe Instagram::Client do
         end
       end
 
+      describe ".validate_update" do
+
+        subject { @client.validate_update(body, headers) }
+
+        context "when calculated signature matches request signature" do
+
+          let(:body) { {foo: "bar"}.to_json }
+          let(:request_signature) { OpenSSL::HMAC.hexdigest('sha1', @client.client_secret, body) }
+          let(:headers) { {"X-Hub-Signature" => request_signature} }
+
+          it { expect(subject).to be_true }
+        end
+
+        context "when calculated signature does not match request signature" do
+
+          let(:body) { {foo: "bar"}.to_json }
+          let(:request_signature) { "going to fail" }
+          let(:headers) { {"X-Hub-Signature" => request_signature} }
+
+          it { expect(subject).to be_false }
+        end
+      end
+
       describe ".process_subscriptions" do
 
         context "without a callbacks block" do
