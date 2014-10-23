@@ -21,6 +21,25 @@ module Instagram
         response
       end
 
+      # Returns extended information of a given media item
+      #
+      # @overload media_shortcode(shortcode)
+      #   @param shortcode [String] An Instagram media item shortcode
+      #   @return [Hashie::Mash] The requested media item.
+      #   @example Return extended information for media item with shortcode 'D'
+      #     Instagram.media_shortcode('D')
+      # @format none
+      # @authenticated false unless requesting media from a protected user
+      #
+      #   If getting this data of a protected user, you must authenticate (and be allowed to see that user).
+      # @rate_limited true
+      # @see http://instagram.com/developer/endpoints/media/#get_media_by_shortcode
+      def media_shortcode(*args)
+        shortcode = args.first
+        response = get("media/shortcode/#{shortcode}", {}, false, false, true)
+        response
+      end
+
       # Returns a list of the overall most popular media
       #
       # @overload media_popular(options={})
