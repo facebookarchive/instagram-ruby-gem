@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('faraday', ['>= 0.7', '< 0.10'])
   s.add_runtime_dependency('faraday_middleware', ['>= 0.8', '< 0.10'])
   s.add_runtime_dependency('multi_json', '>= 1.0.3', '~> 1.0')
-  s.add_runtime_dependency('hashie',  '>= 0.4.0')
+  s.add_runtime_dependency('hashie', '>= 0.4.0')
   s.authors = ["Shayne Sweeney"]
   s.description = %q{A Ruby wrapper for the Instagram REST and Search APIs}
   s.post_install_message =<<eos
