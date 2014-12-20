@@ -1,6 +1,6 @@
-require File.expand_path('../connection', __FILE__)
-require File.expand_path('../request', __FILE__)
-require File.expand_path('../oauth', __FILE__)
+require_relative 'connection'
+require_relative 'request'
+require_relative 'oauth'
 
 module Instagram
   # @private

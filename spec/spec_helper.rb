@@ -10,7 +10,7 @@ else
   end
 end
 
-require File.expand_path('../../lib/instagram', __FILE__)
+require_relative '../lib/instagram'
 
 require 'rspec'
 require 'webmock/rspec'
