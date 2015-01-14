@@ -20,9 +20,9 @@ describe Faraday::Response do
       end
 
       it "should raise #{exception.name} error" do
-        lambda do
+        expect do
           @client.user_media_feed()
-        end.should raise_error(exception)
+        end.to raise_error(exception)
       end
 
     end
@@ -63,9 +63,9 @@ describe Faraday::Response do
     end
 
     it 'should raise an Instagram::BadGateway' do
-      lambda do
+      expect do
         @client.user_media_feed()
-      end.should raise_error(Instagram::BadGateway)
+      end.to raise_error(Instagram::BadGateway)
     end
   end
 
@@ -78,9 +78,9 @@ describe Faraday::Response do
     end
 
     it 'should raise an Instagram::GatewayTimeout' do
-      lambda do
+      expect do
         @client.user_media_feed()
-      end.should raise_error(Instagram::GatewayTimeout)
+      end.to raise_error(Instagram::GatewayTimeout)
     end
   end
 end
