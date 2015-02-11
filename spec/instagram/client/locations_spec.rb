@@ -122,6 +122,29 @@ describe Instagram::Client do
         end
       end
 
+      describe ".location_search_facebook_places_id" do
+        before do
+          stub_get("locations/search.#{format}").
+            with(:query => {:access_token => @client.access_token}).
+            with(:query => {:facebook_places_id => "175495679140580"}).
+            to_return(:body => fixture("location_search_facebook.#{format}"), :headers => {:content_type => "application/#{format}; charset=utf-8"})
+        end
+
+        it "should get the correct resource by facebook_place_id" do
+          @client.location_search_facebook_places_id("175495679140580")
+          a_get("locations/search.#{format}").
+            with(:query => {:access_token => @client.access_token}).
+            with(:query => {:facebook_places_id => "175495679140580"}).
+            should have_been_made
+        end
+
+        it "should return an array of user search results" do
+          locations = @client.location_search_facebook_places_id("175495679140580")
+          locations.should be_a Array
+          locations.first.name.should == "Bartertown Diner"
+        end
+      end
+
     end
   end
 end

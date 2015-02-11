@@ -45,7 +45,7 @@ module Instagram
       #   @param lat [String] A given latitude in decimal format
       #   @param lng [String] A given longitude in decimal format
       #   @option options [Integer] :count The number of media items to retrieve.
-      #   @return [Hashie::Mash] location resultm object, #data is an Array.
+      #   @return [Hashie::Mash] location result object, #data is an Array.
       #   @example 1: Return a location with the Foursquare Venue ID = ()
       #     Instagram.location_search("3fd66200f964a520c5f11ee3") (Schiller's Liquor Bar, 131 Rivington St., NY, NY 10002)
       #   @example 2: Return locations around 37.7808851, -122.3948632 (164 S Park, SF, CA USA)
@@ -67,6 +67,21 @@ module Instagram
           lat, lng, distance = args
           response = get('locations/search', options.merge(:lat => lat, :lng => lng, :distance => distance))
         end
+        response
+      end
+
+      # Returns Instagram locations by Facebook Place ID
+      #
+      # @overload location_search(options={})
+      #   @param facebook_id [String] A valid Facebook Place ID. Must be an integer.
+      #   @return [Hashie::Mash] location result object, #data is an Array.
+      # @see http://instagram.com/developer/endpoints/locations/#get_locations_search
+      # @format :json
+      # @authenticated false
+      # @rate_limited true
+      def location_search_facebook_places_id(facebook_id, *args)
+        options = args.last.is_a?(Hash) ? args.pop : {}
+        response = get('locations/search', options.merge(:facebook_places_id => facebook_id))
         response
       end
     end
