@@ -5,22 +5,22 @@ module Instagram
   # Defines HTTP request methods
   module Request
     # Perform an HTTP GET request
-    def get(path, options={}, signature=false, raw=false, unformatted=false, no_response_wrapper=no_response_wrapper)
+    def get(path, options={}, signature=false, raw=false, unformatted=false, no_response_wrapper=no_response_wrapper())
       request(:get, path, options, signature, raw, unformatted, no_response_wrapper)
     end
 
     # Perform an HTTP POST request
-    def post(path, options={}, signature=false, raw=false, unformatted=false, no_response_wrapper=no_response_wrapper)
+    def post(path, options={}, signature=false, raw=false, unformatted=false, no_response_wrapper=no_response_wrapper())
       request(:post, path, options, signature, raw, unformatted, no_response_wrapper)
     end
 
     # Perform an HTTP PUT request
-    def put(path, options={},  signature=false, raw=false, unformatted=false, no_response_wrapper=no_response_wrapper)
+    def put(path, options={},  signature=false, raw=false, unformatted=false, no_response_wrapper=no_response_wrapper())
       request(:put, path, options, signature, raw, unformatted, no_response_wrapper)
     end
 
     # Perform an HTTP DELETE request
-    def delete(path, options={}, signature=false, raw=false, unformatted=false, no_response_wrapper=no_response_wrapper)
+    def delete(path, options={}, signature=false, raw=false, unformatted=false, no_response_wrapper=no_response_wrapper())
       request(:delete, path, options, signature, raw, unformatted, no_response_wrapper)
     end
 
