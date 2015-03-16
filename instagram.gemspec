@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rake', '~> 0.9.2.2')
   s.add_development_dependency('rspec', '~> 2.4')
   s.add_development_dependency('webmock', '~> 1.6')
-  s.add_development_dependency('bluecloth', '~> 2.0.11')
+  s.add_development_dependency('bluecloth', '~> 2.2.0')
   s.add_runtime_dependency('faraday', ['>= 0.7', '< 0.10'])
   s.add_runtime_dependency('faraday_middleware', ['>= 0.8', '< 0.10'])
   s.add_runtime_dependency('multi_json', '>= 1.0.3', '~> 1.0')
