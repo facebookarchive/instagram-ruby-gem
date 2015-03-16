@@ -250,5 +250,5 @@ Complete your CLA here: [https://code.facebook.com/cla](https://code.facebook.co
 Copyright
 ---------
 Copyright (c) 2014, Facebook, Inc. All rights reserved.
-By contributing to Instgram Ruby Gem, you agree that your contributions will be licensed under its BSD license.
+By contributing to Instagram Ruby Gem, you agree that your contributions will be licensed under its BSD license.
 See [LICENSE](https://github.com/Instagram/instagram-ruby-gem/blob/master/LICENSE.md) for details.
