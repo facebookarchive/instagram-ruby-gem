@@ -23,12 +23,12 @@ module Instagram
       # @overload tag_recent_media(tag, options={})
       #   @param tag-name [String] An Instagram tag name.
       #   @param options [Hash] A customizable set of options.
-      #   @option options [Integer] :max_id (nil) Returns results with an ID less than (that is, older than) or equal to the specified ID.
-      #   @option options [Integer] :min_id (nil) Returns results with an ID greater than (that is, newer than) or equal to the specified ID.
+      #   @option options [Integer] :max_tag_id (nil) Returns results with an ID less than (that is, older than) or equal to the specified ID. The value can be retrieved from the returned response via pagination.max_tag_id.
+      #   @option options [Integer] :min_tag_id (nil) Returns results with an ID greater than (that is, newer than) or equal to the specified ID. The value can be retrieved from the returned response via pagination.min_tag_id.
       #   @return [Hashie::Mash]
       #   @example Return a list of the most recent media items tagged "cat"
       #     Instagram.tag_recent_media('cat')
-      # @see http://instagram.com/developer/endpoints/tags/#get_tags_media_recent
+      # @see https://instagram.com/developer/endpoints/tags/#get_tags_media_recent
       # @format :json
       # @authenticated false
       # @rate_limited true
