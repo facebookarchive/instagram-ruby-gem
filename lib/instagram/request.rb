@@ -30,6 +30,15 @@ module Instagram
     def request(method, path, options, signature=false, raw=false, unformatted=false, no_response_wrapper=false)
       response = connection(raw).send(method) do |request|
         path = formatted_path(path) unless unformatted
+        if client_id != nil
+           sig_options = options.merge({:client_id => client_id})
+        end
+        if access_token != nil
+           sig_options = options.merge({:access_token => access_token})
+        end
+        sig = generate_sig("/"+path, sig_options, client_secret)
+        options[:sig] = sig
+        
         case method
         when :get, :delete
           request.url(path, options)
@@ -55,6 +64,15 @@ module Instagram
         digest = OpenSSL::Digest.new('sha256')
         signature = OpenSSL::HMAC.hexdigest(digest, secret, ips)
         return [ips, signature].join('|')
+    end
+
+    def generate_sig(endpoint, params, secret)
+      sig = endpoint
+      params.sort.map do |key, val|
+        sig += '|%s=%s' % [key, val]
+      end
+      digest = OpenSSL::Digest::Digest.new('sha256')
+      return OpenSSL::HMAC.hexdigest(digest, secret, sig)
     end
 
   end
