@@ -63,7 +63,7 @@ module Instagram
           o[:callback_url] = callback_url unless callback_url.nil?
           o[:aspect] = aspect || o[:aspect] || "media"
         }
-        response = post("subscriptions", options.merge(:client_secret => client_secret))
+        response = post("subscriptions", options.merge(:client_secret => client_secret), signature=true)
         response
       end
 
@@ -92,7 +92,7 @@ module Instagram
         options = args.last.is_a?(Hash) ? args.pop : {}
         subscription_id = args.first
         options.merge!(:id => subscription_id) if subscription_id
-        response = delete("subscriptions", options.merge(:client_secret => client_secret))
+        response = delete("subscriptions", options.merge(:client_secret => client_secret), signature=true)
         response
       end
 
