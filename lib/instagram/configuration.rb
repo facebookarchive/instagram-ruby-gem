@@ -20,6 +20,7 @@ module Instagram
       :user_agent,
       :no_response_wrapper,
       :loud_logger,
+      :sign_requests,
     ].freeze
 
     # By default, don't set a user access token
@@ -76,6 +77,9 @@ module Instagram
     # By default, don't turn on loud logging
     DEFAULT_LOUD_LOGGER = nil
 
+    # By default, requests are not signed
+    DEFAULT_SIGN_REQUESTS = false
+
     # @private
     attr_accessor *VALID_OPTIONS_KEYS
 
@@ -112,6 +116,7 @@ module Instagram
       self.user_agent         = DEFAULT_USER_AGENT
       self.no_response_wrapper= DEFAULT_NO_RESPONSE_WRAPPER
       self.loud_logger        = DEFAULT_LOUD_LOGGER
+      self.sign_requests      = DEFAULT_SIGN_REQUESTS
     end
   end
 end
