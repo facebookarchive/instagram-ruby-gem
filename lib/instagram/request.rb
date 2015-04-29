@@ -71,6 +71,7 @@ module Instagram
 
     def generate_sig(endpoint, params, secret)
       sig = endpoint
+      params = Hash[params.map{ |k, v| [k.to_s, v] }]
       params.sort.map do |key, val|
         sig += '|%s=%s' % [key, val]
       end
