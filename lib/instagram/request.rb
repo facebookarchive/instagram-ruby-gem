@@ -71,7 +71,8 @@ module Instagram
 
     def generate_sig(endpoint, params, secret)
       sig = endpoint
-      params.sort.map do |key, val|
+      params = params.sort_by{|c|c[0].to_s}
+      params.map do |key, val|
         sig += '|%s=%s' % [key, val]
       end
       digest = OpenSSL::Digest::Digest.new('sha256')
