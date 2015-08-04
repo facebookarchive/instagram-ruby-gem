@@ -71,7 +71,7 @@ get "/nav" do
       <li><a href='/media_popular'>Popular Media</a> Calls media_popular - Get a list of the overall most popular media items</li>
       <li><a href='/user_search'>User Search</a> Calls user_search - Search for users on instagram, by name or username</li>
       <li><a href='/location_search'>Location Search</a> Calls location_search - Search for a location by lat/lng</li>
-      <li><a href='/location_search_4square'>Location Search - 4Square</a> Calls location_search - Search for a location by Fousquare ID (v2)</li>
+      <li><a href='/location_search_4square'>Location Search - 4Square</a> Calls location_search - Search for a location by Foursquare ID (v2)</li>
       <li><a href='/tags'>Tags</a>Search for tags, view tag info and get media by tag</li>
       <li><a href='/limits'>View Rate Limit and Remaining API calls</a>View remaining and ratelimit info.</li>
     </ol>
