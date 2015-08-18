@@ -57,10 +57,12 @@ module Instagram
         options = args.last.is_a?(Hash) ? args.pop : {}
         object = args.shift
         callback_url = args.shift
+        verify_token = args.shift
         aspect = args.shift
         options.tap {|o|
           o[:object] = object unless object.nil?
           o[:callback_url] = callback_url unless callback_url.nil?
+          o[:verify_token] = verify_token unless verify_token.nil?
           o[:aspect] = aspect || o[:aspect] || "media"
         }
         response = post("subscriptions", options.merge(:client_secret => client_secret), signature=true)
