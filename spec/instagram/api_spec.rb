@@ -44,6 +44,7 @@ describe Instagram::API do
           :user_agent => 'Custom User Agent',
           :no_response_wrapper => true,
           :loud_logger => true,
+          :sign_requests => false,
         }
       end
 
