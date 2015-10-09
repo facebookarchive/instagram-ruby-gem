@@ -40,7 +40,16 @@ module FaradayMiddleware
       # body gets passed as a string, not sure if it is passed as something else from other spots?
       if not body.nil? and not body.empty? and body.kind_of?(String)
         # removed multi_json thanks to wesnolte's commit
-        body = ::JSON.parse(body)
+        body = begin
+          ::JSON.parse(body)
+        rescue JSON::ParserError => e
+          # handle HTML response here as empty JSON
+          if e.message.match /unexpected token/
+            nil
+          else
+            raise e
+          end
+        end
       end
 
       if body.nil?
