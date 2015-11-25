@@ -77,6 +77,13 @@ module Instagram
         response = get('media/search', options.merge(:lat => lat, :lng => lng))
         response
       end
+
+      def next_url_medias(next_url)
+        response = Faraday.get(next_url)
+        response_hash = JSON.parse(response.body)
+        response_hashie = Hashie::Mash.new(response_hash)
+        Response.create(response_hashie, {})
+      end
     end
   end
 end
