@@ -1,4 +1,7 @@
 require 'faraday'
+#if using typhoeus as the adapter uncomment these two requires to avoid seeing "Ethon::Errors::InvalidOption: The option: disable_ssl_peer_verification is invalid." (https://github.com/typhoeus/typhoeus/issues/270)
+#require 'typhoeus'
+#require 'typhoeus/adapters/faraday'
 
 # @private
 module FaradayMiddleware
