@@ -7,6 +7,7 @@ describe Faraday::Response do
 
   {
     400 => Instagram::BadRequest,
+    403 => Instagram::Forbidden,
     404 => Instagram::NotFound,
     429 => Instagram::TooManyRequests,
     500 => Instagram::InternalServerError,

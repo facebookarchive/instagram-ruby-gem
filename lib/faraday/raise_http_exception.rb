@@ -9,6 +9,8 @@ module FaradayMiddleware
         case response[:status].to_i
         when 400
           raise Instagram::BadRequest, error_message_400(response)
+        when 403
+          raise Instagram::Forbidden, error_message_400(response)
         when 404
           raise Instagram::NotFound, error_message_400(response)
         when 429
