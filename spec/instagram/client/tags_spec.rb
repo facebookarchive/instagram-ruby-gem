@@ -17,14 +17,14 @@ describe Instagram::Client do
 
         it "should get the correct resource" do
           @client.tag('cat')
-          a_get("tags/cat.#{format}").
-            with(:query => {:access_token => @client.access_token}).
-            should have_been_made
+          expect(a_get("tags/cat.#{format}").
+            with(:query => {:access_token => @client.access_token})).
+            to have_been_made
         end
 
         it "should return extended information of a given media item" do
           tag = @client.tag('cat')
-          tag.name.should == 'cat'
+          expect(tag.name).to eq('cat')
         end
       end
 
@@ -38,15 +38,15 @@ describe Instagram::Client do
 
         it "should get the correct resource" do
           @client.tag_recent_media('cat')
-          a_get("tags/cat/media/recent.#{format}").
-            with(:query => {:access_token => @client.access_token}).
-            should have_been_made
+          expect(a_get("tags/cat/media/recent.#{format}").
+            with(:query => {:access_token => @client.access_token})).
+            to have_been_made
         end
 
         it "should return a list of media taken at a given location" do
           media = @client.tag_recent_media('cat')
-          media.should be_a Array
-          media.first.user.username.should == "amandavan"
+          expect(media).to be_a Array
+          expect(media.first.user.username).to eq("amandavan")
         end
 
       end
@@ -62,16 +62,16 @@ describe Instagram::Client do
 
         it "should get the correct resource" do
           @client.tag_search('cat')
-          a_get("tags/search.#{format}").
+          expect(a_get("tags/search.#{format}").
             with(:query => {:access_token => @client.access_token}).
-            with(:query => {:q => 'cat'}).
-            should have_been_made
+            with(:query => {:q => 'cat'})).
+            to have_been_made
         end
 
         it "should return an array of user search results" do
           tags = @client.tag_search('cat')
-          tags.should be_a Array
-          tags.first.name.should == "cats"
+          expect(tags).to be_a Array
+          expect(tags.first.name).to eq("cats")
         end
       end
     end

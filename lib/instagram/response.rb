@@ -1,6 +1,7 @@
 module Instagram
   module Response
     def self.create( response_hash, ratelimit_hash )
+      response_hash = {} unless response_hash
       data = response_hash.data.dup rescue response_hash
       data.extend( self )
       data.instance_exec do

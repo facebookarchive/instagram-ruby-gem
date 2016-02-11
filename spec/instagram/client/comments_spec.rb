@@ -18,15 +18,15 @@ describe Instagram::Client do
 
         it "should get the correct resource" do
           @client.media_comments(777)
-          a_get("media/777/comments.#{format}").
-            with(:query => {:access_token => @client.access_token}).
-            should have_been_made
+          expect(a_get("media/777/comments.#{format}").
+            with(:query => {:access_token => @client.access_token})).
+            to have_been_made
         end
 
         it "should return an array of user search results" do
           comments = @client.media_comments(777)
-          comments.should be_a Array
-          comments.first.text.should == "Vet visit"
+          expect(comments).to be_a Array
+          expect(comments.first.text).to eq("Vet visit")
         end
       end
 
@@ -40,14 +40,14 @@ describe Instagram::Client do
 
         it "should get the correct resource" do
           @client.create_media_comment(777, "hi there")
-          a_post("media/777/comments.#{format}").
-            with(:body => {:text => "hi there", :access_token => @client.access_token}).
-            should have_been_made
+          expect(a_post("media/777/comments.#{format}").
+            with(:body => {:text => "hi there", :access_token => @client.access_token})).
+            to have_been_made
         end
 
         it "should return the new comment when successful" do
           comment = @client.create_media_comment(777, "hi there")
-          comment.text.should == "hi there"
+          expect(comment.text).to eq("hi there")
         end
       end
 
@@ -61,9 +61,9 @@ describe Instagram::Client do
 
         it "should get the correct resource" do
           @client.delete_media_comment(777, 1234)
-          a_delete("media/777/comments/1234.#{format}").
-            with(:query => {:access_token => @client.access_token}).
-            should have_been_made
+          expect(a_delete("media/777/comments/1234.#{format}").
+            with(:query => {:access_token => @client.access_token})).
+            to have_been_made
         end
       end
     end
