@@ -36,7 +36,7 @@ module Instagram
       # @overload create_subscription(object, callback_url, aspect="media", options={})
       #   @param object [String] The object you'd like to subscribe to (user, tag, location or geography)
       #   @param callback_url [String] The subscription callback URL
-      #   @param aspect [String] he aspect of the object you'd like to subscribe to (in this case, "media").
+      #   @param aspect [String] The aspect of the object you'd like to subscribe to (in this case, "media").
       #   @param options [Hash] Addition options and parameters
       #   @option options [String, Integer] :object_id When specifying a location or tag use the location's ID or tag name respectively
       #   @option options [String, Float] :lat The center latitude of an area, used when subscribing to a geography object
@@ -73,12 +73,12 @@ module Instagram
       #   @param options [Hash] Addition options and parameters
       #   @option options [Integer] :subscription_id The subscription's ID
       #   @option options [String] :object When specified will remove all subscriptions of this object type, unless an :object_id is also specified (user, tag, location or geography)
-      #   @option options [String, Integer] :object_id When specifying :object, inlcude an :object_id to only remove subscriptions of that object and object_id
+      #   @option options [String, Integer] :object_id When specifying :object, include an :object_id to only remove subscriptions of that object and object_id
       # @overload delete_subscription(subscription_id, options={})
       #   @param subscription_id [Integer] The subscription's ID
       #   @param options [Hash] Addition options and parameters
       #   @option options [String] :object When specified will remove all subscriptions of this object type, unless an :object_id is also specified (user, tag, location or geography)
-      #   @option options [String, Integer] :object_id When specifying :object, inlcude an :object_id to only remove subscriptions of that object and object_id
+      #   @option options [String, Integer] :object_id When specifying :object, include an :object_id to only remove subscriptions of that object and object_id
       #   @return [Hashie::Mash]
       #   @example Deletes an application's user change subscription
       #     Instagram.delete_subscription(:object => "user")
