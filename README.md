@@ -1,3 +1,9 @@
+- - -
+
+**_This project is not actively maintained. Proceed at your own risk!_**
+
+- - - 
+
 The Instagram Ruby Gem
 ====================
 A Ruby wrapper for the Instagram REST and Search APIs
