@@ -39,15 +39,15 @@ module Instagram
         response
       end
 
-      # Returns Instagram locations within proximity of given lat,lng or foursquare venue id
+      # Returns Instagram locations within proximity of given lat,lng or Facebook Places ID
       #
       # @overload location_search(options={})
-      #   @param foursquare_v2_id [String] A valid Foursquare Venue ID (v2)
+      #   @param facebook_places_id [String] A valid Facebook Places ID
       #   @param lat [String] A given latitude in decimal format
       #   @param lng [String] A given longitude in decimal format
       #   @option options [Integer] :count The number of media items to retrieve.
       #   @return [Hashie::Mash] location resultm object, #data is an Array.
-      #   @example 1: Return a location with the Foursquare Venue ID = ()
+      #   @example 1: Return a location with the Facebook Places ID = ()
       #     Instagram.location_search("3fd66200f964a520c5f11ee3") (Schiller's Liquor Bar, 131 Rivington St., NY, NY 10002)
       #   @example 2: Return locations around 37.7808851, -122.3948632 (164 S Park, SF, CA USA)
       #     Instagram.location_search("37.7808851", "-122.3948632")
@@ -59,8 +59,8 @@ module Instagram
         options = args.last.is_a?(Hash) ? args.pop : {}
         case args.size
         when 1
-          foursquare_v2_id = args.first
-          response = get('locations/search', options.merge(:foursquare_v2_id => foursquare_v2_id))
+          facebook_places_id = args.first
+          response = get('locations/search', options.merge(:facebook_places_id => facebook_places_id))
         when 2
           lat, lng = args
           response = get('locations/search', options.merge(:lat => lat, :lng => lng))

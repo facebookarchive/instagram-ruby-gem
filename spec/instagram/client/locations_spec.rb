@@ -98,20 +98,20 @@ describe Instagram::Client do
         end
       end
 
-      describe ".location_search_foursquare_v2_id" do
+      describe ".location_search_facebook_places_id" do
 
         before do
           stub_get("locations/search.#{format}").
             with(:query => {:access_token => @client.access_token}).
-            with(:query => {:foursquare_v2_id => "3fd66200f964a520c5f11ee3"}).
+            with(:query => {:facebook_places_id => "3fd66200f964a520c5f11ee3"}).
             to_return(:body => fixture("location_search_fsq.#{format}"), :headers => {:content_type => "application/#{format}; charset=utf-8"})
         end
 
-        it "should get the correct resource by foursquare_v2_id" do
+        it "should get the correct resource by facebook_places_id" do
           @client.location_search("3fd66200f964a520c5f11ee3")
           a_get("locations/search.#{format}").
             with(:query => {:access_token => @client.access_token}).
-            with(:query => {:foursquare_v2_id => "3fd66200f964a520c5f11ee3"}).
+            with(:query => {:facebook_places_id => "3fd66200f964a520c5f11ee3"}).
             should have_been_made
         end
 
