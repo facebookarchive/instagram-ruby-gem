@@ -104,7 +104,7 @@ describe Instagram::Client do
           stub_get("locations/search.#{format}").
             with(:query => {:access_token => @client.access_token}).
             with(:query => {:facebook_places_id => "3fd66200f964a520c5f11ee3"}).
-            to_return(:body => fixture("location_search_fsq.#{format}"), :headers => {:content_type => "application/#{format}; charset=utf-8"})
+            to_return(:body => fixture("location_search_facebook.#{format}"), :headers => {:content_type => "application/#{format}; charset=utf-8"})
         end
 
         it "should get the correct resource by facebook_places_id" do
