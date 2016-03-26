@@ -20,11 +20,8 @@ describe Faraday::Response do
       end
 
       it "should raise #{exception.name} error" do
-        lambda do
-          @client.user_media_feed()
-        end.should raise_error(exception)
+        expect { @client.user_media_feed }.to raise_error { exception }
       end
-
     end
   end
 
@@ -35,9 +32,7 @@ describe Faraday::Response do
     end
 
     it "should return the body error message" do
-      expect do
-        @client.user_media_feed()
-      end.to raise_error(Instagram::BadRequest, /Bad words are bad\./)
+      expect { @client.user_media_feed }.to raise_error(Instagram::BadRequest, /Bad words are bad\./)
     end
   end
 
@@ -48,9 +43,7 @@ describe Faraday::Response do
     end
 
     it "should return the body error type and message" do
-      expect do
-        @client.user_media_feed()
-      end.to raise_error(Instagram::BadRequest, /OAuthException: No matching code found\./)
+      expect { @client.user_media_feed }.to raise_error(Instagram::BadRequest, /OAuthException: No matching code found\./)
     end
   end
 
@@ -63,9 +56,7 @@ describe Faraday::Response do
     end
 
     it 'should raise an Instagram::BadGateway' do
-      lambda do
-        @client.user_media_feed()
-      end.should raise_error(Instagram::BadGateway)
+      expect { @client.user_media_feed() }.to raise_error(Instagram::BadGateway)
     end
   end
 
@@ -78,9 +69,7 @@ describe Faraday::Response do
     end
 
     it 'should raise an Instagram::GatewayTimeout' do
-      lambda do
-        @client.user_media_feed()
-      end.should raise_error(Instagram::GatewayTimeout)
+      expect { @client.user_media_feed }.to raise_error(Instagram::GatewayTimeout)
     end
   end
 end

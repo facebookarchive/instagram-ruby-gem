@@ -16,19 +16,19 @@ describe Instagram::Client do
 
         it "should get the correct resource" do
           @client.oembed("http://instagram.com/p/abcdef")
-          a_get("oembed?url=http://instagram.com/p/abcdef").
-            with(:query => {:access_token => @client.access_token}).
-            should have_been_made
+          expect(a_get("oembed?url=http://instagram.com/p/abcdef").
+            with(:query => {:access_token => @client.access_token})).
+            to have_been_made
         end
 
         it "should return the oembed information for an instagram media url" do
           oembed = @client.oembed("http://instagram.com/p/abcdef")
-          oembed.media_id.should == "123657555223544123_41812344"
+          expect(oembed.media_id).to eq("123657555223544123_41812344")
         end
 
         it "should return nil if a URL is not provided" do
           oembed = @client.oembed
-          oembed.should be_nil
+          expect(oembed).to be_nil
         end
       end
     end
