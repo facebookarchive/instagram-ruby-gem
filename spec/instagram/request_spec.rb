@@ -19,9 +19,9 @@ describe Instagram::Request do
           to_return(:status => 200, :body => "", :headers => {})
 
         client.post("/media/123/likes", {}, signature=true)
-        a_request(:post, url).
-          with(:headers => {'X-Insta-Forwarded-For'=> @signed_header}).
-          should have_been_made
+        expect(a_request(:post, url).
+          with(:headers => {'X-Insta-Forwarded-For'=> @signed_header})).
+          to have_been_made
       end
 
       it "should not set X-Insta-Fowarded-For header if client_ips is not provided" do
@@ -32,9 +32,9 @@ describe Instagram::Request do
           to_return(:status => 200, :body => "", :headers => {})
 
         client.post("/media/123/likes", {}, signature=true)
-        a_request(:post, url).
-          with(:headers => {'X-Insta-Forwarded-For'=> @signed_header}).
-          should_not have_been_made
+        expect(a_request(:post, url).
+          with(:headers => {'X-Insta-Forwarded-For'=> @signed_header})).
+          not_to have_been_made
       end
     end
 
@@ -47,9 +47,9 @@ describe Instagram::Request do
           to_return(:status => 200, :body => "", :headers => {})
 
         client.post("/media/123/likes", {}, signature=false)
-        a_request(:post, url).
-          with(:headers => {'X-Insta-Forwarded-For'=> @signed_header}).
-          should_not have_been_made
+        expect(a_request(:post, url).
+          with(:headers => {'X-Insta-Forwarded-For'=> @signed_header})).
+          not_to have_been_made
       end
     end
   end

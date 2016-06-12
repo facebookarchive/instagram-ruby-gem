@@ -20,15 +20,15 @@ describe Instagram::Client do
 
           it "should get the correct resource" do
             @client.geography_recent_media(12345)
-            a_get("geographies/12345/media/recent.#{format}").
-              with(:query => {:access_token => @client.access_token}).
-              should have_been_made
+            expect(a_get("geographies/12345/media/recent.#{format}").
+              with(:query => {:access_token => @client.access_token})).
+              to have_been_made
           end
 
           it "should return a list of recent media items within the specifed geography" do
             recent_media = @client.geography_recent_media(12345)
-            recent_media.should be_a Array
-            recent_media.first.user.username.should == "amandavan"
+            expect(recent_media).to be_a Array
+            expect(recent_media.first.user.username).to eq("amandavan")
           end
         end
       end

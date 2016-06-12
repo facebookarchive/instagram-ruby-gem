@@ -22,7 +22,7 @@ describe Instagram::API do
     it "should inherit module configuration" do
       api = Instagram::API.new
       @keys.each do |key|
-        api.send(key).should == key
+        expect(api.send(key)).to eq(key)
       end
     end
 
@@ -53,7 +53,7 @@ describe Instagram::API do
         it "should override module configuration" do
           api = Instagram::API.new(@configuration)
           @keys.each do |key|
-            api.send(key).should == @configuration[key]
+            expect(api.send(key)).to eq(@configuration[key])
           end
         end
 
@@ -69,13 +69,13 @@ describe Instagram::API do
 
         it "should override module configuration after initialization" do
           @keys.each do |key|
-            api.send(key).should == @configuration[key]
+            expect(api.send(key)).to eq(@configuration[key])
           end
         end
 
         describe "#connection" do
           it "should use the connection_options" do
-            Faraday::Connection.should_receive(:new).with(include(:ssl => { :verify => true }))
+            expect(Faraday::Connection).to receive(:new).with(include(:ssl => { :verify => true }))
             api.send(:connection)
           end
         end
@@ -94,7 +94,7 @@ describe Instagram::API do
       @keys.each do |key|
         subject.send("#{key}=", key)
       end
-      subject.config.should == config
+      expect(subject.config).to eq(config)
     end
   end
 
@@ -116,7 +116,7 @@ describe Instagram::API do
 
       url2 = client.send(:connection).build_url("/oauth/authorize/", params2).to_s
 
-      url2.should == url
+      expect(url2).to eq(url)
     end
 
     it "should not include client secret in URL params" do
@@ -124,7 +124,7 @@ describe Instagram::API do
       client = Instagram::Client.new(params)
       redirect_uri = 'http://localhost:4567/oauth/callback'
       url = client.authorize_url(:redirect_uri => redirect_uri)
-      url.should_not include("client_secret")
+      expect(url).not_to include("client_secret")
     end
 
     describe "scope param" do
@@ -133,7 +133,7 @@ describe Instagram::API do
         client = Instagram::Client.new(params)
         redirect_uri = 'http://localhost:4567/oauth/callback'
         url = client.authorize_url(:redirect_uri => redirect_uri)
-        url.should include("scope")
+        expect(url).to include("scope")
       end
 
       it "should not include the scope if the scope is blank" do
@@ -141,7 +141,7 @@ describe Instagram::API do
         client = Instagram::Client.new(params)
         redirect_uri = 'http://localhost:4567/oauth/callback'
         url = client.authorize_url(:redirect_uri => redirect_uri)
-        url.should_not include("scope")
+        expect(url).not_to include("scope")
       end
     end
 
@@ -151,7 +151,7 @@ describe Instagram::API do
         params = { :redirect_uri => redirect_uri }
         client = Instagram::Client.new(params)
         url = client.authorize_url()
-        url.should =~ /redirect_uri=#{URI.escape(redirect_uri, Regexp.union('/',':'))}/
+        expect(url).to match(/redirect_uri=#{URI.escape(redirect_uri, Regexp.union('/',':'))}/)
       end
 
       it "should override configuration redirect_uri if passed as option" do
@@ -161,7 +161,7 @@ describe Instagram::API do
         redirect_uri_option = 'http://localhost:4567/oauth/callback_option'
         options = { :redirect_uri => redirect_uri_option }
         url = client.authorize_url(options)
-        url.should =~ /redirect_uri=#{URI.escape(redirect_uri_option, Regexp.union('/',':'))}/
+        expect(url).to match(/redirect_uri=#{URI.escape(redirect_uri_option, Regexp.union('/',':'))}/)
       end
     end
   end
@@ -179,15 +179,15 @@ describe Instagram::API do
 
       it "should get the correct resource" do
         @client.get_access_token(code="C", :redirect_uri => "http://localhost:4567/oauth/callback")
-        a_request(:post, @url).
-          with(:body => {:client_id => "CID", :client_secret => "CS", :redirect_uri => "http://localhost:4567/oauth/callback", :grant_type => "authorization_code", :code => "C"}).
-          should have_been_made
+        expect(a_request(:post, @url).
+          with(:body => {:client_id => "CID", :client_secret => "CS", :redirect_uri => "http://localhost:4567/oauth/callback", :grant_type => "authorization_code", :code => "C"})).
+          to have_been_made
       end
 
       it "should return a hash with an access_token and user data" do
         response = @client.get_access_token(code="C", :redirect_uri => "http://localhost:4567/oauth/callback")
-        response.access_token.should == "at"
-        response.user.username.should == "mikeyk"
+        expect(response.access_token).to eq("at")
+        expect(response.user.username).to eq("mikeyk")
       end
     end
 
@@ -202,17 +202,17 @@ describe Instagram::API do
 
       it "should fall back to configuration redirect_uri if not passed as option" do
         @client.get_access_token(code="C")
-        a_request(:post, @url).
-          with(:body => hash_including({:redirect_uri => @redirect_uri_config})).
-          should have_been_made
+        expect(a_request(:post, @url).
+          with(:body => hash_including({:redirect_uri => @redirect_uri_config}))).
+          to have_been_made
       end
 
       it "should override configuration redirect_uri if passed as option" do
         redirect_uri_option = "http://localhost:4567/oauth/callback_option"
         @client.get_access_token(code="C", :redirect_uri => redirect_uri_option)
-        a_request(:post, @url).
-          with(:body => hash_including({:redirect_uri => redirect_uri_option})).
-          should have_been_made
+        expect(a_request(:post, @url).
+          with(:body => hash_including({:redirect_uri => redirect_uri_option}))).
+          to have_been_made
       end
     end
 
@@ -266,8 +266,8 @@ describe Instagram::API do
         end
 
         it "should redact API keys" do
-          ENV.stub(:[]).with('http_proxy').and_return(nil)
-          ENV.stub(:[]).with('INSTAGRAM_GEM_REDACT').and_return('true')
+          allow(ENV).to receive(:[]).with('http_proxy').and_return(nil)
+          allow(ENV).to receive(:[]).with('INSTAGRAM_GEM_REDACT').and_return('true')
 
           output = capture_output do
             @client.user_media_feed()

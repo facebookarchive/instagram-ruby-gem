@@ -17,14 +17,14 @@ describe Instagram::Client do
 
         it "should get the correct resource" do
           @client.location(514276)
-          a_get("locations/514276.#{format}").
-            with(:query => {:access_token => @client.access_token}).
-            should have_been_made
+          expect(a_get("locations/514276.#{format}").
+            with(:query => {:access_token => @client.access_token})).
+            to have_been_made
         end
 
         it "should return extended information of a given location" do
           location = @client.location(514276)
-          location.name.should == "Instagram"
+          expect(location.name).to eq("Instagram")
         end
       end
 
@@ -38,15 +38,15 @@ describe Instagram::Client do
 
         it "should get the correct resource" do
           @client.location_recent_media(514276)
-          a_get("locations/514276/media/recent.#{format}").
-            with(:query => {:access_token => @client.access_token}).
-            should have_been_made
+          expect(a_get("locations/514276/media/recent.#{format}").
+            with(:query => {:access_token => @client.access_token})).
+            to have_been_made
         end
 
         it "should return a list of media taken at a given location" do
           media = @client.location_recent_media(514276)
-          media.should be_a Array
-          media.first.user.username.should == "josh"
+          expect(media).to be_a Array
+          expect(media.first.user.username).to eq("josh")
         end
       end
 
@@ -61,16 +61,16 @@ describe Instagram::Client do
 
         it "should get the correct resource by lat/lng" do
           @client.location_search("37.7808851", "-122.3948632")
-          a_get("locations/search.#{format}").
+          expect(a_get("locations/search.#{format}").
             with(:query => {:access_token => @client.access_token}).
-            with(:query => {:lat => "37.7808851", :lng => "-122.3948632"}).
-            should have_been_made
+            with(:query => {:lat => "37.7808851", :lng => "-122.3948632"})).
+            to have_been_made
         end
 
         it "should return an array of user search results" do
           locations = @client.location_search("37.7808851", "-122.3948632")
-          locations.should be_a Array
-          locations.first.name.should == "Instagram"
+          expect(locations).to be_a Array
+          expect(locations.first.name).to eq("Instagram")
         end
       end
 
@@ -85,16 +85,16 @@ describe Instagram::Client do
 
         it "should get the correct resource by lat/lng/distance" do
           @client.location_search("37.7808851", "-122.3948632", "5000")
-          a_get("locations/search.#{format}").
+          expect(a_get("locations/search.#{format}").
             with(:query => {:access_token => @client.access_token}).
-            with(:query => {:lat => "37.7808851", :lng => "-122.3948632", :distance => "5000"}).
-            should have_been_made
+            with(:query => {:lat => "37.7808851", :lng => "-122.3948632", :distance => "5000"})).
+            to have_been_made
         end
 
         it "should return an array of user search results" do
           locations = @client.location_search("37.7808851", "-122.3948632", "5000")
-          locations.should be_a Array
-          locations.first.name.should == "Instagram"
+          expect(locations).to be_a Array
+          expect(locations.first.name).to eq("Instagram")
         end
       end
 
@@ -109,16 +109,16 @@ describe Instagram::Client do
 
         it "should get the correct resource by foursquare_v2_id" do
           @client.location_search("3fd66200f964a520c5f11ee3")
-          a_get("locations/search.#{format}").
+          expect(a_get("locations/search.#{format}").
             with(:query => {:access_token => @client.access_token}).
-            with(:query => {:foursquare_v2_id => "3fd66200f964a520c5f11ee3"}).
-            should have_been_made
+            with(:query => {:foursquare_v2_id => "3fd66200f964a520c5f11ee3"})).
+            to have_been_made
         end
 
         it "should return an array of user search results" do
           locations = @client.location_search("3fd66200f964a520c5f11ee3")
-          locations.should be_a Array
-          locations.first.name.should == "Schiller's Liquor Bar"
+          expect(locations).to be_a Array
+          expect(locations.first.name).to eq("Schiller's Liquor Bar")
         end
       end
 
