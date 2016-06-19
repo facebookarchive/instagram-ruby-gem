@@ -70,6 +70,12 @@ module Instagram
         end
         response
       end
+
+      # Quick and dirty method to allow searching by facebook places ID
+      def location_fb_search(facebook_places_id)
+        response = get('locations/search', options.merge(:facebook_places_id => facebook_places_id))
+        return response
+      end
     end
   end
 end
