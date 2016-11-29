@@ -64,9 +64,9 @@ module Instagram
     end
 
     def get_insta_fowarded_for(ips, secret)
-        digest = OpenSSL::Digest.new('sha256')
-        signature = OpenSSL::HMAC.hexdigest(digest, secret, ips)
-        return [ips, signature].join('|')
+      digest = OpenSSL::Digest.new('sha256')
+      signature = OpenSSL::HMAC.hexdigest(digest, secret, ips)
+      return [ips, signature].join('|')
     end
 
     def generate_sig(endpoint, params, secret)
@@ -74,7 +74,7 @@ module Instagram
       params.sort.map do |key, val|
         sig += '|%s=%s' % [key, val]
       end
-      digest = OpenSSL::Digest::Digest.new('sha256')
+      digest = OpenSSL::Digest.new('sha256')
       return OpenSSL::HMAC.hexdigest(digest, secret, sig)
     end
 
