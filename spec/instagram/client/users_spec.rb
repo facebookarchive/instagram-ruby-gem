@@ -1,4 +1,4 @@
-require File.expand_path('../../../spec_helper', __FILE__)
+require_relative '../../spec_helper'
 
 describe Instagram::Client do
   Instagram::Configuration::VALID_FORMATS.each do |format|
@@ -195,7 +195,7 @@ describe Instagram::Client do
       end
 
       describe ".user_liked_media" do
-        
+
         before do
           stub_get("users/self/media/liked.#{format}").
             with(:query => {:access_token => @client.access_token}).
@@ -209,7 +209,7 @@ describe Instagram::Client do
             should have_been_made
         end
       end
-      
+
       describe ".user_recent_media" do
 
         context "with user ID passed" do
@@ -272,148 +272,148 @@ describe Instagram::Client do
           users.first.username.should == "shayne"
         end
       end
-      
+
       describe ".user_relationship" do
-        
+
         before do
           stub_get("users/4/relationship.#{format}").
             with(:query => {:access_token => @client.access_token}).
             to_return(:body => fixture("relationship.#{format}"), :headers => {:content_type => "application/#{format}; charset=utf-8"})
         end
-        
+
         it "should get the correct resource" do
           @client.user_relationship(4)
           a_get("users/4/relationship.#{format}").
             with(:query => {:access_token => @client.access_token}).
             should have_been_made
         end
-        
+
         it "should return a relationship status response" do
           status = @client.user_relationship(4)
           status.incoming_status.should == "requested_by"
         end
       end
-      
+
       describe ".follow_user" do
-        
+
         before do
           stub_post("users/4/relationship.#{format}").
             with(:body => {:action => "follow", :access_token => @client.access_token}).
             to_return(:body => fixture("follow_user.#{format}"), :headers => {:content_type => "application/#{format}; charset=utf-8"})
         end
-        
+
         it "should get the correct resource" do
           @client.follow_user(4)
           a_post("users/4/relationship.#{format}").
             with(:body => {:action => "follow", :access_token => @client.access_token}).
             should have_been_made
         end
-        
+
         it "should return a relationship status response" do
           status = @client.follow_user(4)
           status.outgoing_status.should == "requested"
         end
       end
-      
+
       describe ".unfollow_user" do
-        
+
         before do
           stub_post("users/4/relationship.#{format}").
             with(:body => {:action => "unfollow", :access_token => @client.access_token}).
             to_return(:body => fixture("unfollow_user.#{format}"), :headers => {:content_type => "application/#{format}; charset=utf-8"})
         end
-        
+
         it "should get the correct resource" do
           @client.unfollow_user(4)
           a_post("users/4/relationship.#{format}").
             with(:body => {:action => "unfollow", :access_token => @client.access_token}).
             should have_been_made
         end
-        
+
         it "should return a relationship status response" do
           status = @client.unfollow_user(4)
           status.outgoing_status.should == "none"
         end
       end
-      
+
       describe ".block_user" do
-        
+
         before do
           stub_post("users/4/relationship.#{format}").
             with(:body => {:action => "block", :access_token => @client.access_token}).
             to_return(:body => fixture("block_user.#{format}"), :headers => {:content_type => "application/#{format}; charset=utf-8"})
         end
-        
+
         it "should get the correct resource" do
           @client.block_user(4)
           a_post("users/4/relationship.#{format}").
             with(:body => {:action => "block", :access_token => @client.access_token}).
             should have_been_made
         end
-        
+
         it "should return a relationship status response" do
           status = @client.block_user(4)
           status.outgoing_status.should == "none"
         end
       end
-      
+
       describe ".unblock_user" do
-        
+
         before do
           stub_post("users/4/relationship.#{format}").
             with(:body => {:action => "unblock", :access_token => @client.access_token}).
             to_return(:body => fixture("unblock_user.#{format}"), :headers => {:content_type => "application/#{format}; charset=utf-8"})
         end
-        
+
         it "should get the correct resource" do
           @client.unblock_user(4)
           a_post("users/4/relationship.#{format}").
             with(:body => {:action => "unblock", :access_token => @client.access_token}).
             should have_been_made
         end
-        
+
         it "should return a relationship status response" do
           status = @client.unblock_user(4)
           status.outgoing_status.should == "none"
         end
       end
-      
+
       describe ".approve_user" do
-        
+
         before do
           stub_post("users/4/relationship.#{format}").
             with(:body => {:action => "approve", :access_token => @client.access_token}).
             to_return(:body => fixture("approve_user.#{format}"), :headers => {:content_type => "application/#{format}; charset=utf-8"})
         end
-        
+
         it "should get the correct resource" do
           @client.approve_user(4)
           a_post("users/4/relationship.#{format}").
             with(:body => {:action => "approve", :access_token => @client.access_token}).
             should have_been_made
         end
-        
+
         it "should return a relationship status response" do
           status = @client.approve_user(4)
           status.outgoing_status.should == "follows"
         end
       end
-      
+
       describe ".deny_user" do
-        
+
         before do
           stub_post("users/4/relationship.#{format}").
             with(:body => {:action => "deny", :access_token => @client.access_token}).
             to_return(:body => fixture("deny_user.#{format}"), :headers => {:content_type => "application/#{format}; charset=utf-8"})
         end
-        
+
         it "should get the correct resource" do
           @client.deny_user(4)
           a_post("users/4/relationship.#{format}").
             with(:body => {:action => "deny", :access_token => @client.access_token}).
             should have_been_made
         end
-        
+
         it "should return a relationship status response" do
           status = @client.deny_user(4)
           status.outgoing_status.should == "none"

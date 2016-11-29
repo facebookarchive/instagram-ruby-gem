@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../lib/instagram/version', __FILE__)
+require_relative '../lib/instagram/version'
 
 Gem::Specification.new do |s|
   s.add_development_dependency('rake', '~> 0.9.2.2')

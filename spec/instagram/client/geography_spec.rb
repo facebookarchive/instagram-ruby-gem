@@ -1,4 +1,4 @@
-require File.expand_path('../../../spec_helper', __FILE__)
+require_relative '../../spec_helper'
 
 describe Instagram::Client do
   Instagram::Configuration::VALID_FORMATS.each do |format|
@@ -7,7 +7,7 @@ describe Instagram::Client do
         @client = Instagram::Client.new(:format => format, :client_id => 'CID', :client_secret => 'CS', :access_token => 'AT')
       end
 
-      
+
       describe ".geography_recent_media" do
 
         context "with geography ID passed" do
