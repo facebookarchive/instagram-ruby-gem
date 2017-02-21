@@ -135,7 +135,26 @@ module Instagram
       response = get('users/self/feed', options)
       response
     end
-
+    
+    # Returns liked media items from the currently authorized user.
+    #
+    # @overload user_media_liked(options={})
+    #   @param options [Hash] A customizable set of options.
+    #   @option options [Integer] max_like_id Return media liked before this id
+    #   @option options [Integer] count Count of media to return
+    #   @return [Array]
+    #   @example Return liked media images from user @shayne
+    #     Instagram.user_media_liked() # assuming @shayne is the authorized user
+    # @format :json
+    # @authenticated true
+    # @rate_limited true
+    # @see TODO:docs URL
+    def user_media_liked(*args)
+      options = args.first.is_a?(Hash) ? args.pop : {}
+      response = get('users/self/media/liked', options)
+      response["data"]
+    end
+    
     # Returns a list of recent media items for a given user
     #
     # @overload user_recent_media(options={})
