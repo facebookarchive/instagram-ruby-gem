@@ -16,8 +16,7 @@ module Instagram
 
   # Delegate to Instagram::Client
   def self.method_missing(method, *args, &block)
-    return super unless client.respond_to?(method)
-    client.send(method, *args, &block)
+    client.respond_to?(method) && client.send(method, *args, &block) || super
   end
 
   # Delegate to Instagram::Client
