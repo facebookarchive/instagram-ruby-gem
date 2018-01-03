@@ -14,83 +14,83 @@ describe Instagram do
 
      it "should get the correct resource" do
        Instagram.user_media_feed()
-       a_get("users/self/feed.json").should have_been_made
+       expect(a_get("users/self/feed.json")).to have_been_made
      end
 
      it "should return the same results as a client" do
-       Instagram.user_media_feed().should == Instagram::Client.new.user_media_feed()
+       expect(Instagram.user_media_feed()).to eq(Instagram::Client.new.user_media_feed())
      end
 
    end
 
   describe ".client" do
     it "should be a Instagram::Client" do
-      Instagram.client.should be_a Instagram::Client
+      expect(Instagram.client).to be_a Instagram::Client
     end
   end
 
   describe ".adapter" do
     it "should return the default adapter" do
-      Instagram.adapter.should == Instagram::Configuration::DEFAULT_ADAPTER
+      expect(Instagram.adapter).to eq(Instagram::Configuration::DEFAULT_ADAPTER)
     end
   end
 
   describe ".adapter=" do
     it "should set the adapter" do
       Instagram.adapter = :typhoeus
-      Instagram.adapter.should == :typhoeus
+      expect(Instagram.adapter).to eq(:typhoeus)
     end
   end
 
   describe ".endpoint" do
     it "should return the default endpoint" do
-      Instagram.endpoint.should == Instagram::Configuration::DEFAULT_ENDPOINT
+      expect(Instagram.endpoint).to eq(Instagram::Configuration::DEFAULT_ENDPOINT)
     end
   end
 
   describe ".endpoint=" do
     it "should set the endpoint" do
       Instagram.endpoint = 'http://tumblr.com'
-      Instagram.endpoint.should == 'http://tumblr.com'
+      expect(Instagram.endpoint).to eq('http://tumblr.com')
     end
   end
 
   describe ".format" do
     it "should return the default format" do
-      Instagram.format.should == Instagram::Configuration::DEFAULT_FORMAT
+      expect(Instagram.format).to eq(Instagram::Configuration::DEFAULT_FORMAT)
     end
   end
 
   describe ".format=" do
     it "should set the format" do
       Instagram.format = 'xml'
-      Instagram.format.should == 'xml'
+      expect(Instagram.format).to eq('xml')
     end
   end
 
   describe ".user_agent" do
     it "should return the default user agent" do
-      Instagram.user_agent.should == Instagram::Configuration::DEFAULT_USER_AGENT
+      expect(Instagram.user_agent).to eq(Instagram::Configuration::DEFAULT_USER_AGENT)
     end
   end
 
   describe ".user_agent=" do
     it "should set the user_agent" do
       Instagram.user_agent = 'Custom User Agent'
-      Instagram.user_agent.should == 'Custom User Agent'
+      expect(Instagram.user_agent).to eq('Custom User Agent')
     end
   end
 
     describe ".loud_logger" do
     it "should return the loud_logger status" do
-      Instagram.loud_logger.should == nil
+      expect(Instagram.loud_logger).to eq(nil)
     end
   end
 
   describe ".loud_logger=" do
     it "should set the loud_logger" do
       Instagram.loud_logger = true
-      Instagram.loud_logger.should == true
+      expect(Instagram.loud_logger).to eq(true)
     end
   end
 
@@ -101,7 +101,7 @@ describe Instagram do
       it "should set the #{key}" do
         Instagram.configure do |config|
           config.send("#{key}=", key)
-          Instagram.send(key).should == key
+          expect(Instagram.send(key)).to eq(key)
         end
       end
     end
