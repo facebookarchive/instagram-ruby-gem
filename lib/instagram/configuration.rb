@@ -21,6 +21,7 @@ module Instagram
       :no_response_wrapper,
       :loud_logger,
       :sign_requests,
+      :mash_class
     ].freeze
 
     # By default, don't set a user access token
@@ -80,6 +81,8 @@ module Instagram
     # By default, requests are not signed
     DEFAULT_SIGN_REQUESTS = false
 
+    DEFAULT_MASH_CLASS = nil
+
     # @private
     attr_accessor *VALID_OPTIONS_KEYS
 
@@ -117,6 +120,7 @@ module Instagram
       self.no_response_wrapper= DEFAULT_NO_RESPONSE_WRAPPER
       self.loud_logger        = DEFAULT_LOUD_LOGGER
       self.sign_requests      = DEFAULT_SIGN_REQUESTS
+      self.mash_class         = DEFAULT_MASH_CLASS
     end
   end
 end
