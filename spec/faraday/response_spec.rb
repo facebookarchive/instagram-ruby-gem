@@ -54,6 +54,20 @@ describe Faraday::Response do
     end
   end
 
+  context "when a 400 is raised with an HTML response" do
+    before do
+      stub_get('users/self/feed.json').to_return(
+        :body => '<html><body><h1>400 Bad Request</h1> The server returned an invalid or incomplete response. </body></html>',
+        :status => 400)
+    end
+
+    it "should return the body error type" do
+      expect do
+        @client.user_media_feed()
+      end.to raise_error(Instagram::BadRequest)
+    end
+  end
+
   context 'when a 502 is raised with an HTML response' do
     before do
       stub_get('users/self/feed.json').to_return(
