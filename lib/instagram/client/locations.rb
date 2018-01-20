@@ -23,9 +23,10 @@ module Instagram
       # @overload location_recent_media(id, options={})
       #   @param user [Integer] An Instagram location ID.
       #   @param options [Hash] A customizable set of options.
+      #   @option options [Integer] :min_timestamp (nil) Return media after this UNIX timestamp
       #   @option options [Integer] :max_timestamp (nil) Return media before this UNIX timestamp
+      #   @option options [Integer] :min_id (nil) Returns results with an ID greater than (that is, newer than) or equal to the specified ID.
       #   @option options [Integer] :max_id (nil) Returns results with an ID less than (that is, older than) or equal to the specified ID.
-      #   @option options [Integer] :count (nil) Limits the number of results returned per page.
       #   @return [Hashie::Mash]
       #   @example Return a list of the most recent media items taken at the Instagram office
       #     Instagram.location_recent_media(514276)
