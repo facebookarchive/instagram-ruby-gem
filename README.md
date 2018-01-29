@@ -111,7 +111,7 @@ get "/user_media_feed" do
   client = Instagram.client(:access_token => session[:access_token])
   user = client.user
   html = "<h1>#{user.username}'s media feed</h1>"
-  
+
   page_1 = client.user_media_feed(777)
   page_2_max_id = page_1.pagination.next_max_id
   page_2 = client.user_recent_media(777, :max_id => page_2_max_id ) unless page_2_max_id.nil?
@@ -175,6 +175,15 @@ get "/location_search_4square" do
   client = Instagram.client(:access_token => session[:access_token])
   html = "<h1>Search for a location by Fousquare ID (v2)</h1>"
   for location in client.location_search("3fd66200f964a520c5f11ee3")
+    html << "<li> #{location.name} <a href='https://www.google.com/maps/preview/@#{location.latitude},#{location.longitude},19z'>Map</a></li>"
+  end
+  html
+end
+
+get "/location_search_facebook" do
+  client = Instagram.client(:access_token => session[:access_token])
+  html = "<h1>Search for a location by Facebooks Places ID</h1>"
+  for location in client.location_search_facebook_places_id("175495679140580")
     html << "<li> #{location.name} <a href='https://www.google.com/maps/preview/@#{location.latitude},#{location.longitude},19z'>Map</a></li>"
   end
   html
