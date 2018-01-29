@@ -28,4 +28,8 @@ module Instagram
 
   # Raised when Instagram returns the HTTP status code 429
   class RateLimitExceeded < Error; end
+
+  # Raised when Instagram app settings require signed requests
+  # and no 'sig' parameter present
+  class RequestNotSignedCorrectly < Error; end
 end
