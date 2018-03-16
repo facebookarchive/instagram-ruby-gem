@@ -77,7 +77,7 @@ get "/nav" do
       <li><a href='/media_popular'>Popular Media</a> Calls media_popular - Get a list of the overall most popular media items</li>
       <li><a href='/user_search'>User Search</a> Calls user_search - Search for users on instagram, by name or username</li>
       <li><a href='/location_search'>Location Search</a> Calls location_search - Search for a location by lat/lng</li>
-      <li><a href='/location_search_4square'>Location Search - 4Square</a> Calls location_search - Search for a location by Fousquare ID (v2)</li>
+      <li><a href='/location_search_4square'>Location Search - 4Square</a> Calls location_search - Search for a location by Foursquare ID (v2)</li>
       <li><a href='/tags'>Tags</a>Search for tags, view tag info and get media by tag</li>
       <li><a href='/limits'>View Rate Limit and Remaining API calls</a>View remaining and ratelimit info.</li>
     </ol>
@@ -112,9 +112,9 @@ get "/user_media_feed" do
   user = client.user
   html = "<h1>#{user.username}'s media feed</h1>"
   
-  page_1 = client.user_media_feed(777)
+  page_1 = client.user_media_feed()
   page_2_max_id = page_1.pagination.next_max_id
-  page_2 = client.user_recent_media(777, :max_id => page_2_max_id ) unless page_2_max_id.nil?
+  page_2 = client.user_media_feed(:max_id => page_2_max_id ) unless page_2_max_id.nil?
   html << "<h2>Page 1</h2><br/>"
   for media_item in page_1
     html << "<img src='#{media_item.images.thumbnail.url}'>"
